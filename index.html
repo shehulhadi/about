@@ -1,72 +1,166 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Hadi Usman - About</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Asad Tech Concepts | Software Studio, Yola, Nigeria</title>
+<meta name="description" content="Asad Tech Concepts builds practical software for businesses, institutions and entrepreneurs: websites, marketplaces, web and mobile apps, and management systems.">
+<meta name="theme-color" content="#0b1220">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Asad Tech Concepts | Software Studio">
+<meta property="og:description" content="Practical software for businesses, institutions and entrepreneurs. Browse projects or request a quote.">
+<!-- Add og:image and og:url once the final domain and a 1200x630 preview image exist -->
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <button id="theme-toggle">Toggle theme</button>
-        </nav>
-    </header>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#home">Asad <span>Tech</span> Concepts</a>
+    <button id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav id="nav" aria-label="Main">
+      <a href="#projects">Projects</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+      <a href="#start">Start a Project</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
-    <main>
-        <section id="hero">
-            <h1>Muhammad Hadi Usman</h1>
-            <p>Software engineer and builder.</p>
-            <div class="links">
-                <a href="https://github.com/shehulhadi">GitHub</a>
-                <a href="mailto:hello@example.com">Email</a>
-            </div>
-        </section>
+<main id="main">
+<section class="hero" id="home">
+  <div class="wrap">
+    <h1>Practical software for real businesses</h1>
+    <p>Asad Tech Concepts is a software studio building websites, marketplaces, web and mobile apps, and management systems for businesses, institutions and entrepreneurs.</p>
+    <div class="cta">
+      <a class="btn" href="#projects">Explore Projects</a>
+      <a class="btn ghost" href="#start">Start a Project</a>
+    </div>
+  </div>
+</section>
 
-        <section id="about">
-            <h2>About</h2>
-            <p>I am a passionate software engineer with a strong focus on building robust and scalable web applications. My professional journey revolves around modern web technologies, delivering clean code, and solving complex architectural challenges.</p>
-            <p>In addition to web development, I have extensive experience in the fintech sector, where security, performance, and reliability are paramount. I enjoy crafting financial tools and systems that empower users and streamline digital transactions.</p>
-        </section>
+<section class="block" aria-labelledby="feat-h">
+  <div class="wrap">
+    <h2 id="feat-h">Featured projects</h2>
+    <p class="lead">Each project shows its real status, so you know what is live, what is a prototype and what is still a concept.</p>
+    <div class="grid three" id="featured-grid"></div>
+  </div>
+</section>
 
-        <section id="projects">
-            <h2>Projects</h2>
-            <article>
-                <h3>Project One</h3>
-                <p>A high-performance web application built with modern frameworks and best practices.</p>
-                <a href="https://github.com/shehulhadi">View on GitHub</a>
-            </article>
-            <article>
-                <h3>Project Two</h3>
-                <p>A secure fintech payment gateway and transaction dashboard designed for scale.</p>
-                <a href="https://github.com/shehulhadi">View on GitHub</a>
-            </article>
-            <article>
-                <h3>Project Three</h3>
-                <p>An open-source developer tool that simplifies API integration and testing workflows.</p>
-                <a href="https://github.com/shehulhadi">View on GitHub</a>
-            </article>
-        </section>
+<section class="block alt" id="projects" aria-labelledby="proj-h">
+  <div class="wrap">
+    <h2 id="proj-h">Projects catalogue</h2>
+    <p class="lead">Ask about buying, licensing or customizing any project.</p>
+    <div class="chips" id="filters" role="group" aria-label="Filter by category"></div>
+    <div class="grid three" id="project-grid" aria-live="polite"></div>
+  </div>
+</section>
 
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Get in touch via GitHub or email.</p>
-            <div class="links">
-                <a href="https://github.com/shehulhadi">GitHub</a>
-                <a href="mailto:hello@example.com">Email</a>
-            </div>
-        </section>
-    </main>
+<section class="block" id="services" aria-labelledby="serv-h">
+  <div class="wrap">
+    <h2 id="serv-h">Services</h2>
+    <p class="lead">Every service is quoted individually. The quotation defines scope, deliverables, cost, timeline, hosting and maintenance.</p>
+    <div class="grid three">
+      <article class="card service"><h3>Websites and landing pages</h3><dl><dt>Solves</dt><dd>No professional online presence.</dd><dt>Deliverable</dt><dd>A responsive, fast website.</dd></dl></article>
+      <article class="card service"><h3>E-commerce and marketplaces</h3><dl><dt>Solves</dt><dd>Selling products without a proper store.</dd><dt>Deliverable</dt><dd>Online store or multi-vendor marketplace.</dd></dl></article>
+      <article class="card service"><h3>Custom web applications</h3><dl><dt>Solves</dt><dd>Work that spreadsheets and chats cannot handle.</dd><dt>Deliverable</dt><dd>A web app built around your process.</dd></dl></article>
+      <article class="card service"><h3>Android and mobile apps</h3><dl><dt>Solves</dt><dd>Reaching users on their phones.</dd><dt>Deliverable</dt><dd>A mobile application.</dd></dl></article>
+      <article class="card service"><h3>Desktop software</h3><dl><dt>Solves</dt><dd>Tools that must run on office computers.</dd><dt>Deliverable</dt><dd>A desktop application.</dd></dl></article>
+      <article class="card service"><h3>Business systems and dashboards</h3><dl><dt>Solves</dt><dd>Scattered records and no overview.</dd><dt>Deliverable</dt><dd>A management system or dashboard.</dd></dl></article>
+      <article class="card service"><h3>Document management and workflow</h3><dl><dt>Solves</dt><dd>Lost files and unclear task ownership.</dd><dt>Deliverable</dt><dd>Document storage and workflow automation.</dd></dl></article>
+      <article class="card service"><h3>Existing software customization</h3><dl><dt>Solves</dt><dd>A product that almost fits.</dd><dt>Deliverable</dt><dd>An adapted version of an existing app.</dd></dl></article>
+      <article class="card service"><h3>Maintenance and support</h3><dl><dt>Solves</dt><dd>Software that breaks or goes stale.</dd><dt>Deliverable</dt><dd>Fixes, updates and technical support.</dd></dl></article>
+    </div>
+    <p style="margin-top:24px"><a class="btn" href="#start">Request a Quote</a></p>
+  </div>
+</section>
 
-    <footer>
-        <p>&copy; 2026 Muhammad Hadi Usman</p>
-    </footer>
+<section class="block alt" id="process" aria-labelledby="proc-h">
+  <div class="wrap">
+    <h2 id="proc-h">How we work</h2>
+    <ol class="steps">
+      <li><strong>Discuss</strong><span class="muted">You describe the problem and goals.</span></li>
+      <li><strong>Quote</strong><span class="muted">Scope, cost and timeline are agreed in writing.</span></li>
+      <li><strong>Build</strong><span class="muted">Work is delivered in small, reviewable steps.</span></li>
+      <li><strong>Launch and support</strong><span class="muted">Deployment, then maintenance as agreed.</span></li>
+    </ol>
+  </div>
+</section>
 
-    <script src="script.js"></script>
+<section class="block" id="about" aria-labelledby="about-h">
+  <div class="wrap">
+    <h2 id="about-h">About</h2>
+    <p class="lead">Asad Tech Concepts solves practical problems with software. The focus is on useful, maintainable digital solutions that people can actually run and keep updating.</p>
+  </div>
+</section>
+
+<section class="block alt" id="start" aria-labelledby="start-h">
+  <div class="wrap">
+    <h2 id="start-h">Start a project</h2>
+    <p class="lead">Fill in the details, then send them by WhatsApp or email. This website does not store your submission.</p>
+    <form id="enquiry" novalidate>
+      <div class="row">
+        <label>Your name *<input name="name" autocomplete="name" required></label>
+        <label>Business or organization<input name="org" autocomplete="organization"></label>
+      </div>
+      <div class="row">
+        <label>Email *<input name="email" type="email" autocomplete="email" required></label>
+        <label>WhatsApp number<input name="phone" type="tel" autocomplete="tel"></label>
+      </div>
+      <div class="row">
+        <label>Project type
+          <select name="type">
+            <option>Website or landing page</option><option>E-commerce or marketplace</option><option>Custom web application</option>
+            <option>Mobile application</option><option>Desktop software</option><option>Business system or dashboard</option>
+            <option>Document management or workflow</option><option>Customize existing software</option><option>Maintenance or support</option><option>Other</option>
+          </select>
+        </label>
+        <label>Target platform
+          <select name="platform"><option>Web</option><option>Android/Mobile</option><option>Desktop</option><option>Not sure</option></select>
+        </label>
+      </div>
+      <label>Project description *<textarea name="description" required></textarea></label>
+      <div class="row">
+        <label>Budget range<input name="budget" placeholder="Optional"></label>
+        <label>Preferred timeline<input name="timeline" placeholder="Optional"></label>
+      </div>
+      <p class="err" id="form-error" role="alert"></p>
+      <div class="cta" style="margin:0">
+        <button class="btn" type="button" id="send-wa">Send via WhatsApp</button>
+        <button class="btn ghost" type="button" id="send-mail">Send via Email</button>
+      </div>
+      <p class="note">Your message opens in WhatsApp or your email app for you to review before sending.</p>
+    </form>
+  </div>
+</section>
+
+<section class="block" id="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <h2 id="contact-h">Contact</h2>
+    <ul class="contact-list">
+      <li>Email: <a data-mail><span data-email-text></span></a></li>
+      <li>WhatsApp / phone: <a data-wa target="_blank" rel="noopener"><span data-phone-text></span></a></li>
+      <li>Location: <span data-location-text></span></li>
+    </ul>
+    <a class="btn" data-wa target="_blank" rel="noopener">Chat on WhatsApp</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">&copy; <span id="year"></span> Asad Tech Concepts. All rights reserved.</div>
+</footer>
+
+<dialog id="detail" aria-label="Project details">
+  <button class="btn small ghost close" id="detail-close" type="button">Close</button>
+  <div id="detail-body"></div>
+</dialog>
+
+<script src="js/config.js"></script>
+<script src="data/projects.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
