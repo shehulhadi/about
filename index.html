@@ -6,6 +6,7 @@
   <title>Asad Tech Concepts | Practical Software for Real Businesses</title>
   <meta name="description" content="We build web apps, management tools, and marketplaces for Nigerian businesses and institutions.">
   <meta name="theme-color" content="#0a1118">
+  <link rel="manifest" href="manifest.json">
   
   <!-- Open Graph / WhatsApp Sharing -->
   <meta property="og:type" content="website">
@@ -685,6 +686,43 @@
       });
     }
 
+
+// PWA Install Logic
+let deferredPrompt;
+const installBanner = document.getElementById('install-banner');
+const installBtn = document.getElementById('install-btn');
+const closeInstall = document.getElementById('close-install');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  if (installBanner) installBanner.style.display = 'flex';
+});
+
+if (installBtn) {
+  installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        installBanner.style.display = 'none';
+      }
+      deferredPrompt = null;
+    }
+  });
+}
+
+if (closeInstall) {
+  closeInstall.addEventListener('click', () => {
+    installBanner.style.display = 'none';
+  });
+}
+
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed', err));
+}
+
     // Form Validation & WhatsApp Submission
     const form = document.getElementById('contact-form');
     
@@ -740,5 +778,19 @@
         </div>
       </div>
     </dialog>
+
+<div id="install-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:var(--surface); border-top:1px solid var(--border); padding:16px; z-index:1000; align-items:center; justify-content:space-between; gap:16px;">
+  <div style="display:flex; align-items:center; gap:12px;">
+     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 2v13M5 9l7 7 7-7M4 22h16"/></svg>
+     <div>
+       <strong style="display:block; font-size:14px;">Install Asad Tech</strong>
+       <span style="font-size:12px; color:var(--text-muted);">Add to Home Screen</span>
+     </div>
+  </div>
+  <div>
+    <button id="install-btn" class="btn btn-primary" style="min-height:36px; padding:0 16px; font-size:14px;">Install</button>
+    <button id="close-install" style="background:none;border:none;color:var(--text-muted);font-size:24px;margin-left:8px;cursor:pointer;">&times;</button>
+  </div>
+</div>
 </body>
 </html>
