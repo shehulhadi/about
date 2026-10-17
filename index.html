@@ -2,228 +2,700 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Asad Tech Concepts | Software Studio</title>
-  <meta name="description" content="Building web apps, management tools, and marketplaces for real businesses.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asad Tech Concepts | Practical Software for Real Businesses</title>
+  <meta name="description" content="We build web apps, management tools, and marketplaces for Nigerian businesses and institutions.">
   <meta name="theme-color" content="#0a1118">
+  
+  <!-- Open Graph / WhatsApp Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Asad Tech Concepts | Software Studio">
+  <meta property="og:description" content="Live marketplace in Yola · Fixed-cost quotes · Weekly review builds. Start a project on WhatsApp.">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- SVG Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a1118%22/><text x=%2250%22 y=%2255%22 font-family=%22sans-serif%22 font-size=%2250%22 font-weight=%22bold%22 fill=%22%2300e5a3%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>A</text></svg>">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================
+       CSS VARIABLES (Edit these to change theme)
+       ========================================= */
+    :root {
+      --bg: #0a1118;
+      --surface: #111a24;
+      --surface-hover: #16222e;
+      --border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #00e5a3;
+      --accent-hover: #00c98f;
+      
+      --badge-prod-bg: rgba(0, 229, 163, 0.1);
+      --badge-prod-text: #00e5a3;
+      --badge-proto-bg: rgba(59, 130, 246, 0.1);
+      --badge-proto-text: #60a5fa;
+      --badge-concept-bg: rgba(245, 158, 11, 0.1);
+      --badge-concept-text: #fbbf24;
+
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+      
+      --max-width: 1120px;
+      --radius: 12px;
+    }
+
+    /* =========================================
+       RESET & BASE
+       ========================================= */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      /* Subtle radial glow */
+      background-image: radial-gradient(circle at 50% 0%, rgba(0, 229, 163, 0.08) 0%, transparent 50%);
+      background-repeat: no-repeat;
+    }
+    a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent-hover); }
+    ul { list-style: none; }
+    img, svg { display: block; max-width: 100%; }
+
+    /* Typography Scale */
+    h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; }
+    h1 { font-size: clamp(2.5rem, 5vw + 1rem, 4rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 24px; }
+    h2 { font-size: clamp(2rem, 3vw + 1rem, 2.5rem); font-weight: 700; margin-bottom: 16px; letter-spacing: -0.01em; }
+    h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
+    .lead { font-size: 1.125rem; color: var(--text-muted); margin-bottom: 32px; max-width: 600px; }
+
+    /* Layout Utilities */
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+    .section { padding: 80px 0; border-top: 1px solid var(--border); }
+    .grid-3 { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    
+    @media (min-width: 768px) {
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* =========================================
+       BUTTONS & TAP TARGETS
+       ========================================= */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; padding: 0 24px; border-radius: var(--radius);
+      font-family: var(--font-body); font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s ease; border: 1px solid transparent;
+      text-align: center;
+    }
+    .btn-primary { background: var(--accent); color: #000; }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 229, 163, 0.2); }
+    .btn-secondary { background: transparent; color: var(--text-main); border-color: var(--border); }
+    .btn-secondary:hover { border-color: var(--text-muted); background: var(--surface); transform: translateY(-2px); }
+    .btn-wa { background: #25D366; color: #fff; gap: 8px; }
+    .btn-wa:hover { background: #20b858; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2); }
+
+    /* =========================================
+       HEADER & NAVIGATION
+       ========================================= */
+    .skip-link { position: absolute; left: -999px; top: 0; background: var(--accent); color: #000; padding: 12px; z-index: 1000; font-weight: 600; }
+    .skip-link:focus { left: 0; }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10, 17, 24, 0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: var(--text-main); }
+    .logo span { color: var(--accent); }
+    
+    .desktop-nav { display: none; gap: 32px; align-items: center; }
+    .desktop-nav a { color: var(--text-main); font-weight: 500; font-size: 15px; }
+    .desktop-nav a:hover { color: var(--accent); }
+    
+    .header-actions { display: none; }
+
+    .menu-toggle {
+      display: flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; background: transparent; border: none;
+      color: var(--text-main); cursor: pointer;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none; position: absolute; top: 72px; left: 0; right: 0;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      padding: 24px; flex-direction: column; gap: 16px;
+    }
+    .mobile-menu.active { display: flex; }
+    .mobile-menu a { color: var(--text-main); font-size: 1.125rem; font-weight: 600; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    
+    @media (min-width: 900px) {
+      .menu-toggle { display: none; }
+      .desktop-nav { display: flex; }
+      .header-actions { display: flex; gap: 16px; }
+    }
+
+    /* =========================================
+       HERO SECTION
+       ========================================= */
+    .hero { padding: 80px 0 60px; }
+    .hero .lead { font-size: clamp(1.125rem, 2vw, 1.25rem); }
+    .hero-actions { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+    @media (min-width: 600px) { .hero-actions { flex-direction: row; } }
+    
+    .trust-row { display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.875rem; color: var(--text-muted); }
+    .trust-row span { display: flex; align-items: center; gap: 8px; }
+    .trust-row span::before { content: "•"; color: var(--accent); font-size: 1.2rem; }
+
+    /* =========================================
+       WORK / CASE STUDIES
+       ========================================= */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      display: flex; flex-direction: column; transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-4px); }
+    .card-mockup { width: 100%; height: 200px; background: var(--bg); border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--border); overflow: hidden; position: relative; }
+    
+    .badge { display: inline-block; padding: 4px 12px; border-radius: 99px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+    .badge.prod { background: var(--badge-prod-bg); color: var(--badge-prod-text); }
+    .badge.proto { background: var(--badge-proto-bg); color: var(--badge-proto-text); }
+    .badge.concept { background: var(--badge-concept-bg); color: var(--badge-concept-text); }
+    
+    .card h3 { font-size: 1.25rem; margin-bottom: 12px; }
+    .card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 24px; flex-grow: 1; }
+    .card p strong { color: var(--text-main); font-weight: 600; }
+    .stack-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+    .stack-tags span { font-size: 0.75rem; background: var(--bg); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border); color: var(--text-muted); }
+
+    /* =========================================
+       SERVICES (Icon Grid)
+       ========================================= */
+    .services-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
+    @media (min-width: 600px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .services-grid { grid-template-columns: repeat(4, 1fr); } }
+    
+    .service-item { background: var(--surface); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); }
+    .service-icon { width: 40px; height: 40px; background: rgba(0,229,163,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--accent); }
+    .service-item h4 { font-size: 1.1rem; margin-bottom: 8px; }
+    .service-meta { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 4px; }
+    .service-meta strong { color: var(--text-main); }
+
+    /* =========================================
+       PROCESS TIMELINE
+       ========================================= */
+    .timeline { position: relative; margin-top: 40px; display: flex; flex-direction: column; gap: 32px; padding-left: 24px; }
+    .timeline::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 2px; background: var(--border); }
+    .timeline-step { position: relative; }
+    .timeline-step::before { content: ""; position: absolute; left: -29px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+    .timeline-step h4 { font-size: 1.25rem; margin-bottom: 8px; }
+    .timeline-step p { font-size: 0.95rem; color: var(--text-muted); max-width: 250px; }
+    
+    @media (min-width: 768px) {
+      .timeline { flex-direction: row; padding-left: 0; padding-top: 24px; gap: 24px; justify-content: space-between; }
+      .timeline::before { left: 8px; right: 8px; top: 0; bottom: auto; height: 2px; width: auto; }
+      .timeline-step::before { left: 0; top: -29px; }
+      .timeline-step { flex: 1; }
+    }
+
+    /* =========================================
+       ABOUT
+       ========================================= */
+    .about-wrap { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; }
+    @media (min-width: 768px) { .about-wrap { flex-direction: row; align-items: center; gap: 64px; } }
+    .founder-photo { width: 120px; height: 120px; border-radius: 50%; background: var(--surface); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800; color: var(--accent); flex-shrink: 0; }
+    .founder-info h3 { font-size: 1.5rem; }
+    .founder-info .location { color: var(--accent); font-weight: 500; margin-bottom: 16px; display: block; }
+    blockquote { border-left: 2px solid var(--accent); padding-left: 16px; font-style: italic; color: var(--text-muted); margin: 24px 0; font-size: 1.125rem; }
+
+    /* =========================================
+       CONTACT FORM
+       ========================================= */
+    .contact-grid { display: grid; grid-template-columns: 1fr; gap: 48px; margin-top: 40px; }
+    @media (min-width: 900px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+    
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
+    .form-control { width: 100%; min-height: 48px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; font-family: var(--font-body); font-size: 16px; color: var(--text-main); transition: border-color 0.2s, box-shadow 0.2s; }
+    .form-control:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 229, 163, 0.15); }
+    textarea.form-control { min-height: 120px; resize: vertical; }
+    .error-msg { color: #f87171; font-size: 0.875rem; margin-top: 4px; display: none; }
+    
+    .form-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+    @media (min-width: 600px) { .form-actions { flex-direction: row; } }
+    .form-actions .btn { flex: 1; }
+
+    .contact-info { background: var(--surface); padding: 32px; border-radius: var(--radius); border: 1px solid var(--border); }
+    .contact-info p { color: var(--text-muted); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; font-size: 1rem; }
+    .contact-info a { color: var(--text-main); font-weight: 500; }
+    .contact-info svg { color: var(--accent); flex-shrink: 0; }
+
+    /* =========================================
+       FOOTER
+       ========================================= */
+    footer { padding: 40px 0; border-top: 1px solid var(--border); margin-bottom: 72px; /* space for floating button */ }
+    @media (min-width: 900px) { footer { margin-bottom: 0; } }
+    .footer-content { display: flex; flex-direction: column; gap: 24px; align-items: center; text-align: center; }
+    @media (min-width: 768px) { .footer-content { flex-direction: row; justify-content: space-between; text-align: left; } }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+    .footer-links a { color: var(--text-muted); font-size: 0.875rem; }
+    .footer-links a:hover { color: var(--text-main); }
+    .copyright { color: var(--text-muted); font-size: 0.875rem; }
+
+    /* Floating WhatsApp Button */
+    .fab {
+      position: fixed; bottom: 24px; right: 24px; z-index: 99;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #25D366; color: #fff; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4); transition: transform 0.2s;
+    }
+    .fab:hover { transform: scale(1.05); }
+    @media (min-width: 900px) { .fab { display: none; } }
+
+    /* Motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+    }
+  </style>
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- HEADER -->
   <header>
-    <div class="wrap nav-wrapper">
-      <a href="#" class="brand">Asad <span>Tech</span></a>
-      <nav>
-        <a href="#featured">Projects</a>
-        <a href="#catalogue">Catalogue</a>
+    <div class="container nav-wrap">
+      <a href="#" class="logo">Asad<span>Tech</span></a>
+      
+      <nav class="desktop-nav">
+        <a href="#work">Work</a>
         <a href="#services">Services</a>
-        <a href="#contact" class="btn small">Start a Project</a>
+        <a href="#process">Process</a>
+        <a href="#about">About</a>
       </nav>
+      
+      <div class="header-actions">
+        <a href="https://wa.me/2349063200718" target="_blank" rel="noopener" class="btn btn-wa">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="btn btn-primary" style="margin-top: 16px;">Start a project</a>
     </div>
   </header>
 
-  <main>
-    <!-- 1. HERO SECTION -->
-    <section class="hero">
-      <div class="wrap">
-        <h1>Practical software for real businesses.</h1>
-        <p class="lead">We build web apps, management tools, and marketplaces that solve operational bottlenecks and scale with your institution or enterprise.</p>
-        <div class="hero-cta">
-          <a href="#contact" class="btn">Start a Project</a>
-          <a href="#about" class="btn-link">Learn More &rarr;</a>
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero container">
+      <h1>Practical software for real businesses.</h1>
+      <p class="lead">We build web apps, management tools, and marketplaces that solve operational bottlenecks and scale with your institution or enterprise.</p>
+      
+      <div class="hero-actions">
+        <a href="https://wa.me/2349063200718?text=Hello%20Asad%20Tech%20Concepts%2C%20I%20would%20like%20to%20start%20a%20project." target="_blank" rel="noopener" class="btn btn-wa">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Start a project
+        </a>
+        <a href="#work" class="btn btn-secondary">See our work</a>
+      </div>
+      
+      <div class="trust-row">
+        <span>Live marketplace in Yola</span>
+        <span>Fixed-cost quotes</span>
+        <span>Weekly review builds</span>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work" class="section container">
+      <h2>Featured Work</h2>
+      <p class="lead">Real tools built for real operations.</p>
+      
+      <div class="grid-3">
+        <!-- PXDynasty -->
+        <article class="card">
+          <div class="card-mockup">
+            <svg viewBox="0 0 300 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="200" fill="#0a1118"/>
+              <!-- Browser Window -->
+              <rect x="20" y="20" width="260" height="160" rx="8" fill="#111a24" stroke="#1e293b"/>
+              <rect x="20" y="20" width="260" height="30" rx="8" fill="#16222e"/>
+              <circle cx="35" cy="35" r="4" fill="#ef4444"/>
+              <circle cx="50" cy="35" r="4" fill="#f59e0b"/>
+              <circle cx="65" cy="35" r="4" fill="#00e5a3"/>
+              <!-- Content -->
+              <rect x="35" y="65" width="40" height="10" rx="4" fill="#00e5a3"/>
+              <rect x="35" y="85" width="100" height="6" rx="3" fill="#334155"/>
+              <!-- Product Grid -->
+              <rect x="35" y="110" width="70" height="55" rx="6" fill="#16222e" stroke="#1e293b"/>
+              <rect x="45" y="120" width="50" height="25" rx="4" fill="#1e293b"/>
+              <rect x="45" y="150" width="30" height="6" rx="3" fill="#475569"/>
+              
+              <rect x="115" y="110" width="70" height="55" rx="6" fill="#16222e" stroke="#1e293b"/>
+              <rect x="125" y="120" width="50" height="25" rx="4" fill="#1e293b"/>
+              <rect x="125" y="150" width="30" height="6" rx="3" fill="#475569"/>
+            </svg>
+          </div>
+          <span class="badge prod">Production</span>
+          <h3>PXDynasty</h3>
+          <p><strong>Problem:</strong> Local vendors lacked a unified digital storefront. <br><br><strong>Built:</strong> A multi-vendor marketplace with product listings, cart handling, and delivery workflows.</p>
+          <div class="stack-tags">
+            <span>Vanilla JS</span>
+            <span>Node.js</span>
+            <span>Paystack</span>
+          </div>
+        </article>
+
+        <!-- Matric -->
+        <article class="card">
+          <div class="card-mockup">
+            <svg viewBox="0 0 300 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="200" fill="#0a1118"/>
+              <!-- Phone Window -->
+              <rect x="100" y="15" width="100" height="180" rx="16" fill="#111a24" stroke="#1e293b" stroke-width="2"/>
+              <rect x="135" y="22" width="30" height="4" rx="2" fill="#334155"/>
+              <!-- App UI -->
+              <rect x="110" y="45" width="80" height="20" rx="4" fill="#00e5a3"/>
+              <rect x="115" y="52" width="40" height="6" rx="3" fill="#0a1118"/>
+              
+              <rect x="110" y="75" width="80" height="40" rx="6" fill="#16222e"/>
+              <circle cx="125" cy="95" r="10" fill="#1e293b"/>
+              <rect x="145" y="88" width="35" height="6" rx="3" fill="#475569"/>
+              <rect x="145" y="100" width="25" height="6" rx="3" fill="#334155"/>
+              
+              <rect x="110" y="125" width="80" height="40" rx="6" fill="#16222e"/>
+              <circle cx="125" cy="145" r="10" fill="#1e293b"/>
+              <rect x="145" y="138" width="35" height="6" rx="3" fill="#475569"/>
+              <rect x="145" y="150" width="25" height="6" rx="3" fill="#334155"/>
+            </svg>
+          </div>
+          <span class="badge concept">Concept</span>
+          <h3>Matric</h3>
+          <p><strong>Problem:</strong> University communications are scattered across informal channels with no verified identity. <br><br><strong>Built:</strong> A centralized platform for verified student identities, academic communities, and official notices.</p>
+          <div class="stack-tags">
+            <span>React</span>
+            <span>Firebase</span>
+          </div>
+        </article>
+
+        <!-- LegisCore -->
+        <article class="card">
+          <div class="card-mockup">
+            <svg viewBox="0 0 300 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="200" fill="#0a1118"/>
+              <!-- Document -->
+              <rect x="50" y="20" width="200" height="160" rx="6" fill="#111a24" stroke="#1e293b"/>
+              <rect x="70" y="40" width="120" height="10" rx="4" fill="#00e5a3"/>
+              <rect x="70" y="65" width="160" height="4" rx="2" fill="#334155"/>
+              <rect x="70" y="75" width="140" height="4" rx="2" fill="#334155"/>
+              <rect x="70" y="85" width="150" height="4" rx="2" fill="#334155"/>
+              
+              <!-- Workflow -->
+              <rect x="70" y="110" width="60" height="20" rx="4" fill="#16222e" stroke="#1e293b"/>
+              <rect x="90" y="116" width="20" height="8" rx="2" fill="#00e5a3"/>
+              
+              <path d="M 130 120 L 150 120" stroke="#334155" stroke-width="2"/>
+              <path d="M 145 115 L 150 120 L 145 125" fill="none" stroke="#334155" stroke-width="2"/>
+              
+              <rect x="150" y="110" width="60" height="20" rx="4" fill="#16222e" stroke="#1e293b"/>
+              <rect x="170" y="116" width="20" height="8" rx="2" fill="#334155"/>
+            </svg>
+          </div>
+          <span class="badge proto">Prototype</span>
+          <h3>LegisCore</h3>
+          <p><strong>Problem:</strong> Law firms struggle to track document versions and route administrative tasks. <br><br><strong>Built:</strong> A secure document-management and workflow prototype for legal offices.</p>
+          <div class="stack-tags">
+            <span>Python</span>
+            <span>PostgreSQL</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section container">
+      <h2>Studio Capabilities</h2>
+      <p class="lead">Full-stack engineering for complex operations.</p>
+      
+      <div class="services-grid">
+        <!-- 1 -->
+        <div class="service-item">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h4>Web Applications</h4>
+          <p class="service-meta"><strong>Solves:</strong> Manual spreadsheets</p>
+          <p class="service-meta"><strong>Delivers:</strong> Custom internal tools</p>
+        </div>
+        <!-- 2 -->
+        <div class="service-item">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          </div>
+          <h4>Marketplaces</h4>
+          <p class="service-meta"><strong>Solves:</strong> Scattered vendors</p>
+          <p class="service-meta"><strong>Delivers:</strong> Unified storefronts</p>
+        </div>
+        <!-- 3 -->
+        <div class="service-item">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h4>Desktop Software</h4>
+          <p class="service-meta"><strong>Solves:</strong> Offline data entry</p>
+          <p class="service-meta"><strong>Delivers:</strong> Secure local apps</p>
+        </div>
+        <!-- 4 -->
+        <div class="service-item">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <h4>Mobile Apps</h4>
+          <p class="service-meta"><strong>Solves:</strong> On-the-go access</p>
+          <p class="service-meta"><strong>Delivers:</strong> Android & iOS builds</p>
+        </div>
+        <!-- 5 -->
+        <div class="service-item">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <h4>Cloud Systems</h4>
+          <p class="service-meta"><strong>Solves:</strong> Server downtime</p>
+          <p class="service-meta"><strong>Delivers:</strong> Scalable hosting</p>
+        </div>
+        <!-- 6 -->
+        <div class="service-item">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <h4>API Integration</h4>
+          <p class="service-meta"><strong>Solves:</strong> Disconnected tools</p>
+          <p class="service-meta"><strong>Delivers:</strong> Automated workflows</p>
+        </div>
+        <!-- 7 -->
+        <div class="service-item">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h4>Security Audits</h4>
+          <p class="service-meta"><strong>Solves:</strong> Vulnerability risks</p>
+          <p class="service-meta"><strong>Delivers:</strong> Hardened codebases</p>
+        </div>
+        <!-- 8 -->
+        <div class="service-item">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <h4>Maintenance</h4>
+          <p class="service-meta"><strong>Solves:</strong> Breaking updates</p>
+          <p class="service-meta"><strong>Delivers:</strong> Ongoing support</p>
         </div>
       </div>
     </section>
 
-    <!-- 2. FEATURED PROJECTS -->
-    <section id="featured" class="block">
-      <div class="wrap">
-        <h2>Featured Projects</h2>
-        <div class="grid-3">
-          <article class="card">
-            <div class="badge production">Production</div>
-            <h3>PXDynasty</h3>
-            <p>A multi-vendor marketplace for local businesses. Includes product listings, cart handling, and order delivery workflows.</p>
-            <a href="https://shehulhadi.github.io/pxdynasty/" target="_blank" rel="noopener" class="btn outline">View Project</a>
-          </article>
-          <article class="card">
-            <div class="badge prototype">Prototype</div>
-            <h3>LegisCore</h3>
-            <p>A legal document-management and office workflow system. Built to track case files and route administrative tasks.</p>
-            <a href="#" class="btn outline disabled">View Project</a>
-          </article>
-          <article class="card">
-            <div class="badge concept">Concept</div>
-            <h3>Matric</h3>
-            <p>A university platform for verified student identities. Connects academic communities, notices, and learning resources.</p>
-            <a href="#" class="btn outline disabled">View Project</a>
-          </article>
+    <!-- PROCESS -->
+    <section id="process" class="section container">
+      <h2>How We Work</h2>
+      <p class="lead">A transparent pipeline from first call to launch.</p>
+      
+      <div class="timeline">
+        <div class="timeline-step">
+          <h4>Discuss</h4>
+          <p>We map your operational bottlenecks and define the project scope.</p>
+        </div>
+        <div class="timeline-step">
+          <h4>Quote</h4>
+          <p>You receive a fixed-cost estimate, timeline, and deliverable list.</p>
+        </div>
+        <div class="timeline-step">
+          <h4>Build</h4>
+          <p>Iterative development with weekly review builds and testing.</p>
+        </div>
+        <div class="timeline-step">
+          <h4>Launch & Support</h4>
+          <p>Deployment to production with ongoing maintenance retainer options.</p>
         </div>
       </div>
     </section>
 
-    <!-- 3. PRODUCT CATALOGUE -->
-    <section id="catalogue" class="block bg-alt">
-      <div class="wrap">
-        <h2>Product Catalogue</h2>
-        <p class="lead">Digital goods available for direct licensing, purchasing, or custom configuration.</p>
-        <div class="grid-3">
-          <article class="card">
-            <div class="card-header">
-              <span class="tag">Source Code</span>
-              <h3>Marketplace Starter</h3>
-            </div>
-            <p>The foundational codebase for PXDynasty. Fully documented for rapid deployment.</p>
-            <a href="#contact" class="btn">Buy Studio Code</a>
-          </article>
-          <article class="card">
-            <div class="card-header">
-              <span class="tag">UI Kit</span>
-              <h3>Dashboard System</h3>
-            </div>
-            <p>Figma and HTML components for building secure admin panels and analytics dashboards.</p>
-            <a href="#contact" class="btn">Buy Media</a>
-          </article>
-          <article class="card">
-            <div class="card-header">
-              <span class="tag">System</span>
-              <h3>Legal Office Base</h3>
-            </div>
-            <p>Adapt the LegisCore workflow engine for your firm's specific document routing needs.</p>
-            <a href="#contact" class="btn">License</a>
-          </article>
+    <!-- ABOUT -->
+    <section id="about" class="section container">
+      <h2>About the Studio</h2>
+      <div class="about-wrap">
+        <div class="founder-photo">MH</div>
+        <div class="founder-info">
+          <h3>Muhammad Hadi Usman</h3>
+          <span class="location">Jimeta-Yola, Adamawa, Nigeria</span>
+          <blockquote>"We engineer software that prioritizes utility over vanity. Our focus is on building resilient, maintainable systems that solve specific, real-world problems."</blockquote>
+          <p>With a background in fintech and local business operations, I build software that African businesses can actually rely on. From multi-vendor marketplace logistics to legal document routing, every line of code is written to solve a practical bottleneck.</p>
         </div>
       </div>
     </section>
 
-    <!-- 4. SERVICES GRID (BENTO BOX) -->
-    <section id="services" class="block">
-      <div class="wrap">
-        <h2>Studio Capabilities</h2>
-        <div class="bento-grid">
-          <div class="bento-item span-2">
-            <h3>Full-Stack Web Applications</h3>
-            <ul>
-              <li>Custom API integrations</li>
-              <li>Database architecture</li>
-              <li>Authentication & Security</li>
-            </ul>
+    <!-- CONTACT -->
+    <section id="contact" class="section container">
+      <h2>Start a Project</h2>
+      <p class="lead">Tell me what you're building. I reply within 24 hours.</p>
+      
+      <div class="contact-grid">
+        <form id="contact-form" novalidate>
+          <div class="form-group">
+            <label for="name">Your Name *</label>
+            <input type="text" id="name" class="form-control" placeholder="e.g. John Doe" required>
+            <div class="error-msg" id="name-error">Please enter your name.</div>
           </div>
-          <div class="bento-item">
-            <h3>UI/UX Design</h3>
-            <ul>
-              <li>Wireframing</li>
-              <li>Interactive Prototypes</li>
-            </ul>
+          <div class="form-group">
+            <label for="details">Project Type & Budget *</label>
+            <input type="text" id="details" class="form-control" placeholder="e.g. E-commerce store, ₦500k - ₦1M" required>
+            <div class="error-msg" id="details-error">Please enter project type and budget.</div>
           </div>
-          <div class="bento-item">
-            <h3>Cloud Systems</h3>
-            <ul>
-              <li>AWS / GCP deployment</li>
-              <li>CI/CD pipelines</li>
-            </ul>
-          </div>
-          <div class="bento-item span-2">
-            <h3>Custom Extensions</h3>
-            <ul>
-              <li>Payment gateway integrations</li>
-              <li>Third-party API middleware</li>
-              <li>Workflow automations</li>
-            </ul>
-          </div>
-        </div>
-        <div class="bento-footer">
-          <a href="#contact" class="btn-link">View Pricing Structures &rarr;</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. PROCESS PIPELINE -->
-    <section id="process" class="block bg-alt">
-      <div class="wrap">
-        <h2>How We Work</h2>
-        <div class="pipeline">
-          <div class="step">
-            <span class="step-num">01</span>
-            <h4>Discuss</h4>
-            <p>We map your operational bottlenecks and define the project scope.</p>
-          </div>
-          <div class="step">
-            <span class="step-num">02</span>
-            <h4>Quote</h4>
-            <p>You receive a fixed-cost estimate, timeline, and deliverable list.</p>
-          </div>
-          <div class="step">
-            <span class="step-num">03</span>
-            <h4>Build</h4>
-            <p>Iterative development with weekly review builds and testing.</p>
-          </div>
-          <div class="step">
-            <span class="step-num">04</span>
-            <h4>Launch & Support</h4>
-            <p>Deployment to production with ongoing maintenance retainer options.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. ABOUT STATEMENT -->
-    <section id="about" class="block statement-block">
-      <div class="wrap">
-        <h2 class="statement-text">"We engineer software that prioritizes utility over vanity. Our focus is on building resilient, maintainable systems that solve specific, real-world problems."</h2>
-      </div>
-    </section>
-
-    <!-- 7. CONTACT INTAKE FORM -->
-    <section id="contact" class="block">
-      <div class="wrap form-wrap">
-        <div class="form-info">
-          <h2>Start a Project</h2>
-          <p class="lead">Tell us what you're building. We will review the details and reply with next steps.</p>
-          
-          <div class="raw-contact">
-            <p><strong>Email:</strong> <a href="mailto:shehulhadi00@gmail.com">shehulhadi00@gmail.com</a></p>
-            <p><strong>WhatsApp:</strong> <a href="https://wa.me/2349063200718" target="_blank" rel="noopener">+234 906 320 0718</a></p>
-            <p><strong>Location:</strong> Jimeta-Yola, Adamawa, Nigeria</p>
-          </div>
-        </div>
-
-        <form id="project-form">
-          <div class="input-group">
-            <label for="name">Name *</label>
-            <input type="text" id="name" required placeholder="Your full name">
-          </div>
-          <div class="input-group">
-            <label for="details">Project Details (Type/Budget) *</label>
-            <input type="text" id="details" required placeholder="e.g. Web App, $2000 - $5000">
-          </div>
-          <div class="input-group">
+          <div class="form-group">
             <label for="description">Project Description *</label>
-            <textarea id="description" rows="5" required placeholder="Describe the problem you need solved..."></textarea>
+            <textarea id="description" class="form-control" placeholder="Describe the problem you need solved..." required></textarea>
+            <div class="error-msg" id="description-error">Please describe your project.</div>
           </div>
+          
           <div class="form-actions">
-            <button type="button" id="submit-wa" class="btn">Send via WhatsApp</button>
-            <button type="button" id="submit-mail" class="btn outline">Send via Email</button>
+            <button type="submit" class="btn btn-wa">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Send via WhatsApp
+            </button>
+            <a href="mailto:shehulhadi00@gmail.com" class="btn btn-secondary">Send via Email</a>
           </div>
         </form>
+
+        <div class="contact-info">
+          <p>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Jimeta-Yola, Adamawa, Nigeria
+          </p>
+          <p>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:shehulhadi00@gmail.com">shehulhadi00@gmail.com</a>
+          </p>
+          <p>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="https://wa.me/2349063200718" target="_blank" rel="noopener">+234 906 320 0718</a>
+          </p>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- 8. FOOTER -->
+  <!-- FOOTER -->
   <footer>
-    <div class="wrap footer-content">
-      <p>&copy; <span id="year"></span> Asad Tech Concepts. All rights reserved.</p>
-      <div class="legal-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
+    <div class="container footer-content">
+      <div class="copyright">
+        &copy; <span id="year"></span> Asad Tech Concepts.
+      </div>
+      <div class="footer-links">
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="https://wa.me/2349063200718" target="_blank" rel="noopener">Contact</a>
       </div>
     </div>
   </footer>
 
-  <script src="js/config.js"></script>
-  <script src="js/main.js"></script>
+  <!-- Floating WhatsApp (Mobile) -->
+  <a href="https://wa.me/2349063200718?text=Hello%20Asad%20Tech%20Concepts%2C%20I%20have%20an%20enquiry." target="_blank" rel="noopener" class="fab" aria-label="Chat on WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+
+  <script>
+    // Set Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.contains('active');
+      if (isOpen) {
+        mobileMenu.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      } else {
+        mobileMenu.classList.add('active');
+        menuToggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Form Validation & WhatsApp Submission
+    const form = document.getElementById('contact-form');
+    
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('name');
+      const details = document.getElementById('details');
+      const description = document.getElementById('description');
+      
+      const nameError = document.getElementById('name-error');
+      const detailsError = document.getElementById('details-error');
+      const descriptionError = document.getElementById('description-error');
+      
+      let isValid = true;
+      
+      // Reset errors
+      [name, details, description].forEach(el => el.style.borderColor = 'var(--border)');
+      [nameError, detailsError, descriptionError].forEach(el => el.style.display = 'none');
+      
+      if (!name.value.trim()) {
+        name.style.borderColor = '#f87171';
+        nameError.style.display = 'block';
+        isValid = false;
+      }
+      
+      if (!details.value.trim()) {
+        details.style.borderColor = '#f87171';
+        detailsError.style.display = 'block';
+        isValid = false;
+      }
+      
+      if (!description.value.trim()) {
+        description.style.borderColor = '#f87171';
+        descriptionError.style.display = 'block';
+        isValid = false;
+      }
+      
+      if (isValid) {
+        const text = `*New Project Enquiry*%0A%0A*Name:* ${encodeURIComponent(name.value.trim())}%0A*Details:* ${encodeURIComponent(details.value.trim())}%0A%0A*Description:*%0A${encodeURIComponent(description.value.trim())}`;
+        window.open(`https://wa.me/2349063200718?text=${text}`, '_blank');
+      }
+    });
+  </script>
 </body>
 </html>
