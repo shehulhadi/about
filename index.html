@@ -1,166 +1,229 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Asad Tech Concepts | Software Studio, Yola, Nigeria</title>
-<meta name="description" content="Asad Tech Concepts builds practical software for businesses, institutions and entrepreneurs: websites, marketplaces, web and mobile apps, and management systems.">
-<meta name="theme-color" content="#0b1220">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Asad Tech Concepts | Software Studio">
-<meta property="og:description" content="Practical software for businesses, institutions and entrepreneurs. Browse projects or request a quote.">
-<!-- Add og:image and og:url once the final domain and a 1200x630 preview image exist -->
-<meta name="twitter:card" content="summary">
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Asad Tech Concepts | Software Studio</title>
+  <meta name="description" content="Building web apps, management tools, and marketplaces for real businesses.">
+  <meta name="theme-color" content="#0a1118">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<header>
-  <div class="wrap bar">
-    <a class="brand" href="#home">Asad <span>Tech</span> Concepts</a>
-    <button id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
-    <nav id="nav" aria-label="Main">
-      <a href="#projects">Projects</a>
-      <a href="#services">Services</a>
-      <a href="#process">Process</a>
-      <a href="#about">About</a>
-      <a href="#start">Start a Project</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main id="main">
-<section class="hero" id="home">
-  <div class="wrap">
-    <h1>Practical software for real businesses</h1>
-    <p>Asad Tech Concepts is a software studio building websites, marketplaces, web and mobile apps, and management systems for businesses, institutions and entrepreneurs.</p>
-    <div class="cta">
-      <a class="btn" href="#projects">Explore Projects</a>
-      <a class="btn ghost" href="#start">Start a Project</a>
+  <header>
+    <div class="wrap nav-wrapper">
+      <a href="#" class="brand">Asad <span>Tech</span></a>
+      <nav>
+        <a href="#featured">Projects</a>
+        <a href="#catalogue">Catalogue</a>
+        <a href="#services">Services</a>
+        <a href="#contact" class="btn small">Start a Project</a>
+      </nav>
     </div>
-  </div>
-</section>
+  </header>
 
-<section class="block" aria-labelledby="feat-h">
-  <div class="wrap">
-    <h2 id="feat-h">Featured projects</h2>
-    <p class="lead">Each project shows its real status, so you know what is live, what is a prototype and what is still a concept.</p>
-    <div class="grid three" id="featured-grid"></div>
-  </div>
-</section>
+  <main>
+    <!-- 1. HERO SECTION -->
+    <section class="hero">
+      <div class="wrap">
+        <h1>Practical software for real businesses.</h1>
+        <p class="lead">We build web apps, management tools, and marketplaces that solve operational bottlenecks and scale with your institution or enterprise.</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn">Start a Project</a>
+          <a href="#about" class="btn-link">Learn More &rarr;</a>
+        </div>
+      </div>
+    </section>
 
-<section class="block alt" id="projects" aria-labelledby="proj-h">
-  <div class="wrap">
-    <h2 id="proj-h">Projects catalogue</h2>
-    <p class="lead">Ask about buying, licensing or customizing any project.</p>
-    <div class="chips" id="filters" role="group" aria-label="Filter by category"></div>
-    <div class="grid three" id="project-grid" aria-live="polite"></div>
-  </div>
-</section>
+    <!-- 2. FEATURED PROJECTS -->
+    <section id="featured" class="block">
+      <div class="wrap">
+        <h2>Featured Projects</h2>
+        <div class="grid-3">
+          <article class="card">
+            <div class="badge production">Production</div>
+            <h3>PXDynasty</h3>
+            <p>A multi-vendor marketplace for local businesses. Includes product listings, cart handling, and order delivery workflows.</p>
+            <a href="https://shehulhadi.github.io/pxdynasty/" target="_blank" rel="noopener" class="btn outline">View Project</a>
+          </article>
+          <article class="card">
+            <div class="badge prototype">Prototype</div>
+            <h3>LegisCore</h3>
+            <p>A legal document-management and office workflow system. Built to track case files and route administrative tasks.</p>
+            <a href="#" class="btn outline disabled">View Project</a>
+          </article>
+          <article class="card">
+            <div class="badge concept">Concept</div>
+            <h3>Matric</h3>
+            <p>A university platform for verified student identities. Connects academic communities, notices, and learning resources.</p>
+            <a href="#" class="btn outline disabled">View Project</a>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<section class="block" id="services" aria-labelledby="serv-h">
-  <div class="wrap">
-    <h2 id="serv-h">Services</h2>
-    <p class="lead">Every service is quoted individually. The quotation defines scope, deliverables, cost, timeline, hosting and maintenance.</p>
-    <div class="grid three">
-      <article class="card service"><h3>Websites and landing pages</h3><dl><dt>Solves</dt><dd>No professional online presence.</dd><dt>Deliverable</dt><dd>A responsive, fast website.</dd></dl></article>
-      <article class="card service"><h3>E-commerce and marketplaces</h3><dl><dt>Solves</dt><dd>Selling products without a proper store.</dd><dt>Deliverable</dt><dd>Online store or multi-vendor marketplace.</dd></dl></article>
-      <article class="card service"><h3>Custom web applications</h3><dl><dt>Solves</dt><dd>Work that spreadsheets and chats cannot handle.</dd><dt>Deliverable</dt><dd>A web app built around your process.</dd></dl></article>
-      <article class="card service"><h3>Android and mobile apps</h3><dl><dt>Solves</dt><dd>Reaching users on their phones.</dd><dt>Deliverable</dt><dd>A mobile application.</dd></dl></article>
-      <article class="card service"><h3>Desktop software</h3><dl><dt>Solves</dt><dd>Tools that must run on office computers.</dd><dt>Deliverable</dt><dd>A desktop application.</dd></dl></article>
-      <article class="card service"><h3>Business systems and dashboards</h3><dl><dt>Solves</dt><dd>Scattered records and no overview.</dd><dt>Deliverable</dt><dd>A management system or dashboard.</dd></dl></article>
-      <article class="card service"><h3>Document management and workflow</h3><dl><dt>Solves</dt><dd>Lost files and unclear task ownership.</dd><dt>Deliverable</dt><dd>Document storage and workflow automation.</dd></dl></article>
-      <article class="card service"><h3>Existing software customization</h3><dl><dt>Solves</dt><dd>A product that almost fits.</dd><dt>Deliverable</dt><dd>An adapted version of an existing app.</dd></dl></article>
-      <article class="card service"><h3>Maintenance and support</h3><dl><dt>Solves</dt><dd>Software that breaks or goes stale.</dd><dt>Deliverable</dt><dd>Fixes, updates and technical support.</dd></dl></article>
+    <!-- 3. PRODUCT CATALOGUE -->
+    <section id="catalogue" class="block bg-alt">
+      <div class="wrap">
+        <h2>Product Catalogue</h2>
+        <p class="lead">Digital goods available for direct licensing, purchasing, or custom configuration.</p>
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-header">
+              <span class="tag">Source Code</span>
+              <h3>Marketplace Starter</h3>
+            </div>
+            <p>The foundational codebase for PXDynasty. Fully documented for rapid deployment.</p>
+            <a href="#contact" class="btn">Buy Studio Code</a>
+          </article>
+          <article class="card">
+            <div class="card-header">
+              <span class="tag">UI Kit</span>
+              <h3>Dashboard System</h3>
+            </div>
+            <p>Figma and HTML components for building secure admin panels and analytics dashboards.</p>
+            <a href="#contact" class="btn">Buy Media</a>
+          </article>
+          <article class="card">
+            <div class="card-header">
+              <span class="tag">System</span>
+              <h3>Legal Office Base</h3>
+            </div>
+            <p>Adapt the LegisCore workflow engine for your firm's specific document routing needs.</p>
+            <a href="#contact" class="btn">License</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SERVICES GRID (BENTO BOX) -->
+    <section id="services" class="block">
+      <div class="wrap">
+        <h2>Studio Capabilities</h2>
+        <div class="bento-grid">
+          <div class="bento-item span-2">
+            <h3>Full-Stack Web Applications</h3>
+            <ul>
+              <li>Custom API integrations</li>
+              <li>Database architecture</li>
+              <li>Authentication & Security</li>
+            </ul>
+          </div>
+          <div class="bento-item">
+            <h3>UI/UX Design</h3>
+            <ul>
+              <li>Wireframing</li>
+              <li>Interactive Prototypes</li>
+            </ul>
+          </div>
+          <div class="bento-item">
+            <h3>Cloud Systems</h3>
+            <ul>
+              <li>AWS / GCP deployment</li>
+              <li>CI/CD pipelines</li>
+            </ul>
+          </div>
+          <div class="bento-item span-2">
+            <h3>Custom Extensions</h3>
+            <ul>
+              <li>Payment gateway integrations</li>
+              <li>Third-party API middleware</li>
+              <li>Workflow automations</li>
+            </ul>
+          </div>
+        </div>
+        <div class="bento-footer">
+          <a href="#contact" class="btn-link">View Pricing Structures &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. PROCESS PIPELINE -->
+    <section id="process" class="block bg-alt">
+      <div class="wrap">
+        <h2>How We Work</h2>
+        <div class="pipeline">
+          <div class="step">
+            <span class="step-num">01</span>
+            <h4>Discuss</h4>
+            <p>We map your operational bottlenecks and define the project scope.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">02</span>
+            <h4>Quote</h4>
+            <p>You receive a fixed-cost estimate, timeline, and deliverable list.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">03</span>
+            <h4>Build</h4>
+            <p>Iterative development with weekly review builds and testing.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">04</span>
+            <h4>Launch & Support</h4>
+            <p>Deployment to production with ongoing maintenance retainer options.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ABOUT STATEMENT -->
+    <section id="about" class="block statement-block">
+      <div class="wrap">
+        <h2 class="statement-text">"We engineer software that prioritizes utility over vanity. Our focus is on building resilient, maintainable systems that solve specific, real-world problems."</h2>
+      </div>
+    </section>
+
+    <!-- 7. CONTACT INTAKE FORM -->
+    <section id="contact" class="block">
+      <div class="wrap form-wrap">
+        <div class="form-info">
+          <h2>Start a Project</h2>
+          <p class="lead">Tell us what you're building. We will review the details and reply with next steps.</p>
+          
+          <div class="raw-contact">
+            <p><strong>Email:</strong> <a href="mailto:shehulhadi00@gmail.com">shehulhadi00@gmail.com</a></p>
+            <p><strong>WhatsApp:</strong> <a href="https://wa.me/2349063200718" target="_blank" rel="noopener">+234 906 320 0718</a></p>
+            <p><strong>Location:</strong> Jimeta-Yola, Adamawa, Nigeria</p>
+          </div>
+        </div>
+
+        <form id="project-form">
+          <div class="input-group">
+            <label for="name">Name *</label>
+            <input type="text" id="name" required placeholder="Your full name">
+          </div>
+          <div class="input-group">
+            <label for="details">Project Details (Type/Budget) *</label>
+            <input type="text" id="details" required placeholder="e.g. Web App, $2000 - $5000">
+          </div>
+          <div class="input-group">
+            <label for="description">Project Description *</label>
+            <textarea id="description" rows="5" required placeholder="Describe the problem you need solved..."></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="button" id="submit-wa" class="btn">Send via WhatsApp</button>
+            <button type="button" id="submit-mail" class="btn outline">Send via Email</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- 8. FOOTER -->
+  <footer>
+    <div class="wrap footer-content">
+      <p>&copy; <span id="year"></span> Asad Tech Concepts. All rights reserved.</p>
+      <div class="legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
     </div>
-    <p style="margin-top:24px"><a class="btn" href="#start">Request a Quote</a></p>
-  </div>
-</section>
+  </footer>
 
-<section class="block alt" id="process" aria-labelledby="proc-h">
-  <div class="wrap">
-    <h2 id="proc-h">How we work</h2>
-    <ol class="steps">
-      <li><strong>Discuss</strong><span class="muted">You describe the problem and goals.</span></li>
-      <li><strong>Quote</strong><span class="muted">Scope, cost and timeline are agreed in writing.</span></li>
-      <li><strong>Build</strong><span class="muted">Work is delivered in small, reviewable steps.</span></li>
-      <li><strong>Launch and support</strong><span class="muted">Deployment, then maintenance as agreed.</span></li>
-    </ol>
-  </div>
-</section>
-
-<section class="block" id="about" aria-labelledby="about-h">
-  <div class="wrap">
-    <h2 id="about-h">About</h2>
-    <p class="lead">Asad Tech Concepts solves practical problems with software. The focus is on useful, maintainable digital solutions that people can actually run and keep updating.</p>
-  </div>
-</section>
-
-<section class="block alt" id="start" aria-labelledby="start-h">
-  <div class="wrap">
-    <h2 id="start-h">Start a project</h2>
-    <p class="lead">Fill in the details, then send them by WhatsApp or email. This website does not store your submission.</p>
-    <form id="enquiry" novalidate>
-      <div class="row">
-        <label>Your name *<input name="name" autocomplete="name" required></label>
-        <label>Business or organization<input name="org" autocomplete="organization"></label>
-      </div>
-      <div class="row">
-        <label>Email *<input name="email" type="email" autocomplete="email" required></label>
-        <label>WhatsApp number<input name="phone" type="tel" autocomplete="tel"></label>
-      </div>
-      <div class="row">
-        <label>Project type
-          <select name="type">
-            <option>Website or landing page</option><option>E-commerce or marketplace</option><option>Custom web application</option>
-            <option>Mobile application</option><option>Desktop software</option><option>Business system or dashboard</option>
-            <option>Document management or workflow</option><option>Customize existing software</option><option>Maintenance or support</option><option>Other</option>
-          </select>
-        </label>
-        <label>Target platform
-          <select name="platform"><option>Web</option><option>Android/Mobile</option><option>Desktop</option><option>Not sure</option></select>
-        </label>
-      </div>
-      <label>Project description *<textarea name="description" required></textarea></label>
-      <div class="row">
-        <label>Budget range<input name="budget" placeholder="Optional"></label>
-        <label>Preferred timeline<input name="timeline" placeholder="Optional"></label>
-      </div>
-      <p class="err" id="form-error" role="alert"></p>
-      <div class="cta" style="margin:0">
-        <button class="btn" type="button" id="send-wa">Send via WhatsApp</button>
-        <button class="btn ghost" type="button" id="send-mail">Send via Email</button>
-      </div>
-      <p class="note">Your message opens in WhatsApp or your email app for you to review before sending.</p>
-    </form>
-  </div>
-</section>
-
-<section class="block" id="contact" aria-labelledby="contact-h">
-  <div class="wrap">
-    <h2 id="contact-h">Contact</h2>
-    <ul class="contact-list">
-      <li>Email: <a data-mail><span data-email-text></span></a></li>
-      <li>WhatsApp / phone: <a data-wa target="_blank" rel="noopener"><span data-phone-text></span></a></li>
-      <li>Location: <span data-location-text></span></li>
-    </ul>
-    <a class="btn" data-wa target="_blank" rel="noopener">Chat on WhatsApp</a>
-  </div>
-</section>
-</main>
-
-<footer>
-  <div class="wrap">&copy; <span id="year"></span> Asad Tech Concepts. All rights reserved.</div>
-</footer>
-
-<dialog id="detail" aria-label="Project details">
-  <button class="btn small ghost close" id="detail-close" type="button">Close</button>
-  <div id="detail-body"></div>
-</dialog>
-
-<script src="js/config.js"></script>
-<script src="data/projects.js"></script>
-<script src="js/main.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
