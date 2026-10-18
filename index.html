@@ -509,6 +509,12 @@ transition: none !important;
       footer { margin-bottom: 0 !important; }
     }
 
+  
+    /* === TECH LOGOS MARQUEE === */
+    .marquee-content { display: flex; align-items: center; white-space: nowrap; animation: scroll 25s linear infinite; }
+    .tech-logo { height: 36px; width: 36px; margin: 0 28px; object-fit: contain; opacity: 0.7; transition: all 0.3s; cursor: pointer; }
+    .tech-logo:hover { opacity: 1; transform: scale(1.15); }
+
   </style>
 <script type="application/ld+json">
 {
@@ -761,8 +767,26 @@ Start a project
 </section>
 <div class="marquee-wrapper">
 <div class="marquee-content">
-<span>HTML & CSS</span><span>JavaScript</span><span>Python</span><span>Node.js</span><span>Supabase</span><span>React</span><span>Paystack API</span><span>Android & iOS</span>
-<span>HTML & CSS</span><span>JavaScript</span><span>Python</span><span>Node.js</span><span>Supabase</span><span>React</span><span>Paystack API</span><span>Android & iOS</span>
+        <img src="https://cdn.simpleicons.org/html5/00e5a3" alt="HTML & CSS" class="tech-logo">
+        <img src="https://cdn.simpleicons.org/javascript/00e5a3" alt="JavaScript" class="tech-logo">
+        <img src="https://cdn.simpleicons.org/python/00e5a3" alt="Python" class="tech-logo">
+        <img src="https://cdn.simpleicons.org/nodedotjs/00e5a3" alt="Node.js" class="tech-logo">
+        <img src="https://cdn.simpleicons.org/supabase/00e5a3" alt="Supabase" class="tech-logo">
+        <img src="https://cdn.simpleicons.org/react/00e5a3" alt="React" class="tech-logo">
+        <img src="https://cdn.simpleicons.org/paystack/00e5a3" alt="Paystack API" class="tech-logo">
+        <img src="https://cdn.simpleicons.org/apple/00e5a3" alt="Android & iOS" class="tech-logo">
+        <img src="https://cdn.simpleicons.org/android/00e5a3" alt="Android & iOS" class="tech-logo">
+        
+        <!-- Duplicate for seamless loop -->
+        <img src="https://cdn.simpleicons.org/html5/00e5a3" alt="HTML & CSS" class="tech-logo">
+        <img src="https://cdn.simpleicons.org/javascript/00e5a3" alt="JavaScript" class="tech-logo">
+        <img src="https://cdn.simpleicons.org/python/00e5a3" alt="Python" class="tech-logo">
+        <img src="https://cdn.simpleicons.org/nodedotjs/00e5a3" alt="Node.js" class="tech-logo">
+        <img src="https://cdn.simpleicons.org/supabase/00e5a3" alt="Supabase" class="tech-logo">
+        <img src="https://cdn.simpleicons.org/react/00e5a3" alt="React" class="tech-logo">
+        <img src="https://cdn.simpleicons.org/paystack/00e5a3" alt="Paystack API" class="tech-logo">
+        <img src="https://cdn.simpleicons.org/apple/00e5a3" alt="Android & iOS" class="tech-logo">
+        <img src="https://cdn.simpleicons.org/android/00e5a3" alt="Android & iOS" class="tech-logo">
 </div>
 </div>
 <section id="work" class="reveal section container">
@@ -1266,9 +1290,9 @@ projectCards.forEach(card => fabObserver.observe(card));
     const toastEl = document.getElementById('tech-toast');
     let toastTimeout;
 
-    document.querySelectorAll('.marquee-content span').forEach(span => {
-      span.addEventListener('click', () => {
-        const tech = span.innerText.trim();
+    document.querySelectorAll('.marquee-content img').forEach(img => {
+      img.addEventListener('click', () => {
+        const tech = img.alt.trim();
         if (techData[tech]) {
           toastEl.innerText = tech + ': ' + techData[tech];
           toastEl.classList.add('show');
