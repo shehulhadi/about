@@ -338,6 +338,22 @@
     /* === REORDERED CARD MOCKUP === */
     .card-mockup { margin-top: 20px; margin-bottom: 24px; }
 
+  
+    /* === INTERACTIVE CARDS & MODAL === */
+    .card-mockup { cursor: pointer; position: relative; transition: transform 0.2s, border-color 0.2s; }
+    .card-mockup:hover { transform: scale(1.02); border-color: var(--accent); }
+    .card-mockup::after { content: "🔍 View Details"; position: absolute; inset: 0; background: rgba(10,17,24,0.85); display: flex; align-items: center; justify-content: center; color: var(--accent); font-weight: 600; font-size: 1.1rem; opacity: 0; transition: opacity 0.2s; border-radius: 8px; }
+    .card-mockup:hover::after { opacity: 1; }
+    
+    dialog.project-modal { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0; max-width: 800px; width: 90%; color: var(--text-main); margin: auto; max-height: 90vh; overflow-y: auto; }
+    dialog.project-modal::backdrop { background: rgba(0,0,0,0.85); backdrop-filter: blur(4px); }
+    .modal-inner { padding: 32px; position: relative; }
+    .modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; color: var(--text-muted); font-size: 28px; cursor: pointer; line-height: 1; }
+    .modal-close:hover { color: var(--text-main); }
+    .modal-mockup { width: 100%; height: 300px; background: var(--bg); border-radius: 8px; margin-bottom: 24px; border: 1px solid var(--border); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .modal-mockup svg { width: 100%; height: 100%; object-fit: contain; }
+    @media(max-width: 600px) { .modal-mockup { height: 200px; } }
+
   </style>
 
   <!-- SEO Schema Markup -->
@@ -370,6 +386,53 @@
     ]
   }
   
+    
+    // Interactive Project Modal Logic
+    function openProjectModal(cardElement) {
+      const title = cardElement.querySelector('h3').innerText;
+      const desc = cardElement.querySelector('p').innerHTML;
+      const statusBadge = cardElement.querySelector('.badge').outerHTML;
+      const mockupSvg = cardElement.querySelector('.card-mockup svg').outerHTML;
+      const actionBtn = cardElement.querySelector('.btn').outerHTML;
+      
+      const modalContent = document.getElementById('modal-dynamic-content');
+      modalContent.innerHTML = `
+        ${statusBadge}
+        <h2 style="margin-top: 12px; margin-bottom: 16px; font-size: 2rem;">${title}</h2>
+        <div class="modal-mockup">${mockupSvg}</div>
+        <p style="color: var(--text-muted); margin-bottom: 24px; line-height: 1.6;">${desc}</p>
+        <div style="display: flex; gap: 16px;">${actionBtn}</div>
+      `;
+      
+      const dialog = document.getElementById('project-modal');
+      if (dialog.showModal) dialog.showModal(); else dialog.setAttribute('open', '');
+    }
+
+    // Attach click events to mockups
+    document.querySelectorAll('.card-mockup').forEach(mockup => {
+      mockup.addEventListener('click', () => {
+        openProjectModal(mockup.closest('.card'));
+      });
+    });
+
+    // Close modal logic
+    const closeBtn = document.getElementById('close-project-modal');
+    const projectDialog = document.getElementById('project-modal');
+    
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribute('open');
+      });
+    }
+    if (projectDialog) {
+      projectDialog.addEventListener('click', (e) => {
+        const rect = projectDialog.getBoundingClientRect();
+        if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+          if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribute('open');
+        }
+      });
+    }
+
     // Scroll Animations (Intersection Observer)
     const reveals = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window) {
@@ -1020,6 +1083,53 @@ if ('serviceWorker' in navigator) {
       }
     });
   
+    
+    // Interactive Project Modal Logic
+    function openProjectModal(cardElement) {
+      const title = cardElement.querySelector('h3').innerText;
+      const desc = cardElement.querySelector('p').innerHTML;
+      const statusBadge = cardElement.querySelector('.badge').outerHTML;
+      const mockupSvg = cardElement.querySelector('.card-mockup svg').outerHTML;
+      const actionBtn = cardElement.querySelector('.btn').outerHTML;
+      
+      const modalContent = document.getElementById('modal-dynamic-content');
+      modalContent.innerHTML = `
+        ${statusBadge}
+        <h2 style="margin-top: 12px; margin-bottom: 16px; font-size: 2rem;">${title}</h2>
+        <div class="modal-mockup">${mockupSvg}</div>
+        <p style="color: var(--text-muted); margin-bottom: 24px; line-height: 1.6;">${desc}</p>
+        <div style="display: flex; gap: 16px;">${actionBtn}</div>
+      `;
+      
+      const dialog = document.getElementById('project-modal');
+      if (dialog.showModal) dialog.showModal(); else dialog.setAttribute('open', '');
+    }
+
+    // Attach click events to mockups
+    document.querySelectorAll('.card-mockup').forEach(mockup => {
+      mockup.addEventListener('click', () => {
+        openProjectModal(mockup.closest('.card'));
+      });
+    });
+
+    // Close modal logic
+    const closeBtn = document.getElementById('close-project-modal');
+    const projectDialog = document.getElementById('project-modal');
+    
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribute('open');
+      });
+    }
+    if (projectDialog) {
+      projectDialog.addEventListener('click', (e) => {
+        const rect = projectDialog.getBoundingClientRect();
+        if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+          if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribute('open');
+        }
+      });
+    }
+
     // Scroll Animations (Intersection Observer)
     const reveals = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window) {
@@ -1063,5 +1173,12 @@ if ('serviceWorker' in navigator) {
     <button id="close-install" style="background:none;border:none;color:var(--text-muted);font-size:24px;margin-left:8px;cursor:pointer;">&times;</button>
   </div>
 </div>
+
+  <dialog id="project-modal" class="project-modal">
+    <div class="modal-inner">
+      <button id="close-project-modal" class="modal-close" aria-label="Close">&times;</button>
+      <div id="modal-dynamic-content"></div>
+    </div>
+  </dialog>
 </body>
 </html>
