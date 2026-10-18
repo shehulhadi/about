@@ -462,6 +462,10 @@
     [data-theme="light"] .modal-mockup { background: #f1f5f9; }
     [data-theme="light"] header { background: rgba(248, 250, 252, 0.85); }
 
+  
+    /* === SCROLL PROGRESS BAR === */
+    #scroll-progress { position: fixed; top: 0; left: 0; height: 4px; background: var(--accent); z-index: 9999; width: 0%; transition: width 0.1s ease-out; }
+
   </style>
 
   <!-- SEO Schema Markup -->
@@ -639,6 +643,7 @@
   <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </head>
 <body>
+  <div id="scroll-progress"></div>
   <a href="#main" class="skip-link">Skip to content</a>
 
   <!-- HEADER -->
@@ -1090,6 +1095,7 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             <a href="https://wa.me/2349063200718" target="_blank" rel="noopener">+234 906 320 0718</a>
           </p>
+          <button id="save-contact" class="btn btn-secondary" style="width: 100%; margin-top: 16px; font-size: 0.9rem;">📥 Save Contact to Phone</button>
         </div>
       </div>
     </section>
@@ -1227,6 +1233,53 @@
         
         projectCards.forEach(card => fabObserver.observe(card));
       }
+    }
+
+    
+    // Scroll Progress Bar Logic
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (scrollTop / scrollHeight) * 100;
+      document.getElementById('scroll-progress').style.width = scrolled + '%';
+    });
+
+    
+    // vCard Generator Logic
+    const saveContactBtn = document.getElementById('save-contact');
+    if (saveContactBtn) {
+      saveContactBtn.addEventListener('click', () => {
+        const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:Muhammad Hadi Usman
+ORG:Asad Tech Concepts
+TITLE:Software Studio
+TEL;TYPE=CELL,VOICE:+2349063200718
+EMAIL;TYPE=WORK,INTERNET:shehulhadi00@gmail.com
+URL:https://shehulhadi.github.io/about/
+ADR;TYPE=WORK:;;Jimeta-Yola;Adamawa;;;Nigeria
+END:VCARD`;
+
+        const blob = new Blob([vcard], { type: 'text/vcard' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'Asad_Tech_Concepts.vcf';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+        
+        // Visual feedback
+        const originalText = saveContactBtn.textContent;
+        saveContactBtn.textContent = '✓ Contact Saved!';
+        saveContactBtn.style.color = 'var(--accent)';
+        setTimeout(() => {
+          saveContactBtn.textContent = originalText;
+          saveContactBtn.style.color = '';
+        }, 3000);
+      });
     }
 
     // Theme Toggle Logic
