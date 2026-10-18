@@ -282,6 +282,26 @@
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
     }
+  
+    /* === LAYOUT WIDTH & PADDING OVERRIDE === */
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+    .container {
+      width: 100% !important;
+      max-width: 1000px !important; /* Reduced from 1120px for better reading */
+      margin: 0 auto !important;
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+    }
+    @media (min-width: 768px) {
+      .container {
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+      }
+    }
+
   </style>
 
   <!-- SEO Schema Markup -->
