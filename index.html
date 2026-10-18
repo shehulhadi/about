@@ -404,6 +404,46 @@
     .review-avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: var(--accent); font-weight: bold; font-size: 0.8rem; }
     .review-author { font-size: 0.85rem; color: var(--text-main); }
 
+  
+    /* === STATUS WIDGET & MARQUEE === */
+    .status-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 229, 163, 0.1); color: var(--accent); padding: 6px 14px; border-radius: 99px; font-size: 0.85rem; font-weight: 600; margin-bottom: 24px; border: 1px solid rgba(0, 229, 163, 0.2); }
+    .pulse-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 0 rgba(0, 229, 163, 0.7); animation: pulse 2s infinite; }
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 229, 163, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 229, 163, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 229, 163, 0); }
+    }
+
+    /* Tech Marquee */
+    .marquee-wrapper { padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); overflow: hidden; display: flex; position: relative; }
+    .marquee-wrapper::before, .marquee-wrapper::after { content: ""; position: absolute; top: 0; bottom: 0; width: 50px; z-index: 2; pointer-events: none; }
+    .marquee-wrapper::before { left: 0; background: linear-gradient(to right, var(--surface), transparent); }
+    .marquee-wrapper::after { right: 0; background: linear-gradient(to left, var(--surface), transparent); }
+    .marquee-content { display: flex; white-space: nowrap; animation: scroll 25s linear infinite; }
+    .marquee-content span { display: inline-block; margin: 0 24px; color: var(--text-muted); font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  
+    /* === PROJECT FILTERS === */
+    .filter-container { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 32px 0; }
+    .filter-btn { background: var(--surface); border: 1px solid var(--border); color: var(--text-main); padding: 8px 16px; border-radius: 99px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s ease; }
+    .filter-btn:hover { border-color: var(--accent); }
+    .filter-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+
+  
+    /* === QUOTE ESTIMATOR === */
+    .estimator-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; max-width: 700px; margin: 0 auto; }
+    .est-group { margin-bottom: 24px; }
+    .est-group h4 { margin-bottom: 12px; font-size: 1rem; color: var(--text-main); }
+    .est-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .est-options { grid-template-columns: 1fr; } }
+    .est-label { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; color: var(--text-muted); cursor: pointer; padding: 10px; border: 1px solid var(--border); border-radius: 8px; transition: border-color 0.2s; }
+    .est-label:hover { border-color: var(--accent); }
+    .est-label input { accent-color: var(--accent); width: 18px; height: 18px; }
+    .est-total-box { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; margin-top: 32px; }
+    .est-total-label { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+    .est-total-price { font-size: 2rem; font-weight: 800; color: var(--accent); font-family: var(--font-display); }
+
   </style>
 
   <!-- SEO Schema Markup -->
@@ -483,6 +523,82 @@
       });
     }
 
+    
+    // Project Filter Logic
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('#project-grid .card');
+    
+    if (filterBtns.length > 0) {
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          const filter = btn.getAttribute('data-filter');
+          
+          projectCards.forEach(card => {
+            if (filter === 'all' || card.getAttribute('data-category') === filter) {
+              card.style.display = 'flex';
+              // Trigger re-animation
+              card.classList.remove('active');
+              setTimeout(() => card.classList.add('active'), 10);
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    }
+
+    
+    // Quote Estimator Logic
+    const estForm = document.getElementById('estimator');
+    if (estForm) {
+      const priceEl = document.getElementById('est-price');
+      const submitBtn = document.getElementById('est-submit');
+      
+      function calculateEstimate() {
+        let minTotal = 0;
+        let maxTotal = 0;
+        
+        // Base project type
+        const selectedType = document.querySelector('input[name="projectType"]:checked');
+        if (selectedType) {
+          minTotal += parseInt(selectedType.getAttribute('data-min'));
+          maxTotal += parseInt(selectedType.getAttribute('data-max'));
+        }
+        
+        // Add-ons
+        document.querySelectorAll('input[name="addon"]:checked').forEach(addon => {
+          minTotal += parseInt(addon.getAttribute('data-min'));
+          maxTotal += parseInt(addon.getAttribute('data-max'));
+        });
+        
+        // Format to NGN
+        const formatter = new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 });
+        priceEl.textContent = `${formatter.format(minTotal)} - ${formatter.format(maxTotal)}`;
+      }
+
+      // Update on change
+      estForm.addEventListener('change', calculateEstimate);
+      calculateEstimate(); // Initial load
+
+      // Submit via WhatsApp
+      submitBtn.addEventListener('click', () => {
+        const selectedType = document.querySelector('input[name="projectType"]:checked').value;
+        let selectedAddons = [];
+        document.querySelectorAll('input[name="addon"]:checked').forEach(addon => {
+          selectedAddons.push(addon.value);
+        });
+        
+        const estimate = priceEl.textContent;
+        
+        let msg = `Hello Asad Tech Concepts,\n\nI used your website estimator and I'd like a formal quote.\n\n*Project:* ${selectedType}\n*Add-ons:* ${selectedAddons.length > 0 ? selectedAddons.join(', ') : 'None'}\n*Estimate:* ${estimate}\n\nPlease let me know the next steps.`;
+        
+        window.open(`https://wa.me/2349063200718?text=${encodeURIComponent(msg)}`, '_blank');
+      });
+    }
+
     // Scroll Animations (Intersection Observer)
     const reveals = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window) {
@@ -545,6 +661,7 @@
   <main id="main">
     <!-- HERO -->
     <section class="hero container">
+      <div class="status-badge"><div class="pulse-dot"></div> Available for Q4 Projects</div>
       <h1>Practical software for real businesses.</h1>
       <p class="lead">We build web apps, management tools, and marketplaces that solve operational bottlenecks and scale with your institution or enterprise.</p>
       
@@ -565,14 +682,30 @@
       </div>
     </section>
 
+
+    <!-- TECH STACK MARQUEE -->
+    <div class="marquee-wrapper">
+      <div class="marquee-content">
+        <span>HTML & CSS</span><span>JavaScript</span><span>Python</span><span>Node.js</span><span>Supabase</span><span>React</span><span>Paystack API</span><span>Android & iOS</span>
+        <!-- Duplicate for seamless loop -->
+        <span>HTML & CSS</span><span>JavaScript</span><span>Python</span><span>Node.js</span><span>Supabase</span><span>React</span><span>Paystack API</span><span>Android & iOS</span>
+      </div>
+    </div>
+
     <!-- WORK -->
     <section id="work" class="reveal section container">
       <h2>Featured Work</h2>
       <p class="lead">Real tools built for real operations.</p>
       
-      <div class="grid-3">
+      <div class="filter-container">
+        <button class="filter-btn active" data-filter="all">All Work</button>
+        <button class="filter-btn" data-filter="web">Web Apps</button>
+        <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+        <button class="filter-btn" data-filter="pos">POS Systems</button>
+      </div>
+      <div class="grid-3" id="project-grid">
         <!-- PXDynasty -->
-        <article class="card">
+        <article class="card" data-category="ecommerce">
           
           <span class="badge prod">Production</span>
           <h3>PXDynasty</h3>
@@ -608,7 +741,7 @@
         </article>
 
         <!-- Matric -->
-        <article class="card">
+        <article class="card" data-category="web">
           
           <span class="badge prod">Production</span>
           <h3>Matric</h3>
@@ -642,7 +775,7 @@
         </article>
 
         <!-- LegisCore -->
-        <article class="card">
+        <article class="card" data-category="web">
           <span class="badge proto">Prototype</span>
           <h3>LegisCore</h3>
           <p><strong>Problem:</strong> Law firms struggle to track document versions and route administrative tasks. <br><br><strong>Built:</strong> A secure "Filing Room" document-management and workflow system for legal offices. <br><br><span style="color:var(--accent); font-weight:600;">Demo Login:</span><br>Email: test@legiscore.local<br>Pass: TestPass123!</p>
@@ -657,7 +790,7 @@
         </article>
       
         <!-- Asad POS -->
-        <article class="card">
+        <article class="card" data-category="pos">
           
           <span class="badge prod">Production</span>
           <h3>Asad POS</h3>
@@ -848,6 +981,44 @@
           <summary>I don't live in Yola. Can we still work together?</summary>
           <p>Yes. While our studio is based in Jimeta-Yola, we work remotely with clients in Abuja, Lagos, Kano, and across Nigeria. All communication, reviews, and project handoffs are handled smoothly via WhatsApp and Email.</p>
         </details>
+      </div>
+    </section>
+
+
+    <!-- QUOTE ESTIMATOR -->
+    <section id="estimator" class="section container reveal">
+      <h2>Interactive Quote Estimator</h2>
+      <p class="lead">Select your requirements to see a ballpark estimate.</p>
+      
+      <div class="estimator-card">
+        <div class="est-group">
+          <h4>1. What are you building?</h4>
+          <div class="est-options">
+            <label class="est-label"><input type="radio" name="projectType" value="Website" data-min="150000" data-max="300000" checked> Business Website</label>
+            <label class="est-label"><input type="radio" name="projectType" value="E-commerce" data-min="400000" data-max="800000"> E-commerce / Marketplace</label>
+            <label class="est-label"><input type="radio" name="projectType" value="Web App" data-min="600000" data-max="1500000"> Custom Web App / System</label>
+            <label class="est-label"><input type="radio" name="projectType" value="POS" data-min="250000" data-max="500000"> POS / Inventory Software</label>
+          </div>
+        </div>
+
+        <div class="est-group">
+          <h4>2. Any add-ons?</h4>
+          <div class="est-options">
+            <label class="est-label"><input type="checkbox" name="addon" value="Payment Integration" data-min="50000" data-max="100000"> Payment Integration</label>
+            <label class="est-label"><input type="checkbox" name="addon" value="Admin Dashboard" data-min="150000" data-max="300000"> Admin Dashboard</label>
+            <label class="est-label"><input type="checkbox" name="addon" value="Mobile App Version" data-min="250000" data-max="600000"> Mobile App Version</label>
+            <label class="est-label"><input type="checkbox" name="addon" value="Rush Delivery" data-min="100000" data-max="200000"> Rush Delivery</label>
+          </div>
+        </div>
+
+        <div class="est-total-box">
+          <div class="est-total-label">Estimated Range (NGN)</div>
+          <div class="est-total-price" id="est-price">₦150,000 - ₦300,000</div>
+        </div>
+
+        <button id="est-submit" class="btn btn-wa" style="width: 100%; margin-top: 24px;">
+          Send Estimate Request via WhatsApp
+        </button>
       </div>
     </section>
 
@@ -1156,6 +1327,82 @@ if ('serviceWorker' in navigator) {
         if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
           if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribute('open');
         }
+      });
+    }
+
+    
+    // Project Filter Logic
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('#project-grid .card');
+    
+    if (filterBtns.length > 0) {
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          const filter = btn.getAttribute('data-filter');
+          
+          projectCards.forEach(card => {
+            if (filter === 'all' || card.getAttribute('data-category') === filter) {
+              card.style.display = 'flex';
+              // Trigger re-animation
+              card.classList.remove('active');
+              setTimeout(() => card.classList.add('active'), 10);
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    }
+
+    
+    // Quote Estimator Logic
+    const estForm = document.getElementById('estimator');
+    if (estForm) {
+      const priceEl = document.getElementById('est-price');
+      const submitBtn = document.getElementById('est-submit');
+      
+      function calculateEstimate() {
+        let minTotal = 0;
+        let maxTotal = 0;
+        
+        // Base project type
+        const selectedType = document.querySelector('input[name="projectType"]:checked');
+        if (selectedType) {
+          minTotal += parseInt(selectedType.getAttribute('data-min'));
+          maxTotal += parseInt(selectedType.getAttribute('data-max'));
+        }
+        
+        // Add-ons
+        document.querySelectorAll('input[name="addon"]:checked').forEach(addon => {
+          minTotal += parseInt(addon.getAttribute('data-min'));
+          maxTotal += parseInt(addon.getAttribute('data-max'));
+        });
+        
+        // Format to NGN
+        const formatter = new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 });
+        priceEl.textContent = `${formatter.format(minTotal)} - ${formatter.format(maxTotal)}`;
+      }
+
+      // Update on change
+      estForm.addEventListener('change', calculateEstimate);
+      calculateEstimate(); // Initial load
+
+      // Submit via WhatsApp
+      submitBtn.addEventListener('click', () => {
+        const selectedType = document.querySelector('input[name="projectType"]:checked').value;
+        let selectedAddons = [];
+        document.querySelectorAll('input[name="addon"]:checked').forEach(addon => {
+          selectedAddons.push(addon.value);
+        });
+        
+        const estimate = priceEl.textContent;
+        
+        let msg = `Hello Asad Tech Concepts,\n\nI used your website estimator and I'd like a formal quote.\n\n*Project:* ${selectedType}\n*Add-ons:* ${selectedAddons.length > 0 ? selectedAddons.join(', ') : 'None'}\n*Estimate:* ${estimate}\n\nPlease let me know the next steps.`;
+        
+        window.open(`https://wa.me/2349063200718?text=${encodeURIComponent(msg)}`, '_blank');
       });
     }
 
