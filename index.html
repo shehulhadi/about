@@ -101,7 +101,7 @@ position: sticky; top: 0; z-index: 100;
 background: rgba(10, 17, 24, 0.85); backdrop-filter: blur(12px);
 border-bottom: 1px solid var(--border);
 }
-.nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 16px; }
 .logo { font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: var(--text-main); }
 .logo span { color: var(--accent); }
 .desktop-nav { display: none; gap: 32px; align-items: center; }
@@ -159,10 +159,10 @@ display: flex; flex-direction: column; transition: border-color 0.2s, transform 
 /* =========================================
 SERVICES (Icon Grid)
 ========================================= */
-.services-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
-@media (min-width: 600px) { .services-grid { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 900px) { .services-grid { grid-template-columns: repeat(4, 1fr); } }
-.service-item { background: var(--surface); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border); }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 40px; }
+@media (min-width: 600px) { .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 40px; } }
+@media (min-width: 900px) { .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 40px; } }
+.service-item { word-break: break-word; background: var(--surface); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border); }
 .service-icon { width: 40px; height: 40px; background: rgba(0,229,163,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--accent); }
 .service-item h4 { font-size: 1.1rem; margin-bottom: 8px; }
 .service-meta { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 4px; }
