@@ -302,6 +302,38 @@
       }
     }
 
+  
+    /* === SCROLL ANIMATIONS === */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+
+  
+    /* === FAQ ACCORDION === */
+    .faq-list { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
+    details { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; cursor: pointer; transition: border-color 0.2s; }
+    details:hover { border-color: rgba(255,255,255,0.2); }
+    details[open] { border-color: var(--accent); }
+    summary { font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; align-items: center; color: var(--text-main); }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; font-weight: 400; transition: transform 0.2s; }
+    details[open] summary::after { transform: rotate(45deg); }
+    details p { margin-top: 12px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; padding-right: 24px; }
+
+  
+    /* === TESTIMONIALS === */
+    .testimonial-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
+    @media (min-width: 768px) { .testimonial-grid { grid-template-columns: repeat(2, 1fr); } }
+    .testimonial-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; position: relative; overflow: hidden; }
+    .testimonial-card::before { content: "\201C"; font-family: serif; font-size: 5rem; color: rgba(0, 229, 163, 0.15); position: absolute; top: -10px; left: 15px; line-height: 1; }
+    .testimonial-text { font-size: 1.05rem; color: var(--text-main); margin-bottom: 20px; position: relative; z-index: 1; font-style: italic; line-height: 1.5; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(0, 229, 163, 0.1); display: flex; align-items: center; justify-content: center; color: var(--accent); font-weight: bold; font-size: 0.9rem; }
+    .author-info h5 { font-size: 0.95rem; margin: 0 0 2px 0; color: var(--text-main); }
+    .author-info p { font-size: 0.8rem; color: var(--text-muted); margin: 0; }
+
   </style>
 
   <!-- SEO Schema Markup -->
@@ -333,6 +365,24 @@
       {"@type": "State", "name": "Bauchi"}
     ]
   }
+  
+    // Scroll Animations (Intersection Observer)
+    const reveals = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+      reveals.forEach(reveal => observer.observe(reveal));
+    } else {
+      // Fallback for older browsers
+      reveals.forEach(reveal => reveal.classList.add('active'));
+    }
+
   </script>
 
 </head>
@@ -398,7 +448,7 @@
     </section>
 
     <!-- WORK -->
-    <section id="work" class="section container">
+    <section id="work" class="reveal section container">
       <h2>Featured Work</h2>
       <p class="lead">Real tools built for real operations.</p>
       
@@ -547,8 +597,38 @@
 </div>
     </section>
 
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="section container reveal">
+      <h2>Client Feedback</h2>
+      <p class="lead">Trusted by businesses and institutions.</p>
+      
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-text">The POS system completely eliminated our inventory tracking errors. We can now track block production and sales in real-time without relying on paper ledgers.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">AJ</div>
+            <div class="author-info">
+              <h5>A. Jibrialla</h5>
+              <p>Construction Manager</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">Our new marketplace platform has made it incredibly easy for local vendors to list their products and manage deliveries in one place. The WhatsApp integration is brilliant.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">VD</div>
+            <div class="author-info">
+              <h5>Vendor Demo</h5>
+              <p>PXDynasty User</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- SERVICES -->
-    <section id="services" class="section container">
+    <section id="services" class="reveal section container">
       <h2>Studio Capabilities</h2>
       <p class="lead">Full-stack engineering for complex operations.</p>
       
@@ -629,7 +709,7 @@
     </section>
 
     <!-- PROCESS -->
-    <section id="process" class="section container">
+    <section id="process" class="reveal section container">
       <h2>How We Work</h2>
       <p class="lead">A transparent pipeline from first call to launch.</p>
       
@@ -654,7 +734,7 @@
     </section>
 
     <!-- ABOUT -->
-    <section id="about" class="section container">
+    <section id="about" class="reveal section container">
       <h2>About the Studio</h2>
       <div class="about-wrap">
         <div class="founder-photo">MH</div>
@@ -667,8 +747,38 @@
       </div>
     </section>
 
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="section container reveal">
+      <h2>Frequently Asked Questions</h2>
+      <p class="lead">Clear answers before we even start.</p>
+      
+      <div class="faq-list">
+        <details name="faq">
+          <summary>How much does a custom web application cost?</summary>
+          <p>Because every project is unique, we provide fixed-cost quotes after our initial discussion. Small business landing pages typically start around ₦150,000, while complex systems like multi-vendor marketplaces or custom POS software range between ₦500,000 and ₦2M+.</p>
+        </details>
+        <details name="faq">
+          <summary>How long does it take to build a system?</summary>
+          <p>A standard website takes 1-2 weeks. A complex web application or marketplace takes 4-8 weeks depending on the features. We provide a clear timeline in your quote and send you weekly review builds so you can see the progress.</p>
+        </details>
+        <details name="faq">
+          <summary>Do you offer maintenance after launch?</summary>
+          <p>Yes. We offer monthly maintenance retainers to handle server updates, bug fixes, and minor content changes. We ensure your software remains secure and online long after it is deployed.</p>
+        </details>
+        <details name="faq">
+          <summary>Can you customize software you already built?</summary>
+          <p>Absolutely. If you want to license the LegisCore engine for your law firm, or adapt the Asad POS for your retail store, we can customize the branding, workflows, and user roles to fit your specific business.</p>
+        </details>
+        <details name="faq">
+          <summary>I don't live in Yola. Can we still work together?</summary>
+          <p>Yes. While our studio is based in Jimeta-Yola, we work remotely with clients in Abuja, Lagos, Kano, and across Nigeria. All communication, reviews, and project handoffs are handled smoothly via WhatsApp and Email.</p>
+        </details>
+      </div>
+    </section>
+
     <!-- CONTACT -->
-    <section id="contact" class="section container">
+    <section id="contact" class="reveal section container">
       <h2>Start a Project</h2>
       <p class="lead">Tell me what you're building. I reply within 24 hours.</p>
       
@@ -901,6 +1011,24 @@ if ('serviceWorker' in navigator) {
         window.open(`https://wa.me/2349063200718?text=${text}`, '_blank');
       }
     });
+  
+    // Scroll Animations (Intersection Observer)
+    const reveals = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+      reveals.forEach(reveal => observer.observe(reveal));
+    } else {
+      // Fallback for older browsers
+      reveals.forEach(reveal => reveal.classList.add('active'));
+    }
+
   </script>
   <dialog id="download-modal">
       <div class="modal-inner">
