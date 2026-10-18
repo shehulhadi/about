@@ -400,6 +400,21 @@ transition: none !important;
       .wipe-left, .wipe-right { opacity: 1 !important; transform: none !important; transition: none !important; }
     }
 
+  
+    /* === TECH TOOLTIPS === */
+    .marquee-wrapper:hover .marquee-content { animation-play-state: paused; }
+    .marquee-content span { cursor: pointer; transition: color 0.2s; }
+    .marquee-content span:hover { color: var(--accent); }
+    
+    .tech-toast {
+      position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--surface); border: 1px solid var(--accent); color: var(--text-main);
+      padding: 12px 20px; border-radius: 99px; font-size: 0.9rem; font-weight: 500;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5); z-index: 9999; opacity: 0; pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); text-align: center; max-width: 90%;
+    }
+    .tech-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
   </style>
 <script type="application/ld+json">
 {
@@ -913,29 +928,67 @@ Send Estimate Request via WhatsApp
 <div class="contact-grid">
 <div data-fs-success style="display:none; color:var(--accent); padding:16px; background:rgba(0,229,163,0.1); border-radius:8px; margin-bottom:20px; font-weight:600;">✓ Message sent successfully! I will reply within 24 hours.</div>
 <form id="contact-form" action="https://formspree.io/f/xrpedgvz" method="POST">
-<div class="form-group">
-<label for="name">Your Name *</label>
-<input type="text" id="name" name="name" class="form-control" placeholder="e.g. John Doe" required data-fs-field>
-<div class="error-msg" data-fs-error="name" style="display:none;"></div>
-</div>
-<div class="form-group">
-<label for="details">Project Type & Budget *</label>
-<input type="text" id="details" name="details" class="form-control" placeholder="e.g. E-commerce store, ₦500k - ₦1M" required data-fs-field>
-<div class="error-msg" data-fs-error="details" style="display:none;"></div>
-</div>
-<div class="form-group">
-<label for="description">Project Description *</label>
-<textarea id="description" name="description" class="form-control" placeholder="Describe the problem you need solved..." required data-fs-field></textarea>
-<div class="error-msg" data-fs-error="description" style="display:none;"></div>
-</div>
-<div class="form-actions">
-<button type="submit" class="btn btn-primary" data-fs-submit-btn>Send via Email</button>
-<button type="button" id="send-wa" class="btn btn-wa">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-Send via WhatsApp
-</button>
-</div>
-</form>
+      <!-- STEP 1 -->
+      <div class="wizard-step active" id="step-1">
+        <div class="wizard-header">
+          <span class="wizard-title">Project Overview</span>
+          <span class="wizard-progress">Step 1 of 3</span>
+        </div>
+        <div class="form-group">
+          <label for="details">Project Type &amp; Budget *</label>
+          <input type="text" id="details" name="details" class="form-control" placeholder="e.g. E-commerce store, ₦500k - ₦1M" required data-fs-field>
+          <div class="error-msg" data-fs-error="details" style="display:none;"></div>
+        </div>
+        <div class="wizard-nav">
+          <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next Step &rarr;</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="wizard-step" id="step-2">
+        <div class="wizard-header">
+          <span class="wizard-title">Your Details</span>
+          <span class="wizard-progress">Step 2 of 3</span>
+        </div>
+        <div class="form-group">
+          <label for="name">Your Name *</label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="e.g. John Doe" required data-fs-field>
+          <div class="error-msg" data-fs-error="name" style="display:none;"></div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="you@company.com" required data-fs-field>
+          <div class="error-msg" data-fs-error="email" style="display:none;"></div>
+        </div>
+        <div class="wizard-nav">
+          <button type="button" class="btn btn-secondary" onclick="nextStep(1)">&larr; Back</button>
+          <button type="button" class="btn btn-primary" onclick="nextStep(3)">Next Step &rarr;</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="wizard-step" id="step-3">
+        <div class="wizard-header">
+          <span class="wizard-title">Project Details</span>
+          <span class="wizard-progress">Step 3 of 3</span>
+        </div>
+        <div class="form-group">
+          <label for="description">Project Description *</label>
+          <textarea id="description" name="description" class="form-control" placeholder="Describe the problem you need solved..." required data-fs-field></textarea>
+          <div class="error-msg" data-fs-error="description" style="display:none;"></div>
+        </div>
+        <div class="wizard-nav" style="flex-direction: column;">
+          <div style="display:flex; gap:12px; width:100%;">
+            <button type="button" class="btn btn-secondary" onclick="nextStep(2)" style="flex:1;">&larr; Back</button>
+            <button type="submit" class="btn btn-primary" data-fs-submit-btn style="flex:2;">Send via Email</button>
+          </div>
+          <button type="button" id="send-wa" class="btn btn-wa" style="width:100%; margin-top:8px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Send via WhatsApp
+          </button>
+        </div>
+      </div>
+    </form>
 <div class="contact-info">
 <p>
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -1067,7 +1120,38 @@ fab.href = `https://wa.me/2349063200718?text=${encodeURIComponent(msg)}`;
 projectCards.forEach(card => fabObserver.observe(card));
 }
 }
-// Scroll Progress Bar Logic
+
+    // Tech Stack Tooltips
+    const techData = {
+      'HTML & CSS': 'The foundation of all websites. We use modern HTML5 and CSS3 for responsive designs.',
+      'JavaScript': 'The language of the web. Used for interactive frontends and powerful backends.',
+      'Python': 'Excellent for data processing, AI, and building robust backend systems.',
+      'Node.js': 'Fast, scalable backend server environment for modern web apps.',
+      'Supabase': 'Open-source Firebase alternative. Handles authentication and databases securely.',
+      'React': 'A powerful library for building fast, interactive user interfaces.',
+      'Paystack API': 'Seamless, secure payment processing for Nigerian and international cards.',
+      'Android & iOS': 'Native and cross-platform mobile app development for all devices.'
+    };
+
+    const toastEl = document.getElementById('tech-toast');
+    let toastTimeout;
+
+    document.querySelectorAll('.marquee-content span').forEach(span => {
+      span.addEventListener('click', () => {
+        const tech = span.innerText.trim();
+        if (techData[tech]) {
+          toastEl.innerText = tech + ': ' + techData[tech];
+          toastEl.classList.add('show');
+          
+          clearTimeout(toastTimeout);
+          toastTimeout = setTimeout(() => {
+            toastEl.classList.remove('show');
+          }, 4000); // Hide after 4 seconds
+        }
+      });
+    });
+
+    // Scroll Progress Bar Logic
 window.addEventListener('scroll', () => {
 const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -1182,7 +1266,25 @@ installBanner.style.display = 'none';
 if ('serviceWorker' in navigator) {
 navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed', err));
 }
-// Initialize Formspree (Handles Email submission, validation, and success message)
+
+    window.nextStep = function(step) {
+      const currentStepDiv = document.querySelector('.wizard-step.active');
+      const inputs = currentStepDiv.querySelectorAll('input[required], textarea[required]');
+      let isValid = true;
+      inputs.forEach(input => {
+        if (!input.value.trim()) {
+          input.style.borderColor = '#f87171';
+          isValid = false;
+        } else {
+          input.style.borderColor = '';
+        }
+      });
+      if (!isValid) return; 
+      document.querySelectorAll('.wizard-step').forEach(el => el.classList.remove('active'));
+      document.getElementById('step-' + step).classList.add('active');
+    };
+
+    // Initialize Formspree (Handles Email submission, validation, and success message)
 window.formspree = window.formspree || function () { (window.formspree.q = window.formspree.q || []).push(arguments); };
 formspree('initForm', { formElement: '#contact-form', formId: 'xrpedgvz' });
 // WhatsApp Button Logic (Custom)
@@ -1369,5 +1471,6 @@ reveals.forEach(reveal => reveal.classList.add('active'));
 <div id="modal-dynamic-content"></div>
 </div>
 </dialog>
+<div id="tech-toast" class="tech-toast"></div>
 </body>
 </html>
