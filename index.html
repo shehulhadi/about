@@ -391,6 +391,19 @@
       .hero-actions .btn { width: 100%; }
     }
 
+  
+    /* === LIVE APP REVIEWS === */
+    .app-reviews-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
+    @media (min-width: 768px) { .app-reviews-grid { grid-template-columns: repeat(2, 1fr); } }
+    .review-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+    .review-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .review-app-name { font-weight: 700; font-size: 1.1rem; color: var(--text-main); }
+    .review-stars { color: #fbbf24; font-size: 1.2rem; letter-spacing: 2px; }
+    .review-text { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 16px; font-style: italic; }
+    .review-footer { display: flex; align-items: center; gap: 12px; }
+    .review-avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: var(--accent); font-weight: bold; font-size: 0.8rem; }
+    .review-author { font-size: 0.85rem; color: var(--text-main); }
+
   </style>
 
   <!-- SEO Schema Markup -->
@@ -730,6 +743,41 @@
               <h5>Vendor Demo</h5>
               <p>PXDynasty User</p>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- APP REVIEWS -->
+    <section id="app-reviews" class="section container reveal">
+      <h2>Live App Reviews</h2>
+      <p class="lead">What businesses using our software are saying.</p>
+      
+      <div class="app-reviews-grid">
+        <!-- Asad POS Review -->
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-app-name">Asad POS</div>
+            <div class="review-stars">★★★★★</div>
+          </div>
+          <p class="review-text">"The POS system completely eliminated our inventory tracking errors. We can now track block production and sales in real-time. The PIN login makes it secure for our staff."</p>
+          <div class="review-footer">
+            <div class="review-avatar">AJ</div>
+            <div class="review-author">A. Jibrialla<br><span style="font-size:0.75rem; color:var(--text-muted);">Construction Manager</span></div>
+          </div>
+        </div>
+
+        <!-- PXDynasty Review -->
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-app-name">PXDynasty</div>
+            <div class="review-stars">★★★★★</div>
+          </div>
+          <p class="review-text">"Our vendors love how easy it is to list products and receive orders. The WhatsApp integration and delivery workflow saves us hours of manual coordination every single day."</p>
+          <div class="review-footer">
+            <div class="review-avatar">VD</div>
+            <div class="review-author">Vendor Demo<br><span style="font-size:0.75rem; color:var(--text-muted);">Marketplace Vendor</span></div>
           </div>
         </div>
       </div>
