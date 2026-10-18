@@ -554,6 +554,7 @@
           Start a project
         </a>
         <button id="download-btn" class="btn btn-secondary">Download Profile</button>
+        <button id="share-btn" class="btn btn-secondary">Share App</button>
         <a href="#work" class="btn btn-secondary">See our work</a>
       </div>
       
@@ -1002,6 +1003,32 @@
             }
           });
         });
+      });
+    }
+
+    
+    // Share API Logic
+    const shareBtn = document.getElementById('share-btn');
+    if (shareBtn) {
+      shareBtn.addEventListener('click', async () => {
+        const shareData = {
+          title: 'Asad Tech Concepts',
+          text: 'Practical software for real businesses. Check out Asad Tech Concepts!',
+          url: 'https://shehulhadi.github.io/about/'
+        };
+        try {
+          if (navigator.share) {
+            // Native mobile share sheet (WhatsApp, Twitter, etc.)
+            await navigator.share(shareData);
+          } else {
+            // Fallback for desktop browsers
+            await navigator.clipboard.writeText(shareData.url);
+            shareBtn.textContent = 'Link Copied!';
+            setTimeout(() => { shareBtn.textContent = 'Share App'; }, 2000);
+          }
+        } catch (err) {
+          console.log('Share failed or cancelled', err);
+        }
       });
     }
 
