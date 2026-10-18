@@ -415,6 +415,14 @@ transition: none !important;
     }
     .tech-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+  
+    /* === SPLIT TEXT ANIMATION === */
+    .split-word { display: inline-block; opacity: 0; transform: translateY(15px); transition: opacity 0.4s ease, transform 0.4s ease; }
+    .split-word.reveal { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .split-word { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+
   </style>
 <script type="application/ld+json">
 {
@@ -484,6 +492,30 @@ if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribu
 }
 });
 }
+
+    
+    // Split Text Animation for Hero Description
+    const heroDesc = document.querySelector('.hero .lead');
+    if (heroDesc) {
+      const words = heroDesc.innerText.split(/\s+/);
+      heroDesc.innerHTML = '';
+      
+      words.forEach((word, index) => {
+        const span = document.createElement('span');
+        span.className = 'split-word';
+        span.textContent = word;
+        span.style.transitionDelay = `${index * 0.03}s`; // 30ms stagger
+        heroDesc.appendChild(span);
+        heroDesc.appendChild(document.createTextNode(' ')); // Normal space for wrapping
+      });
+
+      // Trigger animation shortly after load
+      setTimeout(() => {
+        document.querySelectorAll('.hero .split-word').forEach(span => {
+          span.classList.add('reveal');
+        });
+      }, 150);
+    }
 
     // Horizontal Wipe Animation for Project Cards
     const wipeCards = document.querySelectorAll('#project-grid .card');
@@ -1342,6 +1374,30 @@ if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribu
 }
 });
 }
+
+    
+    // Split Text Animation for Hero Description
+    const heroDesc = document.querySelector('.hero .lead');
+    if (heroDesc) {
+      const words = heroDesc.innerText.split(/\s+/);
+      heroDesc.innerHTML = '';
+      
+      words.forEach((word, index) => {
+        const span = document.createElement('span');
+        span.className = 'split-word';
+        span.textContent = word;
+        span.style.transitionDelay = `${index * 0.03}s`; // 30ms stagger
+        heroDesc.appendChild(span);
+        heroDesc.appendChild(document.createTextNode(' ')); // Normal space for wrapping
+      });
+
+      // Trigger animation shortly after load
+      setTimeout(() => {
+        document.querySelectorAll('.hero .split-word').forEach(span => {
+          span.classList.add('reveal');
+        });
+      }, 150);
+    }
 
     // Horizontal Wipe Animation for Project Cards
     const wipeCards = document.querySelectorAll('#project-grid .card');
