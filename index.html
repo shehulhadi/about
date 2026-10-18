@@ -1,1567 +1,1319 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Asad Tech Concepts | Software Studio in Yola & Across Nigeria</title>
-  <meta name="description" content="We build web apps, management tools, and marketplaces for businesses and institutions. Based in Yola, serving clients in Abuja, Lagos, Kano, and across Nigeria.">
-  <meta name="theme-color" content="#0a1118">
-  <link rel="manifest" href="manifest.json">
-  
-  <!-- Open Graph / WhatsApp Sharing -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Asad Tech Concepts | Software Studio">
-  <meta property="og:description" content="Live marketplace in Yola · Fixed-cost quotes · Weekly review builds. Start a project on WhatsApp.">
-  
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  
-  <!-- SVG Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a1118%22/><text x=%2250%22 y=%2255%22 font-family=%22sans-serif%22 font-size=%2250%22 font-weight=%22bold%22 fill=%22%2300e5a3%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>A</text></svg>">
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    /* =========================================
-       CSS VARIABLES (Edit these to change theme)
-       ========================================= */
-    :root {
-      --bg: #0a1118;
-      --surface: #111a24;
-      --surface-hover: #16222e;
-      --border: rgba(255, 255, 255, 0.08);
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent: #00e5a3;
-      --accent-hover: #00c98f;
-      
-      --badge-prod-bg: rgba(0, 229, 163, 0.1);
-      --badge-prod-text: #00e5a3;
-      --badge-proto-bg: rgba(59, 130, 246, 0.1);
-      --badge-proto-text: #60a5fa;
-      --badge-concept-bg: rgba(245, 158, 11, 0.1);
-      --badge-concept-text: #fbbf24;
-
-      --font-body: 'Inter', system-ui, sans-serif;
-      --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
-      
-      --max-width: 1120px;
-      --radius: 12px;
-    }
-
-    /* =========================================
-       RESET & BASE
-       ========================================= */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      font-family: var(--font-body);
-      font-size: 16px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-      /* Subtle radial glow */
-      background-image: radial-gradient(circle at 50% 0%, rgba(0, 229, 163, 0.08) 0%, transparent 50%);
-      background-repeat: no-repeat;
-    }
-    a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
-    a:hover { color: var(--accent-hover); }
-    ul { list-style: none; }
-    img, svg { display: block; max-width: 100%; }
-
-    /* Typography Scale */
-    h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; }
-    h1 { font-size: clamp(2.5rem, 5vw + 1rem, 4rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 24px; }
-    h2 { font-size: clamp(2rem, 3vw + 1rem, 2.5rem); font-weight: 700; margin-bottom: 12px; letter-spacing: -0.01em; }
-    h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
-    .lead { font-size: 1.125rem; color: var(--text-muted); margin-bottom: 24px; max-width: 600px; }
-
-    /* Layout Utilities */
-    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 16px; }
-    @media (min-width: 768px) { .container { padding: 0 24px; } }
-    .section { padding: 48px 0; border-top: 1px solid var(--border); }
-    @media (min-width: 768px) { .section { padding: 80px 0; } }
-    .grid-3 { display: grid; grid-template-columns: 1fr; gap: 24px; }
-    
-    @media (min-width: 768px) {
-      .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    /* =========================================
-       BUTTONS & TAP TARGETS
-       ========================================= */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      min-height: 48px; padding: 0 24px; border-radius: var(--radius);
-      font-family: var(--font-body); font-size: 1rem; font-weight: 600;
-      cursor: pointer; transition: all 0.2s ease; border: 1px solid transparent;
-      text-align: center;
-    }
-    .btn-primary { background: var(--accent); color: #000; }
-    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 229, 163, 0.2); }
-    .btn-secondary { background: transparent; color: var(--text-main); border-color: var(--border); }
-    .btn-secondary:hover { border-color: var(--text-muted); background: var(--surface); transform: translateY(-2px); }
-    .btn-wa { background: #25D366; color: #fff; gap: 8px; }
-    .btn-wa:hover { background: #20b858; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2); }
-
-    /* =========================================
-       HEADER & NAVIGATION
-       ========================================= */
-    .skip-link { position: absolute; left: -999px; top: 0; background: var(--accent); color: #000; padding: 12px; z-index: 1000; font-weight: 600; }
-    .skip-link:focus { left: 0; }
-
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(10, 17, 24, 0.85); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-    .logo { font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: var(--text-main); }
-    .logo span { color: var(--accent); }
-    
-    .desktop-nav { display: none; gap: 32px; align-items: center; }
-    .desktop-nav a { color: var(--text-main); font-weight: 500; font-size: 15px; }
-    .desktop-nav a:hover { color: var(--accent); }
-    
-    .header-actions { display: none; }
-
-    .menu-toggle {
-      display: flex; align-items: center; justify-content: center;
-      width: 48px; height: 48px; background: transparent; border: none;
-      color: var(--text-main); cursor: pointer;
-    }
-
-    /* Mobile Menu */
-    .mobile-menu {
-      display: none; position: absolute; top: 72px; left: 0; right: 0;
-      background: var(--bg); border-bottom: 1px solid var(--border);
-      padding: 24px; flex-direction: column; gap: 16px;
-    }
-    .mobile-menu.active { display: flex; }
-    .mobile-menu a { color: var(--text-main); font-size: 1.125rem; font-weight: 600; padding: 12px 0; border-bottom: 1px solid var(--border); }
-    
-    @media (min-width: 900px) {
-      .menu-toggle { display: none; }
-      .desktop-nav { display: flex; }
-      .header-actions { display: flex; gap: 16px; }
-    }
-
-    /* =========================================
-       HERO SECTION
-       ========================================= */
-    .hero { padding: 48px 0 32px; }
-    @media (min-width: 768px) { .hero { padding: 80px 0 60px; } }
-    .hero .lead { font-size: clamp(1.125rem, 2vw, 1.25rem); }
-    .hero-actions { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
-    @media (min-width: 600px) { .hero-actions { flex-direction: row; } }
-    
-    .trust-row { display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.875rem; color: var(--text-muted); }
-    .trust-row span { display: flex; align-items: center; gap: 8px; }
-    .trust-row span::before { content: "•"; color: var(--accent); font-size: 1.2rem; }
-
-    /* =========================================
-       WORK / CASE STUDIES
-       ========================================= */
-    .card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 20px;
-      display: flex; flex-direction: column; transition: border-color 0.2s, transform 0.2s;
-    }
-    .card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-4px); }
-    .card-mockup { width: 100%; height: 200px; background: var(--bg); border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--border); overflow: hidden; position: relative; }
-    
-    .badge { display: inline-block; padding: 4px 12px; border-radius: 99px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
-    .badge.prod { background: var(--badge-prod-bg); color: var(--badge-prod-text); }
-    .badge.proto { background: var(--badge-proto-bg); color: var(--badge-proto-text); }
-    .badge.concept { background: var(--badge-concept-bg); color: var(--badge-concept-text); }
-    
-    .card h3 { font-size: 1.25rem; margin-bottom: 12px; }
-    .card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 24px; flex-grow: 1; }
-    .card p strong { color: var(--text-main); font-weight: 600; }
-    .stack-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
-    .stack-tags span { font-size: 0.75rem; background: var(--bg); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border); color: var(--text-muted); }
-
-    /* =========================================
-       SERVICES (Icon Grid)
-       ========================================= */
-    .services-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
-    @media (min-width: 600px) { .services-grid { grid-template-columns: 1fr 1fr; } }
-    @media (min-width: 900px) { .services-grid { grid-template-columns: repeat(4, 1fr); } }
-    
-    .service-item { background: var(--surface); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border); }
-    .service-icon { width: 40px; height: 40px; background: rgba(0,229,163,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--accent); }
-    .service-item h4 { font-size: 1.1rem; margin-bottom: 8px; }
-    .service-meta { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 4px; }
-    .service-meta strong { color: var(--text-main); }
-
-    /* =========================================
-       PROCESS TIMELINE
-       ========================================= */
-    .timeline { position: relative; margin-top: 40px; display: flex; flex-direction: column; gap: 32px; padding-left: 24px; }
-    .timeline::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 2px; background: var(--border); }
-    .timeline-step { position: relative; }
-    .timeline-step::before { content: ""; position: absolute; left: -29px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
-    .timeline-step h4 { font-size: 1.25rem; margin-bottom: 8px; }
-    .timeline-step p { font-size: 0.95rem; color: var(--text-muted); max-width: 250px; }
-    
-    @media (min-width: 768px) {
-      .timeline { flex-direction: row; padding-left: 0; padding-top: 24px; gap: 24px; justify-content: space-between; }
-      .timeline::before { left: 8px; right: 8px; top: 0; bottom: auto; height: 2px; width: auto; }
-      .timeline-step::before { left: 0; top: -29px; }
-      .timeline-step { flex: 1; }
-    }
-
-    /* =========================================
-       ABOUT
-       ========================================= */
-    .about-wrap { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; }
-    @media (min-width: 768px) { .about-wrap { flex-direction: row; align-items: center; gap: 64px; } }
-    .founder-photo { width: 120px; height: 120px; border-radius: 50%; background: var(--surface); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800; color: var(--accent); flex-shrink: 0; }
-    .founder-info h3 { font-size: 1.5rem; }
-    .founder-info .location { color: var(--accent); font-weight: 500; margin-bottom: 16px; display: block; }
-    blockquote { border-left: 2px solid var(--accent); padding-left: 16px; font-style: italic; color: var(--text-muted); margin: 24px 0; font-size: 1.125rem; }
-
-    /* =========================================
-       CONTACT FORM
-       ========================================= */
-    .contact-grid { display: grid; grid-template-columns: 1fr; gap: 48px; margin-top: 40px; }
-    @media (min-width: 900px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
-    
-    .form-group { margin-bottom: 20px; }
-    .form-group label { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
-    .form-control { width: 100%; min-height: 48px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; font-family: var(--font-body); font-size: 16px; color: var(--text-main); transition: border-color 0.2s, box-shadow 0.2s; }
-    .form-control:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 229, 163, 0.15); }
-    textarea.form-control { min-height: 120px; resize: vertical; }
-    .error-msg { color: #f87171; font-size: 0.875rem; margin-top: 4px; display: none; }
-    
-    .form-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
-    @media (min-width: 600px) { .form-actions { flex-direction: row; } }
-    .form-actions .btn { flex: 1; }
-
-    .contact-info { background: var(--surface); padding: 32px; border-radius: var(--radius); border: 1px solid var(--border); }
-    .contact-info p { color: var(--text-muted); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; font-size: 1rem; }
-    .contact-info a { color: var(--text-main); font-weight: 500; }
-    .contact-info svg { color: var(--accent); flex-shrink: 0; }
-
-    /* =========================================
-       FOOTER
-       ========================================= */
-    footer { padding: 40px 0; border-top: 1px solid var(--border); margin-bottom: 72px; /* space for floating button */ }
-    @media (min-width: 900px) { footer { margin-bottom: 0; } }
-    .footer-content { display: flex; flex-direction: column; gap: 24px; align-items: center; text-align: center; }
-    @media (min-width: 768px) { .footer-content { flex-direction: row; justify-content: space-between; text-align: left; } }
-    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
-    .footer-links a { color: var(--text-muted); font-size: 0.875rem; }
-    .footer-links a:hover { color: var(--text-main); }
-    .copyright { color: var(--text-muted); font-size: 0.875rem; }
-
-    /* Floating WhatsApp Button */
-    .fab {
-      position: fixed; bottom: 24px; right: 24px; z-index: 99;
-      width: 56px; height: 56px; border-radius: 50%;
-      background: #25D366; color: #fff; display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4); transition: transform 0.2s;
-    }
-    .fab:hover { transform: scale(1.05); }
-    @media (min-width: 900px) { .fab { display: none; } }
-
-    /* Download Modal */
-    dialog { background: var(--surface); color: var(--text-main); border: 1px solid var(--border); border-radius: var(--radius); padding: 0; max-width: 400px; width: 90%; margin: auto; }
-    dialog::backdrop { background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); }
-    .modal-inner { padding: 32px; position: relative; text-align: center; }
-    .modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; color: var(--text-muted); font-size: 24px; cursor: pointer; transition: color 0.2s; }
-    .modal-close:hover { color: var(--text-main); }
-    .modal-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
-
-    /* Motion */
-    @media (prefers-reduced-motion: reduce) {
-      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
-    }
-  
-    /* === LAYOUT WIDTH & PADDING OVERRIDE === */
-    html, body {
-      overflow-x: hidden;
-      width: 100%;
-    }
-    .container {
-      width: 100% !important;
-      max-width: 1000px !important; /* Reduced from 1120px for better reading */
-      margin: 0 auto !important;
-      padding-left: 20px !important;
-      padding-right: 20px !important;
-    }
-    @media (min-width: 768px) {
-      .container {
-        padding-left: 32px !important;
-        padding-right: 32px !important;
-      }
-    }
-
-  
-    /* === SCROLL ANIMATIONS === */
-    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-    .reveal.active { opacity: 1; transform: translateY(0); }
-    @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-    }
-
-  
-    /* === FAQ ACCORDION === */
-    .faq-list { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
-    details { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; cursor: pointer; transition: border-color 0.2s; }
-    details:hover { border-color: rgba(255,255,255,0.2); }
-    details[open] { border-color: var(--accent); }
-    summary { font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; align-items: center; color: var(--text-main); }
-    summary::-webkit-details-marker { display: none; }
-    summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; font-weight: 400; transition: transform 0.2s; }
-    details[open] summary::after { transform: rotate(45deg); }
-    details p { margin-top: 12px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; padding-right: 24px; }
-
-  
-    /* === TESTIMONIALS === */
-    .testimonial-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
-    @media (min-width: 768px) { .testimonial-grid { grid-template-columns: repeat(2, 1fr); } }
-    .testimonial-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; position: relative; overflow: hidden; }
-    .testimonial-card::before { content: "\201C"; font-family: serif; font-size: 5rem; color: rgba(0, 229, 163, 0.15); position: absolute; top: -10px; left: 15px; line-height: 1; }
-    .testimonial-text { font-size: 1.05rem; color: var(--text-main); margin-bottom: 20px; position: relative; z-index: 1; font-style: italic; line-height: 1.5; }
-    .testimonial-author { display: flex; align-items: center; gap: 12px; }
-    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(0, 229, 163, 0.1); display: flex; align-items: center; justify-content: center; color: var(--accent); font-weight: bold; font-size: 0.9rem; }
-    .author-info h5 { font-size: 0.95rem; margin: 0 0 2px 0; color: var(--text-main); }
-    .author-info p { font-size: 0.8rem; color: var(--text-muted); margin: 0; }
-
-  
-    /* === REORDERED CARD MOCKUP === */
-    .card-mockup { margin-top: 20px; margin-bottom: 24px; }
-
-  
-    /* === INTERACTIVE CARDS & MODAL === */
-    .card-mockup { cursor: pointer; position: relative; transition: transform 0.2s, border-color 0.2s; }
-    .card-mockup:hover { transform: scale(1.02); border-color: var(--accent); }
-    .card-mockup::after { content: "🔍 View Details"; position: absolute; inset: 0; background: rgba(10,17,24,0.85); display: flex; align-items: center; justify-content: center; color: var(--accent); font-weight: 600; font-size: 1.1rem; opacity: 0; transition: opacity 0.2s; border-radius: 8px; }
-    .card-mockup:hover::after { opacity: 1; }
-    
-    dialog.project-modal { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0; max-width: 800px; width: 90%; color: var(--text-main); margin: auto; max-height: 90vh; overflow-y: auto; }
-    dialog.project-modal::backdrop { background: rgba(0,0,0,0.85); backdrop-filter: blur(4px); }
-    .modal-inner { padding: 32px; position: relative; }
-    .modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; color: var(--text-muted); font-size: 28px; cursor: pointer; line-height: 1; }
-    .modal-close:hover { color: var(--text-main); }
-    .modal-mockup { width: 100%; height: 300px; background: var(--bg); border-radius: 8px; margin-bottom: 24px; border: 1px solid var(--border); overflow: hidden; display: flex; align-items: center; justify-content: center; }
-    .modal-mockup svg { width: 100%; height: 100%; object-fit: contain; }
-    @media(max-width: 600px) { .modal-mockup { height: 200px; } }
-
-  
-    /* === MOBILE TAP FEEDBACK & HERO BUTTON LAYOUT === */
-    
-    /* Force Hero buttons to stack vertically on phones, row on desktop */
-    .hero-actions {
-      display: flex !important;
-      flex-direction: column !important;
-      gap: 12px !important;
-    }
-    .hero-actions .btn { width: 100% !important; }
-    
-    @media (min-width: 600px) {
-      .hero-actions { flex-direction: row !important; }
-      .hero-actions .btn { width: auto !important; }
-    }
-
-    /* Physical press effect for mobile taps */
-    .btn:active, 
-    .fab:active, 
-    .card-mockup:active {
-      transform: scale(0.96) !important;
-      opacity: 0.8 !important;
-      transition: none !important;
-    }
-
-  
-    /* === CARD SCREENSHOT BUTTONS & HERO FIX === */
-    .card .card-mockup { display: none !important; } /* Hide visual in card */
-    .card-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
-    .card-actions .btn { width: 100%; font-size: 0.875rem; }
-    
-    /* Force Hero buttons to stack on mobile */
-    @media (max-width: 599px) {
-      .hero-actions { flex-direction: column !important; width: 100%; }
-      .hero-actions .btn { width: 100%; }
-    }
-
-  
-    /* === LIVE APP REVIEWS === */
-    .app-reviews-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
-    @media (min-width: 768px) { .app-reviews-grid { grid-template-columns: repeat(2, 1fr); } }
-    .review-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
-    .review-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-    .review-app-name { font-weight: 700; font-size: 1.1rem; color: var(--text-main); }
-    .review-stars { color: #fbbf24; font-size: 1.2rem; letter-spacing: 2px; }
-    .review-text { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 16px; font-style: italic; }
-    .review-footer { display: flex; align-items: center; gap: 12px; }
-    .review-avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: var(--accent); font-weight: bold; font-size: 0.8rem; }
-    .review-author { font-size: 0.85rem; color: var(--text-main); }
-
-  
-    /* === STATUS WIDGET & MARQUEE === */
-    .status-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 229, 163, 0.1); color: var(--accent); padding: 6px 14px; border-radius: 99px; font-size: 0.85rem; font-weight: 600; margin-bottom: 24px; border: 1px solid rgba(0, 229, 163, 0.2); }
-    .pulse-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 0 rgba(0, 229, 163, 0.7); animation: pulse 2s infinite; }
-    @keyframes pulse {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 229, 163, 0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 229, 163, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 229, 163, 0); }
-    }
-
-    /* Tech Marquee */
-    .marquee-wrapper { padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); overflow: hidden; display: flex; position: relative; }
-    .marquee-wrapper::before, .marquee-wrapper::after { content: ""; position: absolute; top: 0; bottom: 0; width: 50px; z-index: 2; pointer-events: none; }
-    .marquee-wrapper::before { left: 0; background: linear-gradient(to right, var(--surface), transparent); }
-    .marquee-wrapper::after { right: 0; background: linear-gradient(to left, var(--surface), transparent); }
-    .marquee-content { display: flex; white-space: nowrap; animation: scroll 25s linear infinite; }
-    .marquee-content span { display: inline-block; margin: 0 24px; color: var(--text-muted); font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; letter-spacing: 0.05em; text-transform: uppercase; }
-    @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-  
-    /* === PROJECT FILTERS === */
-    .filter-container { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 32px 0; }
-    .filter-btn { background: var(--surface); border: 1px solid var(--border); color: var(--text-main); padding: 8px 16px; border-radius: 99px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s ease; }
-    .filter-btn:hover { border-color: var(--accent); }
-    .filter-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
-
-  
-    /* === QUOTE ESTIMATOR === */
-    .estimator-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; max-width: 700px; margin: 0 auto; }
-    .est-group { margin-bottom: 24px; }
-    .est-group h4 { margin-bottom: 12px; font-size: 1rem; color: var(--text-main); }
-    .est-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    @media (max-width: 600px) { .est-options { grid-template-columns: 1fr; } }
-    .est-label { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; color: var(--text-muted); cursor: pointer; padding: 10px; border: 1px solid var(--border); border-radius: 8px; transition: border-color 0.2s; }
-    .est-label:hover { border-color: var(--accent); }
-    .est-label input { accent-color: var(--accent); width: 18px; height: 18px; }
-    .est-total-box { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; margin-top: 32px; }
-    .est-total-label { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
-    .est-total-price { font-size: 2rem; font-weight: 800; color: var(--accent); font-family: var(--font-display); }
-
-  
-    /* === LIGHT THEME OVERRIDES === */
-    [data-theme="light"] {
-      --bg: #f8fafc;
-      --surface: #ffffff;
-      --surface-hover: #f1f5f9;
-      --border: rgba(0, 0, 0, 0.1);
-      --text-main: #0f172a;
-      --text-muted: #475569;
-      --accent: #059669;
-    }
-    /* Fix hardcoded dark backgrounds in light mode */
-    [data-theme="light"] .card-mockup { background: #f1f5f9; }
-    [data-theme="light"] .btn-primary { color: #ffffff; }
-    [data-theme="light"] .btn-wa { color: #ffffff; }
-    [data-theme="light"] .modal-mockup { background: #f1f5f9; }
-    [data-theme="light"] header { background: rgba(248, 250, 252, 0.85); }
-
-  
-    /* === SCROLL PROGRESS BAR === */
-    #scroll-progress { position: fixed; top: 0; left: 0; height: 4px; background: var(--accent); z-index: 9999; width: 0%; transition: width 0.1s ease-out; }
-
-  </style>
-
-  <!-- SEO Schema Markup -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Asad Tech Concepts",
-    "image": "https://shehulhadi.github.io/about/og-image.jpg",
-    "url": "https://shehulhadi.github.io/about/",
-    "telephone": "+2349063200718",
-    "email": "shehulhadi00@gmail.com",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Jimeta-Yola",
-      "addressRegion": "Adamawa",
-      "addressCountry": "NG"
-    },
-    "areaServed": [
-      {"@type": "State", "name": "Adamawa"},
-      {"@type": "State", "name": "Lagos"},
-      {"@type": "State", "name": "Abuja (FCT)"},
-      {"@type": "State", "name": "Kano"},
-      {"@type": "State", "name": "Rivers"},
-      {"@type": "State", "name": "Kaduna"},
-      {"@type": "State", "name": "Oyo"},
-      {"@type": "State", "name": "Enugu"},
-      {"@type": "State", "name": "Borno"},
-      {"@type": "State", "name": "Bauchi"}
-    ]
-  }
-  
-    
-    // Interactive Project Modal Logic
-    function openProjectModal(cardElement) {
-      const title = cardElement.querySelector('h3').innerText;
-      const desc = cardElement.querySelector('p').innerHTML;
-      const statusBadge = cardElement.querySelector('.badge').outerHTML;
-      const mockupSvg = cardElement.querySelector('.card-mockup svg').outerHTML;
-      const actionBtn = cardElement.querySelector('.card-actions a') ? cardElement.querySelector('.card-actions a').outerHTML : '';
-      
-      const modalContent = document.getElementById('modal-dynamic-content');
-      modalContent.innerHTML = `
-        ${statusBadge}
-        <h2 style="margin-top: 12px; margin-bottom: 16px; font-size: 2rem;">${title}</h2>
-        <div class="modal-mockup">${mockupSvg}</div>
-        <p style="color: var(--text-muted); margin-bottom: 24px; line-height: 1.6;">${desc}</p>
-        <div style="display: flex; gap: 16px;">${actionBtn}</div>
-      `;
-      
-      const dialog = document.getElementById('project-modal');
-      if (dialog.showModal) dialog.showModal(); else dialog.setAttribute('open', '');
-    }
-
-    // Attach click events to mockups
-    document.querySelectorAll('.view-screens-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        openProjectModal(btn.closest('.card'));
-      });
-    });
-
-    // Close modal logic
-    const closeBtn = document.getElementById('close-project-modal');
-    const projectDialog = document.getElementById('project-modal');
-    
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
-        if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribute('open');
-      });
-    }
-    if (projectDialog) {
-      projectDialog.addEventListener('click', (e) => {
-        const rect = projectDialog.getBoundingClientRect();
-        if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
-          if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribute('open');
-        }
-      });
-    }
-
-    
-    // Project Filter Logic
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('#project-grid .card');
-    
-    if (filterBtns.length > 0) {
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          filterBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          
-          const filter = btn.getAttribute('data-filter');
-          
-          projectCards.forEach(card => {
-            if (filter === 'all' || card.getAttribute('data-category') === filter) {
-              card.style.display = 'flex';
-              // Trigger re-animation
-              card.classList.remove('active');
-              setTimeout(() => card.classList.add('active'), 10);
-            } else {
-              card.style.display = 'none';
-            }
-          });
-        });
-      });
-    }
-
-    
-    // Quote Estimator Logic
-    const estForm = document.getElementById('estimator');
-    if (estForm) {
-      const priceEl = document.getElementById('est-price');
-      const submitBtn = document.getElementById('est-submit');
-      
-      function calculateEstimate() {
-        let minTotal = 0;
-        let maxTotal = 0;
-        
-        // Base project type
-        const selectedType = document.querySelector('input[name="projectType"]:checked');
-        if (selectedType) {
-          minTotal += parseInt(selectedType.getAttribute('data-min'));
-          maxTotal += parseInt(selectedType.getAttribute('data-max'));
-        }
-        
-        // Add-ons
-        document.querySelectorAll('input[name="addon"]:checked').forEach(addon => {
-          minTotal += parseInt(addon.getAttribute('data-min'));
-          maxTotal += parseInt(addon.getAttribute('data-max'));
-        });
-        
-        // Format to NGN
-        const formatter = new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 });
-        priceEl.textContent = `${formatter.format(minTotal)} - ${formatter.format(maxTotal)}`;
-      }
-
-      // Update on change
-      estForm.addEventListener('change', calculateEstimate);
-      calculateEstimate(); // Initial load
-
-      // Submit via WhatsApp
-      submitBtn.addEventListener('click', () => {
-        const selectedType = document.querySelector('input[name="projectType"]:checked').value;
-        let selectedAddons = [];
-        document.querySelectorAll('input[name="addon"]:checked').forEach(addon => {
-          selectedAddons.push(addon.value);
-        });
-        
-        const estimate = priceEl.textContent;
-        
-        let msg = `Hello Asad Tech Concepts,\n\nI used your website estimator and I'd like a formal quote.\n\n*Project:* ${selectedType}\n*Add-ons:* ${selectedAddons.length > 0 ? selectedAddons.join(', ') : 'None'}\n*Estimate:* ${estimate}\n\nPlease let me know the next steps.`;
-        
-        window.open(`https://wa.me/2349063200718?text=${encodeURIComponent(msg)}`, '_blank');
-      });
-    }
-
-    // Scroll Animations (Intersection Observer)
-    const reveals = document.querySelectorAll('.reveal');
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-      reveals.forEach(reveal => observer.observe(reveal));
-    } else {
-      // Fallback for older browsers
-      reveals.forEach(reveal => reveal.classList.add('active'));
-    }
-
-  </script>
-
-  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OProducts | Software Studio in Yola & Across Nigeria</title>
+<meta name="description" content="We build web apps, management tools, and marketplaces for businesses and institutions. Based in Yola, serving clients in Abuja, Lagos, Kano, and across Nigeria.">
+<meta name="theme-color" content="#0a1118">
+<link rel="manifest" href="manifest.json">
+<meta property="og:type" content="website">
+<meta property="og:title" content="OProducts | Software Studio">
+<meta property="og:description" content="Live marketplace in Yola · Fixed-cost quotes · Weekly review builds. Start a project on WhatsApp.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a1118%22/><text x=%2250%22 y=%2255%22 font-family=%22sans-serif%22 font-size=%2250%22 font-weight=%22bold%22 fill=%22%2300e5a3%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* =========================================
+CSS VARIABLES (Edit these to change theme)
+========================================= */
+:root {
+--bg: #0a1118;
+--surface: #111a24;
+--surface-hover: #16222e;
+--border: rgba(255, 255, 255, 0.08);
+--text-main: #f8fafc;
+--text-muted: #94a3b8;
+--accent: #00e5a3;
+--accent-hover: #00c98f;
+--badge-prod-bg: rgba(0, 229, 163, 0.1);
+--badge-prod-text: #00e5a3;
+--badge-proto-bg: rgba(59, 130, 246, 0.1);
+--badge-proto-text: #60a5fa;
+--badge-concept-bg: rgba(245, 158, 11, 0.1);
+--badge-concept-text: #fbbf24;
+--font-body: 'Inter', system-ui, sans-serif;
+--font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+--max-width: 1120px;
+--radius: 12px;
+}
+/* =========================================
+RESET & BASE
+========================================= */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+background-color: var(--bg);
+color: var(--text-main);
+font-family: var(--font-body);
+font-size: 16px;
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+overflow-x: hidden;
+/* Subtle radial glow */
+background-image: radial-gradient(circle at 50% 0%, rgba(0, 229, 163, 0.08) 0%, transparent 50%);
+background-repeat: no-repeat;
+}
+a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--accent-hover); }
+ul { list-style: none; }
+img, svg { display: block; max-width: 100%; }
+/* Typography Scale */
+h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; }
+h1 { font-size: clamp(2.5rem, 5vw + 1rem, 4rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 24px; }
+h2 { font-size: clamp(2rem, 3vw + 1rem, 2.5rem); font-weight: 700; margin-bottom: 12px; letter-spacing: -0.01em; }
+h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
+.lead { font-size: 1.125rem; color: var(--text-muted); margin-bottom: 24px; max-width: 600px; }
+/* Layout Utilities */
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 16px; }
+@media (min-width: 768px) { .container { padding: 0 24px; } }
+.section { padding: 48px 0; border-top: 1px solid var(--border); }
+@media (min-width: 768px) { .section { padding: 80px 0; } }
+.grid-3 { display: grid; grid-template-columns: 1fr; gap: 24px; }
+@media (min-width: 768px) {
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+}
+/* =========================================
+BUTTONS & TAP TARGETS
+========================================= */
+.btn {
+display: inline-flex; align-items: center; justify-content: center;
+min-height: 48px; padding: 0 24px; border-radius: var(--radius);
+font-family: var(--font-body); font-size: 1rem; font-weight: 600;
+cursor: pointer; transition: all 0.2s ease; border: 1px solid transparent;
+text-align: center;
+}
+.btn-primary { background: var(--accent); color: #000; }
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 229, 163, 0.2); }
+.btn-secondary { background: transparent; color: var(--text-main); border-color: var(--border); }
+.btn-secondary:hover { border-color: var(--text-muted); background: var(--surface); transform: translateY(-2px); }
+.btn-wa { background: #25D366; color: #fff; gap: 8px; }
+.btn-wa:hover { background: #20b858; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2); }
+/* =========================================
+HEADER & NAVIGATION
+========================================= */
+.skip-link { position: absolute; left: -999px; top: 0; background: var(--accent); color: #000; padding: 12px; z-index: 1000; font-weight: 600; }
+.skip-link:focus { left: 0; }
+header {
+position: sticky; top: 0; z-index: 100;
+background: rgba(10, 17, 24, 0.85); backdrop-filter: blur(12px);
+border-bottom: 1px solid var(--border);
+}
+.nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.logo { font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: var(--text-main); }
+.logo span { color: var(--accent); }
+.desktop-nav { display: none; gap: 32px; align-items: center; }
+.desktop-nav a { color: var(--text-main); font-weight: 500; font-size: 15px; }
+.desktop-nav a:hover { color: var(--accent); }
+.header-actions { display: none; }
+.menu-toggle {
+display: flex; align-items: center; justify-content: center;
+width: 48px; height: 48px; background: transparent; border: none;
+color: var(--text-main); cursor: pointer;
+}
+/* Mobile Menu */
+.mobile-menu {
+display: none; position: absolute; top: 72px; left: 0; right: 0;
+background: var(--bg); border-bottom: 1px solid var(--border);
+padding: 24px; flex-direction: column; gap: 16px;
+}
+.mobile-menu.active { display: flex; }
+.mobile-menu a { color: var(--text-main); font-size: 1.125rem; font-weight: 600; padding: 12px 0; border-bottom: 1px solid var(--border); }
+@media (min-width: 900px) {
+.menu-toggle { display: none; }
+.desktop-nav { display: flex; }
+.header-actions { display: flex; gap: 16px; }
+}
+/* =========================================
+HERO SECTION
+========================================= */
+.hero { padding: 48px 0 32px; }
+@media (min-width: 768px) { .hero { padding: 80px 0 60px; } }
+.hero .lead { font-size: clamp(1.125rem, 2vw, 1.25rem); }
+.hero-actions { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+@media (min-width: 600px) { .hero-actions { flex-direction: row; } }
+.trust-row { display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.875rem; color: var(--text-muted); }
+.trust-row span { display: flex; align-items: center; gap: 8px; }
+.trust-row span::before { content: "•"; color: var(--accent); font-size: 1.2rem; }
+/* =========================================
+WORK / CASE STUDIES
+========================================= */
+.card {
+background: var(--surface); border: 1px solid var(--border);
+border-radius: var(--radius); padding: 20px;
+display: flex; flex-direction: column; transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-4px); }
+.card-mockup { width: 100%; height: 200px; background: var(--bg); border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--border); overflow: hidden; position: relative; }
+.badge { display: inline-block; padding: 4px 12px; border-radius: 99px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+.badge.prod { background: var(--badge-prod-bg); color: var(--badge-prod-text); }
+.badge.proto { background: var(--badge-proto-bg); color: var(--badge-proto-text); }
+.badge.concept { background: var(--badge-concept-bg); color: var(--badge-concept-text); }
+.card h3 { font-size: 1.25rem; margin-bottom: 12px; }
+.card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 24px; flex-grow: 1; }
+.card p strong { color: var(--text-main); font-weight: 600; }
+.stack-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+.stack-tags span { font-size: 0.75rem; background: var(--bg); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border); color: var(--text-muted); }
+/* =========================================
+SERVICES (Icon Grid)
+========================================= */
+.services-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
+@media (min-width: 600px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 900px) { .services-grid { grid-template-columns: repeat(4, 1fr); } }
+.service-item { background: var(--surface); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border); }
+.service-icon { width: 40px; height: 40px; background: rgba(0,229,163,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--accent); }
+.service-item h4 { font-size: 1.1rem; margin-bottom: 8px; }
+.service-meta { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 4px; }
+.service-meta strong { color: var(--text-main); }
+/* =========================================
+PROCESS TIMELINE
+========================================= */
+.timeline { position: relative; margin-top: 40px; display: flex; flex-direction: column; gap: 32px; padding-left: 24px; }
+.timeline::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 2px; background: var(--border); }
+.timeline-step { position: relative; }
+.timeline-step::before { content: ""; position: absolute; left: -29px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.timeline-step h4 { font-size: 1.25rem; margin-bottom: 8px; }
+.timeline-step p { font-size: 0.95rem; color: var(--text-muted); max-width: 250px; }
+@media (min-width: 768px) {
+.timeline { flex-direction: row; padding-left: 0; padding-top: 24px; gap: 24px; justify-content: space-between; }
+.timeline::before { left: 8px; right: 8px; top: 0; bottom: auto; height: 2px; width: auto; }
+.timeline-step::before { left: 0; top: -29px; }
+.timeline-step { flex: 1; }
+}
+/* =========================================
+ABOUT
+========================================= */
+.about-wrap { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; }
+@media (min-width: 768px) { .about-wrap { flex-direction: row; align-items: center; gap: 64px; } }
+.founder-photo { width: 120px; height: 120px; border-radius: 50%; background: var(--surface); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800; color: var(--accent); flex-shrink: 0; }
+.founder-info h3 { font-size: 1.5rem; }
+.founder-info .location { color: var(--accent); font-weight: 500; margin-bottom: 16px; display: block; }
+blockquote { border-left: 2px solid var(--accent); padding-left: 16px; font-style: italic; color: var(--text-muted); margin: 24px 0; font-size: 1.125rem; }
+/* =========================================
+CONTACT FORM
+========================================= */
+.contact-grid { display: grid; grid-template-columns: 1fr; gap: 48px; margin-top: 40px; }
+@media (min-width: 900px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
+.form-control { width: 100%; min-height: 48px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; font-family: var(--font-body); font-size: 16px; color: var(--text-main); transition: border-color 0.2s, box-shadow 0.2s; }
+.form-control:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 229, 163, 0.15); }
+textarea.form-control { min-height: 120px; resize: vertical; }
+.error-msg { color: #f87171; font-size: 0.875rem; margin-top: 4px; display: none; }
+.form-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+@media (min-width: 600px) { .form-actions { flex-direction: row; } }
+.form-actions .btn { flex: 1; }
+.contact-info { background: var(--surface); padding: 32px; border-radius: var(--radius); border: 1px solid var(--border); }
+.contact-info p { color: var(--text-muted); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; font-size: 1rem; }
+.contact-info a { color: var(--text-main); font-weight: 500; }
+.contact-info svg { color: var(--accent); flex-shrink: 0; }
+/* =========================================
+FOOTER
+========================================= */
+footer { padding: 40px 0; border-top: 1px solid var(--border); margin-bottom: 72px; /* space for floating button */ }
+@media (min-width: 900px) { footer { margin-bottom: 0; } }
+.footer-content { display: flex; flex-direction: column; gap: 24px; align-items: center; text-align: center; }
+@media (min-width: 768px) { .footer-content { flex-direction: row; justify-content: space-between; text-align: left; } }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+.footer-links a { color: var(--text-muted); font-size: 0.875rem; }
+.footer-links a:hover { color: var(--text-main); }
+.copyright { color: var(--text-muted); font-size: 0.875rem; }
+/* Floating WhatsApp Button */
+.fab {
+position: fixed; bottom: 24px; right: 24px; z-index: 99;
+width: 56px; height: 56px; border-radius: 50%;
+background: #25D366; color: #fff; display: flex; align-items: center; justify-content: center;
+box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4); transition: transform 0.2s;
+}
+.fab:hover { transform: scale(1.05); }
+@media (min-width: 900px) { .fab { display: none; } }
+/* Download Modal */
+dialog { background: var(--surface); color: var(--text-main); border: 1px solid var(--border); border-radius: var(--radius); padding: 0; max-width: 400px; width: 90%; margin: auto; }
+dialog::backdrop { background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); }
+.modal-inner { padding: 32px; position: relative; text-align: center; }
+.modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; color: var(--text-muted); font-size: 24px; cursor: pointer; transition: color 0.2s; }
+.modal-close:hover { color: var(--text-main); }
+.modal-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+/* Motion */
+@media (prefers-reduced-motion: reduce) {
+* { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+/* === LAYOUT WIDTH & PADDING OVERRIDE === */
+html, body {
+overflow-x: hidden;
+width: 100%;
+}
+.container {
+width: 100% !important;
+max-width: 1000px !important; /* Reduced from 1120px for better reading */
+margin: 0 auto !important;
+padding-left: 20px !important;
+padding-right: 20px !important;
+}
+@media (min-width: 768px) {
+.container {
+padding-left: 32px !important;
+padding-right: 32px !important;
+}
+}
+/* === SCROLL ANIMATIONS === */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+.reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+/* === FAQ ACCORDION === */
+.faq-list { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
+details { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; cursor: pointer; transition: border-color 0.2s; }
+details:hover { border-color: rgba(255,255,255,0.2); }
+details[open] { border-color: var(--accent); }
+summary { font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; align-items: center; color: var(--text-main); }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; color: var(--accent); font-size: 1.5rem; font-weight: 400; transition: transform 0.2s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { margin-top: 12px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; padding-right: 24px; }
+/* === TESTIMONIALS === */
+.testimonial-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
+@media (min-width: 768px) { .testimonial-grid { grid-template-columns: repeat(2, 1fr); } }
+.testimonial-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; position: relative; overflow: hidden; }
+.testimonial-card::before { content: "\201C"; font-family: serif; font-size: 5rem; color: rgba(0, 229, 163, 0.15); position: absolute; top: -10px; left: 15px; line-height: 1; }
+.testimonial-text { font-size: 1.05rem; color: var(--text-main); margin-bottom: 20px; position: relative; z-index: 1; font-style: italic; line-height: 1.5; }
+.testimonial-author { display: flex; align-items: center; gap: 12px; }
+.author-avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(0, 229, 163, 0.1); display: flex; align-items: center; justify-content: center; color: var(--accent); font-weight: bold; font-size: 0.9rem; }
+.author-info h5 { font-size: 0.95rem; margin: 0 0 2px 0; color: var(--text-main); }
+.author-info p { font-size: 0.8rem; color: var(--text-muted); margin: 0; }
+/* === REORDERED CARD MOCKUP === */
+.card-mockup { margin-top: 20px; margin-bottom: 24px; }
+/* === INTERACTIVE CARDS & MODAL === */
+.card-mockup { cursor: pointer; position: relative; transition: transform 0.2s, border-color 0.2s; }
+.card-mockup:hover { transform: scale(1.02); border-color: var(--accent); }
+.card-mockup::after { content: "🔍 View Details"; position: absolute; inset: 0; background: rgba(10,17,24,0.85); display: flex; align-items: center; justify-content: center; color: var(--accent); font-weight: 600; font-size: 1.1rem; opacity: 0; transition: opacity 0.2s; border-radius: 8px; }
+.card-mockup:hover::after { opacity: 1; }
+dialog.project-modal { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0; max-width: 800px; width: 90%; color: var(--text-main); margin: auto; max-height: 90vh; overflow-y: auto; }
+dialog.project-modal::backdrop { background: rgba(0,0,0,0.85); backdrop-filter: blur(4px); }
+.modal-inner { padding: 32px; position: relative; }
+.modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; color: var(--text-muted); font-size: 28px; cursor: pointer; line-height: 1; }
+.modal-close:hover { color: var(--text-main); }
+.modal-mockup { width: 100%; height: 300px; background: var(--bg); border-radius: 8px; margin-bottom: 24px; border: 1px solid var(--border); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.modal-mockup svg { width: 100%; height: 100%; object-fit: contain; }
+@media(max-width: 600px) { .modal-mockup { height: 200px; } }
+/* === MOBILE TAP FEEDBACK & HERO BUTTON LAYOUT === */
+/* Force Hero buttons to stack vertically on phones, row on desktop */
+.hero-actions {
+display: flex !important;
+flex-direction: column !important;
+gap: 12px !important;
+}
+.hero-actions .btn { width: 100% !important; }
+@media (min-width: 600px) {
+.hero-actions { flex-direction: row !important; }
+.hero-actions .btn { width: auto !important; }
+}
+/* Physical press effect for mobile taps */
+.btn:active,
+.fab:active,
+.card-mockup:active {
+transform: scale(0.96) !important;
+opacity: 0.8 !important;
+transition: none !important;
+}
+/* === CARD SCREENSHOT BUTTONS & HERO FIX === */
+.card .card-mockup { display: none !important; } /* Hide visual in card */
+.card-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+.card-actions .btn { width: 100%; font-size: 0.875rem; }
+/* Force Hero buttons to stack on mobile */
+@media (max-width: 599px) {
+.hero-actions { flex-direction: column !important; width: 100%; }
+.hero-actions .btn { width: 100%; }
+}
+/* === LIVE APP REVIEWS === */
+.app-reviews-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
+@media (min-width: 768px) { .app-reviews-grid { grid-template-columns: repeat(2, 1fr); } }
+.review-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+.review-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.review-app-name { font-weight: 700; font-size: 1.1rem; color: var(--text-main); }
+.review-stars { color: #fbbf24; font-size: 1.2rem; letter-spacing: 2px; }
+.review-text { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 16px; font-style: italic; }
+.review-footer { display: flex; align-items: center; gap: 12px; }
+.review-avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: var(--accent); font-weight: bold; font-size: 0.8rem; }
+.review-author { font-size: 0.85rem; color: var(--text-main); }
+/* === STATUS WIDGET & MARQUEE === */
+.status-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 229, 163, 0.1); color: var(--accent); padding: 6px 14px; border-radius: 99px; font-size: 0.85rem; font-weight: 600; margin-bottom: 24px; border: 1px solid rgba(0, 229, 163, 0.2); }
+.pulse-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 0 rgba(0, 229, 163, 0.7); animation: pulse 2s infinite; }
+@keyframes pulse {
+0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 229, 163, 0.7); }
+70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 229, 163, 0); }
+100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 229, 163, 0); }
+}
+/* Tech Marquee */
+.marquee-wrapper { padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); overflow: hidden; display: flex; position: relative; }
+.marquee-wrapper::before, .marquee-wrapper::after { content: ""; position: absolute; top: 0; bottom: 0; width: 50px; z-index: 2; pointer-events: none; }
+.marquee-wrapper::before { left: 0; background: linear-gradient(to right, var(--surface), transparent); }
+.marquee-wrapper::after { right: 0; background: linear-gradient(to left, var(--surface), transparent); }
+.marquee-content { display: flex; white-space: nowrap; animation: scroll 25s linear infinite; }
+.marquee-content span { display: inline-block; margin: 0 24px; color: var(--text-muted); font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+/* === PROJECT FILTERS === */
+.filter-container { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 32px 0; }
+.filter-btn { background: var(--surface); border: 1px solid var(--border); color: var(--text-main); padding: 8px 16px; border-radius: 99px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s ease; }
+.filter-btn:hover { border-color: var(--accent); }
+.filter-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+/* === QUOTE ESTIMATOR === */
+.estimator-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; max-width: 700px; margin: 0 auto; }
+.est-group { margin-bottom: 24px; }
+.est-group h4 { margin-bottom: 12px; font-size: 1rem; color: var(--text-main); }
+.est-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) { .est-options { grid-template-columns: 1fr; } }
+.est-label { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; color: var(--text-muted); cursor: pointer; padding: 10px; border: 1px solid var(--border); border-radius: 8px; transition: border-color 0.2s; }
+.est-label:hover { border-color: var(--accent); }
+.est-label input { accent-color: var(--accent); width: 18px; height: 18px; }
+.est-total-box { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; margin-top: 32px; }
+.est-total-label { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+.est-total-price { font-size: 2rem; font-weight: 800; color: var(--accent); font-family: var(--font-display); }
+/* === LIGHT THEME OVERRIDES === */
+[data-theme="light"] {
+--bg: #f8fafc;
+--surface: #ffffff;
+--surface-hover: #f1f5f9;
+--border: rgba(0, 0, 0, 0.1);
+--text-main: #0f172a;
+--text-muted: #475569;
+--accent: #059669;
+}
+/* Fix hardcoded dark backgrounds in light mode */
+[data-theme="light"] .card-mockup { background: #f1f5f9; }
+[data-theme="light"] .btn-primary { color: #ffffff; }
+[data-theme="light"] .btn-wa { color: #ffffff; }
+[data-theme="light"] .modal-mockup { background: #f1f5f9; }
+[data-theme="light"] header { background: rgba(248, 250, 252, 0.85); }
+/* === SCROLL PROGRESS BAR === */
+#scroll-progress { position: fixed; top: 0; left: 0; height: 4px; background: var(--accent); z-index: 9999; width: 0%; transition: width 0.1s ease-out; }
+</style>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "ProfessionalService",
+"name": "OProducts",
+"image": "https://shehulhadi.github.io/about/og-image.jpg",
+"url": "https://shehulhadi.github.io/about/",
+"telephone": "+2349063200718",
+"email": "shehulhadi00@gmail.com",
+"address": {
+"@type": "PostalAddress",
+"addressLocality": "Jimeta-Yola",
+"addressRegion": "Adamawa",
+"addressCountry": "NG"
+},
+"areaServed": [
+{"@type": "State", "name": "Adamawa"},
+{"@type": "State", "name": "Lagos"},
+{"@type": "State", "name": "Abuja (FCT)"},
+{"@type": "State", "name": "Kano"},
+{"@type": "State", "name": "Rivers"},
+{"@type": "State", "name": "Kaduna"},
+{"@type": "State", "name": "Oyo"},
+{"@type": "State", "name": "Enugu"},
+{"@type": "State", "name": "Borno"},
+{"@type": "State", "name": "Bauchi"}
+]
+}
+// Interactive Project Modal Logic
+function openProjectModal(cardElement) {
+const title = cardElement.querySelector('h3').innerText;
+const desc = cardElement.querySelector('p').innerHTML;
+const statusBadge = cardElement.querySelector('.badge').outerHTML;
+const mockupSvg = cardElement.querySelector('.card-mockup svg').outerHTML;
+const actionBtn = cardElement.querySelector('.card-actions a') ? cardElement.querySelector('.card-actions a').outerHTML : '';
+const modalContent = document.getElementById('modal-dynamic-content');
+modalContent.innerHTML = `
+${statusBadge}
+<h2 style="margin-top: 12px; margin-bottom: 16px; font-size: 2rem;">${title}</h2>
+<div class="modal-mockup">${mockupSvg}</div>
+<p style="color: var(--text-muted); margin-bottom: 24px; line-height: 1.6;">${desc}</p>
+<div style="display: flex; gap: 16px;">${actionBtn}</div>
+`;
+const dialog = document.getElementById('project-modal');
+if (dialog.showModal) dialog.showModal(); else dialog.setAttribute('open', '');
+}
+// Attach click events to mockups
+document.querySelectorAll('.view-screens-btn').forEach(btn => {
+btn.addEventListener('click', () => {
+openProjectModal(btn.closest('.card'));
+});
+});
+// Close modal logic
+const closeBtn = document.getElementById('close-project-modal');
+const projectDialog = document.getElementById('project-modal');
+if (closeBtn) {
+closeBtn.addEventListener('click', () => {
+if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribute('open');
+});
+}
+if (projectDialog) {
+projectDialog.addEventListener('click', (e) => {
+const rect = projectDialog.getBoundingClientRect();
+if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribute('open');
+}
+});
+}
+// Project Filter Logic
+const filterBtns = document.querySelectorAll('.filter-btn');
+const projectCards = document.querySelectorAll('#project-grid .card');
+if (filterBtns.length > 0) {
+filterBtns.forEach(btn => {
+btn.addEventListener('click', () => {
+filterBtns.forEach(b => b.classList.remove('active'));
+btn.classList.add('active');
+const filter = btn.getAttribute('data-filter');
+projectCards.forEach(card => {
+if (filter === 'all' || card.getAttribute('data-category') === filter) {
+card.style.display = 'flex';
+// Trigger re-animation
+card.classList.remove('active');
+setTimeout(() => card.classList.add('active'), 10);
+} else {
+card.style.display = 'none';
+}
+});
+});
+});
+}
+// Quote Estimator Logic
+const estForm = document.getElementById('estimator');
+if (estForm) {
+const priceEl = document.getElementById('est-price');
+const submitBtn = document.getElementById('est-submit');
+function calculateEstimate() {
+let minTotal = 0;
+let maxTotal = 0;
+// Base project type
+const selectedType = document.querySelector('input[name="projectType"]:checked');
+if (selectedType) {
+minTotal += parseInt(selectedType.getAttribute('data-min'));
+maxTotal += parseInt(selectedType.getAttribute('data-max'));
+}
+// Add-ons
+document.querySelectorAll('input[name="addon"]:checked').forEach(addon => {
+minTotal += parseInt(addon.getAttribute('data-min'));
+maxTotal += parseInt(addon.getAttribute('data-max'));
+});
+// Format to NGN
+const formatter = new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 });
+priceEl.textContent = `${formatter.format(minTotal)} - ${formatter.format(maxTotal)}`;
+}
+// Update on change
+estForm.addEventListener('change', calculateEstimate);
+calculateEstimate(); // Initial load
+// Submit via WhatsApp
+submitBtn.addEventListener('click', () => {
+const selectedType = document.querySelector('input[name="projectType"]:checked').value;
+let selectedAddons = [];
+document.querySelectorAll('input[name="addon"]:checked').forEach(addon => {
+selectedAddons.push(addon.value);
+});
+const estimate = priceEl.textContent;
+let msg = `Hello OProducts,\n\nI used your website estimator and I'd like a formal quote.\n\n*Project:* ${selectedType}\n*Add-ons:* ${selectedAddons.length > 0 ? selectedAddons.join(', ') : 'None'}\n*Estimate:* ${estimate}\n\nPlease let me know the next steps.`;
+window.open(`https://wa.me/2349063200718?text=${encodeURIComponent(msg)}`, '_blank');
+});
+}
+// Scroll Animations (Intersection Observer)
+const reveals = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('active');
+observer.unobserve(entry.target);
+}
+});
+}, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+reveals.forEach(reveal => observer.observe(reveal));
+} else {
+// Fallback for older browsers
+reveals.forEach(reveal => reveal.classList.add('active'));
+}
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+<script data-goatcounter="https://shehulhadi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
-  <div id="scroll-progress"></div>
-  <a href="#main" class="skip-link">Skip to content</a>
-
-  <!-- HEADER -->
-  <header>
-    <div class="container nav-wrap">
-      <a href="#" class="logo">Asad<span>Tech</span></a>
-      
-      <nav class="desktop-nav">
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="#process">Process</a>
-        <a href="#about">About</a>
-      </nav>
-      
-      <div class="header-actions">
-        <button class="btn btn-secondary update-btn" style="padding: 0 16px; font-size: 14px; min-height: 40px;">Update App</button>
-        <a href="https://wa.me/2349063200718" target="_blank" rel="noopener" class="btn btn-wa">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          WhatsApp
-        </a>
-      </div>
-
-      <button id="theme-toggle" class="menu-toggle" aria-label="Toggle theme" style="margin-right: 8px;">
-        <svg id="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-      </button>
-      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-      </button>
-    </div>
-    
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobile-menu">
-      <a href="#work">Work</a>
-      <a href="#services">Services</a>
-      <a href="#process">Process</a>
-      <a href="#about">About</a>
-      <button class="btn btn-secondary update-btn" style="margin-top: 8px;">Update App</button>
-      <a href="#contact" class="btn btn-primary" style="margin-top: 8px;">Start a project</a>
-    </div>
-  </header>
-
-  <main id="main">
-    <!-- HERO -->
-    <section class="hero container">
-      <div class="status-badge"><div class="pulse-dot"></div> Available for Q4 Projects</div>
-      <h1>Practical software for real businesses.</h1>
-      <p class="lead">We build web apps, management tools, and marketplaces that solve operational bottlenecks and scale with your institution or enterprise.</p>
-      
-      <div class="hero-actions">
-        <a href="https://wa.me/2349063200718?text=Hello%20Asad%20Tech%20Concepts%2C%20I%20would%20like%20to%20start%20a%20project." target="_blank" rel="noopener" class="btn btn-wa">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          Start a project
-        </a>
-        <button id="download-btn" class="btn btn-secondary">Download Profile</button>
-        <button id="share-btn" class="btn btn-secondary">Share App</button>
-        <a href="#work" class="btn btn-secondary">See our work</a>
-      </div>
-      
-      <div class="trust-row">
-        <span>Based in Yola, serving all Nigeria</span>
-        <span>Fixed-cost quotes</span>
-        <span>Weekly review builds</span>
-      </div>
-    </section>
-
-
-    <!-- TECH STACK MARQUEE -->
-    <div class="marquee-wrapper">
-      <div class="marquee-content">
-        <span>HTML & CSS</span><span>JavaScript</span><span>Python</span><span>Node.js</span><span>Supabase</span><span>React</span><span>Paystack API</span><span>Android & iOS</span>
-        <!-- Duplicate for seamless loop -->
-        <span>HTML & CSS</span><span>JavaScript</span><span>Python</span><span>Node.js</span><span>Supabase</span><span>React</span><span>Paystack API</span><span>Android & iOS</span>
-      </div>
-    </div>
-
-    <!-- WORK -->
-    <section id="work" class="reveal section container">
-      <h2>Featured Work</h2>
-      <p class="lead">Real tools built for real operations.</p>
-      
-      <div class="filter-container">
-        <button class="filter-btn active" data-filter="all">All Work</button>
-        <button class="filter-btn" data-filter="web">Web Apps</button>
-        <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
-        <button class="filter-btn" data-filter="pos">POS Systems</button>
-      </div>
-      <div class="grid-3" id="project-grid">
-        <!-- PXDynasty -->
-        <article class="card" data-category="ecommerce">
-          
-          <span class="badge prod">Production</span>
-          <h3>PXDynasty</h3>
-          <p><strong>Problem:</strong> Local vendors lacked a unified digital storefront. <br><br><strong>Built:</strong> A multi-vendor marketplace with product listings, cart handling, and delivery workflows.</p>
-          <div class="stack-tags">
-            <span>Vanilla JS</span>
-            <span>Node.js</span>
-            <span>Paystack</span>
-          </div>
-<div class="card-mockup">
-            <svg viewBox="0 0 300 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="200" fill="#0a1118"/>
-              <!-- Browser Window -->
-              <rect x="20" y="20" width="260" height="160" rx="8" fill="#111a24" stroke="#1e293b"/>
-              <rect x="20" y="20" width="260" height="30" rx="8" fill="#16222e"/>
-              <circle cx="35" cy="35" r="4" fill="#ef4444"/>
-              <circle cx="50" cy="35" r="4" fill="#f59e0b"/>
-              <circle cx="65" cy="35" r="4" fill="#00e5a3"/>
-              <!-- Content -->
-              <rect x="35" y="65" width="40" height="10" rx="4" fill="#00e5a3"/>
-              <rect x="35" y="85" width="100" height="6" rx="3" fill="#334155"/>
-              <!-- Product Grid -->
-              <rect x="35" y="110" width="70" height="55" rx="6" fill="#16222e" stroke="#1e293b"/>
-              <rect x="45" y="120" width="50" height="25" rx="4" fill="#1e293b"/>
-              <rect x="45" y="150" width="30" height="6" rx="3" fill="#475569"/>
-              
-              <rect x="115" y="110" width="70" height="55" rx="6" fill="#16222e" stroke="#1e293b"/>
-              <rect x="125" y="120" width="50" height="25" rx="4" fill="#1e293b"/>
-              <rect x="125" y="150" width="30" height="6" rx="3" fill="#475569"/>
-            </svg>
-          </div>
-          <a href="https://shehulhadi.github.io/pxdynasty/" target="_blank" rel="noopener" class="btn btn-secondary" style="margin-top: 16px; width: 100%; font-size: 0.875rem;">View Live Project &rarr;</a>
-        </article>
-
-        <!-- Matric -->
-        <article class="card" data-category="web">
-          
-          <span class="badge prod">Production</span>
-          <h3>Matric</h3>
-          <p><strong>Problem:</strong> University communications are scattered across informal channels with no verified identity. <br><br><strong>Built:</strong> A verified campus platform now serving MAU, SPY, and FCE in Yola, connecting students to their exact faculty, department, and course communities.</p>
-          <div class="stack-tags">
-            <span>React</span>
-            <span>Firebase</span>
-          </div>
-<div class="card-mockup">
-            <svg viewBox="0 0 300 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="200" fill="#0a1118"/>
-              <!-- Phone Window -->
-              <rect x="100" y="15" width="100" height="180" rx="16" fill="#111a24" stroke="#1e293b" stroke-width="2"/>
-              <rect x="135" y="22" width="30" height="4" rx="2" fill="#334155"/>
-              <!-- App UI -->
-              <rect x="110" y="45" width="80" height="20" rx="4" fill="#00e5a3"/>
-              <rect x="115" y="52" width="40" height="6" rx="3" fill="#0a1118"/>
-              
-              <rect x="110" y="75" width="80" height="40" rx="6" fill="#16222e"/>
-              <circle cx="125" cy="95" r="10" fill="#1e293b"/>
-              <rect x="145" y="88" width="35" height="6" rx="3" fill="#475569"/>
-              <rect x="145" y="100" width="25" height="6" rx="3" fill="#334155"/>
-              
-              <rect x="110" y="125" width="80" height="40" rx="6" fill="#16222e"/>
-              <circle cx="125" cy="145" r="10" fill="#1e293b"/>
-              <rect x="145" y="138" width="35" height="6" rx="3" fill="#475569"/>
-              <rect x="145" y="150" width="25" height="6" rx="3" fill="#334155"/>
-            </svg>
-          </div>
-          <a href="https://shehulhadi.github.io/matric" target="_blank" rel="noopener" class="btn btn-primary">View Live App &rarr;</a>
-        </article>
-
-        <!-- LegisCore -->
-        <article class="card" data-category="web">
-          <span class="badge proto">Prototype</span>
-          <h3>LegisCore</h3>
-          <p><strong>Problem:</strong> Law firms struggle to track document versions and route administrative tasks. <br><br><strong>Built:</strong> A secure "Filing Room" document-management and workflow system for legal offices. <br><br><span style="color:var(--accent); font-weight:600;">Demo Login:</span><br>Email: test@legiscore.local<br>Pass: TestPass123!</p>
-          <div class="stack-tags">
-            <span>HTML/JS</span>
-            <span>LocalStorage</span>
-          </div>
-          <div class="card-actions">
-            <button class="btn btn-secondary view-screens-btn">📸 See Screenshots</button>
-            <a href="https://shehulhadi.github.io/legiscore/" target="_blank" rel="noopener" class="btn btn-primary">View Live App &rarr;</a>
-          </div>
-        </article>
-      
-        <!-- Asad POS -->
-        <article class="card" data-category="pos">
-          
-          <span class="badge prod">Production</span>
-          <h3>Asad POS</h3>
-          <p><strong>Problem:</strong> Manual inventory tracking and sales recording for construction material. <br><br><strong>Built:</strong> A secure, PIN-protected point-of-sale and inventory manager for block production. <br><br><span style="color:var(--accent); font-weight:600;">Demo PIN: 1234</span></p>
-          <div class="stack-tags">
-            <span>Vanilla JS</span>
-            <span>LocalStorage</span>
-          </div>
-          <div class="card-mockup">
-            <svg viewBox="0 0 300 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-              <rect width="300" height="200" fill="#0a1118"/>
-              <!-- App Window -->
-              <rect x="20" y="20" width="260" height="160" rx="8" fill="#111a24" stroke="#1e293b"/>
-              <!-- Sidebar -->
-              <rect x="20" y="20" width="60" height="160" rx="8" fill="#16222e"/>
-              <rect x="35" y="40" width="30" height="6" rx="3" fill="#00e5a3"/>
-              <rect x="35" y="60" width="30" height="6" rx="3" fill="#475569"/>
-              <rect x="35" y="80" width="30" height="6" rx="3" fill="#475569"/>
-              <!-- Main Dashboard -->
-              <rect x="95" y="35" width="80" height="40" rx="4" fill="#16222e" stroke="#1e293b"/>
-              <rect x="105" y="45" width="20" height="6" rx="3" fill="#334155"/>
-              <rect x="105" y="60" width="40" height="8" rx="4" fill="#00e5a3"/>
-              
-              <rect x="185" y="35" width="80" height="40" rx="4" fill="#16222e" stroke="#1e293b"/>
-              <rect x="195" y="45" width="20" height="6" rx="3" fill="#334155"/>
-              <rect x="195" y="60" width="40" height="8" rx="4" fill="#00e5a3"/>
-              
-              <!-- Table -->
-              <rect x="95" y="90" width="170" height="75" rx="4" fill="#16222e" stroke="#1e293b"/>
-              <rect x="105" y="100" width="40" height="6" rx="3" fill="#475569"/>
-              <rect x="165" y="100" width="40" height="6" rx="3" fill="#475569"/>
-              <rect x="105" y="115" width="60" height="6" rx="3" fill="#334155"/>
-              <rect x="165" y="115" width="30" height="6" rx="3" fill="#00e5a3"/>
-              <rect x="105" y="130" width="50" height="6" rx="3" fill="#334155"/>
-              <rect x="165" y="130" width="30" height="6" rx="3" fill="#00e5a3"/>
-            </svg>
-          </div>
-          <a href="https://shehulhadi.github.io/asad-pos/index.html" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 16px; width: 100%; font-size: 0.875rem;">View Live App &rarr;</a>
-        </article>
+<div id="scroll-progress"></div>
+<a href="#main" class="skip-link">Skip to content</a>
+<header>
+<div class="container nav-wrap">
+<a href="#" class="logo">O<span>Products</span></a>
+<nav class="desktop-nav">
+<a href="#work">Work</a>
+<a href="#services">Services</a>
+<a href="#process">Process</a>
+<a href="#about">About</a>
+</nav>
+<div class="header-actions">
+<button class="btn btn-secondary update-btn" style="padding: 0 16px; font-size: 14px; min-height: 40px;">Update App</button>
+<a href="https://wa.me/2349063200718" target="_blank" rel="noopener" class="btn btn-wa">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+WhatsApp
+</a>
 </div>
-    </section>
-
-
-    <!-- SERVICES -->
-    <section id="services" class="reveal section container">
-      <h2>Studio Capabilities</h2>
-      <p class="lead">Full-stack engineering for complex operations.</p>
-      
-      <div class="services-grid">
-        <!-- 1 -->
-        <div class="service-item">
-          <div class="service-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <h4>Web Applications</h4>
-          <p class="service-meta"><strong>Solves:</strong> Manual spreadsheets</p>
-          <p class="service-meta"><strong>Delivers:</strong> Custom internal tools</p>
-        </div>
-        <!-- 2 -->
-        <div class="service-item">
-          <div class="service-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          </div>
-          <h4>Marketplaces</h4>
-          <p class="service-meta"><strong>Solves:</strong> Scattered vendors</p>
-          <p class="service-meta"><strong>Delivers:</strong> Unified storefronts</p>
-        </div>
-        <!-- 3 -->
-        <div class="service-item">
-          <div class="service-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <h4>Desktop Software</h4>
-          <p class="service-meta"><strong>Solves:</strong> Offline data entry</p>
-          <p class="service-meta"><strong>Delivers:</strong> Secure local apps</p>
-        </div>
-        <!-- 4 -->
-        <div class="service-item">
-          <div class="service-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-          </div>
-          <h4>Mobile Apps</h4>
-          <p class="service-meta"><strong>Solves:</strong> On-the-go access</p>
-          <p class="service-meta"><strong>Delivers:</strong> Android & iOS builds</p>
-        </div>
-        <!-- 5 -->
-        <div class="service-item">
-          <div class="service-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-          </div>
-          <h4>Cloud Systems</h4>
-          <p class="service-meta"><strong>Solves:</strong> Server downtime</p>
-          <p class="service-meta"><strong>Delivers:</strong> Scalable hosting</p>
-        </div>
-        <!-- 6 -->
-        <div class="service-item">
-          <div class="service-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-          </div>
-          <h4>API Integration</h4>
-          <p class="service-meta"><strong>Solves:</strong> Disconnected tools</p>
-          <p class="service-meta"><strong>Delivers:</strong> Automated workflows</p>
-        </div>
-        <!-- 7 -->
-        <div class="service-item">
-          <div class="service-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h4>Security Audits</h4>
-          <p class="service-meta"><strong>Solves:</strong> Vulnerability risks</p>
-          <p class="service-meta"><strong>Delivers:</strong> Hardened codebases</p>
-        </div>
-        <!-- 8 -->
-        <div class="service-item">
-          <div class="service-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-          </div>
-          <h4>Maintenance</h4>
-          <p class="service-meta"><strong>Solves:</strong> Breaking updates</p>
-          <p class="service-meta"><strong>Delivers:</strong> Ongoing support</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROCESS -->
-    <section id="process" class="reveal section container">
-      <h2>How We Work</h2>
-      <p class="lead">A transparent pipeline from first call to launch.</p>
-      
-      <div class="timeline">
-        <div class="timeline-step">
-          <h4>Discuss</h4>
-          <p>We map your operational bottlenecks and define the project scope.</p>
-        </div>
-        <div class="timeline-step">
-          <h4>Quote</h4>
-          <p>You receive a fixed-cost estimate, timeline, and deliverable list.</p>
-        </div>
-        <div class="timeline-step">
-          <h4>Build</h4>
-          <p>Iterative development with weekly review builds and testing.</p>
-        </div>
-        <div class="timeline-step">
-          <h4>Launch & Support</h4>
-          <p>Deployment to production with ongoing maintenance retainer options.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="reveal section container">
-      <h2>About the Studio</h2>
-      <div class="about-wrap">
-        <div class="founder-photo">MH</div>
-        <div class="founder-info">
-          <h3>Muhammad Hadi Usman</h3>
-          <span class="location">Jimeta-Yola, Adamawa, Nigeria <br><span style="font-size:0.85rem; color:var(--accent);">Serving clients remotely across Abuja, Lagos, Kano, and all Nigerian states.</span></span>
-          <blockquote>"We engineer software that prioritizes utility over vanity. Our focus is on building resilient, maintainable systems that solve specific, real-world problems."</blockquote>
-          <p>With a background in fintech and local business operations, I build software that African businesses can actually rely on. From multi-vendor marketplace logistics to legal document routing, every line of code is written to solve a practical bottleneck.</p>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- FAQ SECTION -->
-    <section id="faq" class="section container reveal">
-      <h2>Frequently Asked Questions</h2>
-      <p class="lead">Clear answers before we even start.</p>
-      
-      <div class="faq-list">
-        <details name="faq">
-          <summary>How much does a custom web application cost?</summary>
-          <p>Because every project is unique, we provide fixed-cost quotes after our initial discussion. Small business landing pages typically start around ₦150,000, while complex systems like multi-vendor marketplaces or custom POS software range between ₦500,000 and ₦2M+.</p>
-        </details>
-        <details name="faq">
-          <summary>How long does it take to build a system?</summary>
-          <p>A standard website takes 1-2 weeks. A complex web application or marketplace takes 4-8 weeks depending on the features. We provide a clear timeline in your quote and send you weekly review builds so you can see the progress.</p>
-        </details>
-        <details name="faq">
-          <summary>Do you offer maintenance after launch?</summary>
-          <p>Yes. We offer monthly maintenance retainers to handle server updates, bug fixes, and minor content changes. We ensure your software remains secure and online long after it is deployed.</p>
-        </details>
-        <details name="faq">
-          <summary>Can you customize software you already built?</summary>
-          <p>Absolutely. If you want to license the LegisCore engine for your law firm, or adapt the Asad POS for your retail store, we can customize the branding, workflows, and user roles to fit your specific business.</p>
-        </details>
-        <details name="faq">
-          <summary>I don't live in Yola. Can we still work together?</summary>
-          <p>Yes. While our studio is based in Jimeta-Yola, we work remotely with clients in Abuja, Lagos, Kano, and across Nigeria. All communication, reviews, and project handoffs are handled smoothly via WhatsApp and Email.</p>
-        </details>
-      </div>
-    </section>
-
-
-    <!-- QUOTE ESTIMATOR -->
-    <section id="estimator" class="section container reveal">
-      <h2>Interactive Quote Estimator</h2>
-      <p class="lead">Select your requirements to see a ballpark estimate.</p>
-      
-      <div class="estimator-card">
-        <div class="est-group">
-          <h4>1. What are you building?</h4>
-          <div class="est-options">
-            <label class="est-label"><input type="radio" name="projectType" value="Website" data-min="150000" data-max="300000" checked> Business Website</label>
-            <label class="est-label"><input type="radio" name="projectType" value="E-commerce" data-min="400000" data-max="800000"> E-commerce / Marketplace</label>
-            <label class="est-label"><input type="radio" name="projectType" value="Web App" data-min="600000" data-max="1500000"> Custom Web App / System</label>
-            <label class="est-label"><input type="radio" name="projectType" value="POS" data-min="250000" data-max="500000"> POS / Inventory Software</label>
-          </div>
-        </div>
-
-        <div class="est-group">
-          <h4>2. Any add-ons?</h4>
-          <div class="est-options">
-            <label class="est-label"><input type="checkbox" name="addon" value="Payment Integration" data-min="50000" data-max="100000"> Payment Integration</label>
-            <label class="est-label"><input type="checkbox" name="addon" value="Admin Dashboard" data-min="150000" data-max="300000"> Admin Dashboard</label>
-            <label class="est-label"><input type="checkbox" name="addon" value="Mobile App Version" data-min="250000" data-max="600000"> Mobile App Version</label>
-            <label class="est-label"><input type="checkbox" name="addon" value="Rush Delivery" data-min="100000" data-max="200000"> Rush Delivery</label>
-          </div>
-        </div>
-
-        <div class="est-total-box">
-          <div class="est-total-label">Estimated Range (NGN)</div>
-          <div class="est-total-price" id="est-price">₦150,000 - ₦300,000</div>
-        </div>
-
-        <button id="est-submit" class="btn btn-wa" style="width: 100%; margin-top: 24px;">
-          Send Estimate Request via WhatsApp
-        </button>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="reveal section container">
-      <h2>Start a Project</h2>
-      <p class="lead">Tell me what you're building. I reply within 24 hours.</p>
-      
-      <div class="contact-grid">
-        <div data-fs-success style="display:none; color:var(--accent); padding:16px; background:rgba(0,229,163,0.1); border-radius:8px; margin-bottom:20px; font-weight:600;">✓ Message sent successfully! I will reply within 24 hours.</div>
-        <form id="contact-form" action="https://formspree.io/f/xrpedgvz" method="POST">
-          <div class="form-group">
-            <label for="name">Your Name *</label>
-            <input type="text" id="name" name="name" class="form-control" placeholder="e.g. John Doe" required data-fs-field>
-            <div class="error-msg" data-fs-error="name" style="display:none;"></div>
-          </div>
-          <div class="form-group">
-            <label for="details">Project Type & Budget *</label>
-            <input type="text" id="details" name="details" class="form-control" placeholder="e.g. E-commerce store, ₦500k - ₦1M" required data-fs-field>
-            <div class="error-msg" data-fs-error="details" style="display:none;"></div>
-          </div>
-          <div class="form-group">
-            <label for="description">Project Description *</label>
-            <textarea id="description" name="description" class="form-control" placeholder="Describe the problem you need solved..." required data-fs-field></textarea>
-            <div class="error-msg" data-fs-error="description" style="display:none;"></div>
-          </div>
-          
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary" data-fs-submit-btn>Send via Email</button>
-            <button type="button" id="send-wa" class="btn btn-wa">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-              Send via WhatsApp
-            </button>
-          </div>
-        </form>
-
-        <div class="contact-info">
-          <p>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Jimeta-Yola, Adamawa, Nigeria <br><span style="font-size:0.85rem; color:var(--accent);">Serving clients remotely across Abuja, Lagos, Kano, and all Nigerian states.</span>
-          </p>
-          <p>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <a href="mailto:shehulhadi00@gmail.com">shehulhadi00@gmail.com</a>
-          </p>
-          <p>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <a href="https://wa.me/2349063200718" target="_blank" rel="noopener">+234 906 320 0718</a>
-          </p>
-          <button id="save-contact" class="btn btn-secondary" style="width: 100%; margin-top: 16px; font-size: 0.9rem;">📥 Save Contact to Phone</button>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container footer-content">
-      <div class="copyright">
-        &copy; <span id="year"></span> Asad Tech Concepts.
-      </div>
-      <div class="footer-links">
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="https://wa.me/2349063200718" target="_blank" rel="noopener">Contact</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Floating WhatsApp (Mobile) -->
-  <a href="https://wa.me/2349063200718?text=Hello%20Asad%20Tech%20Concepts%2C%20I%20have%20an%20enquiry." target="_blank" rel="noopener" class="fab" aria-label="Chat on WhatsApp">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-  </a>
-
-  <script>
-    // Set Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Mobile Menu Toggle
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    menuToggle.addEventListener('click', () => {
-      const isOpen = mobileMenu.classList.contains('active');
-      if (isOpen) {
-        mobileMenu.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
-      } else {
-        mobileMenu.classList.add('active');
-        menuToggle.setAttribute('aria-expanded', 'true');
-      }
-    });
-
-    // Close mobile menu on link click
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-
-    // Download Modal Logic
-    const downloadModal = document.getElementById('download-modal');
-    const downloadBtn = document.getElementById('download-btn');
-    const closeModalBtn = document.getElementById('close-modal');
-
-    if (downloadBtn) {
-      downloadBtn.addEventListener('click', () => downloadModal.showModal());
-    }
-    if (closeModalBtn) {
-      closeModalBtn.addEventListener('click', () => downloadModal.close());
-    }
-    if (downloadModal) {
-      downloadModal.addEventListener('click', (e) => {
-        const rect = downloadModal.getBoundingClientRect();
-        if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
-          downloadModal.close();
-        }
-      });
-    }
-
-
-
-    // Clear Cache / Update App Logic
-    const updateBtns = document.querySelectorAll('.update-btn');
-    updateBtns.forEach(btn => {
-      btn.addEventListener('click', async () => {
-        btn.textContent = 'Updating...';
-        if ('serviceWorker' in navigator) {
-          const regs = await navigator.serviceWorker.getRegistrations();
-          for (let reg of regs) { await reg.unregister(); }
-        }
-        if ('caches' in window) {
-          const keys = await caches.keys();
-          for (let k of keys) { await caches.delete(k); }
-        }
-        window.location.reload(true);
-      });
-    });
-
-    // Listen for new Service Worker updates
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').then(reg => {
-        reg.addEventListener('updatefound', () => {
-          const newWorker = reg.installing;
-          newWorker.addEventListener('statechange', () => {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              document.querySelectorAll('.update-btn').forEach(btn => {
-                btn.textContent = 'Update Available!';
-                btn.style.background = 'var(--accent)';
-                btn.style.color = '#000';
-                btn.style.borderColor = 'var(--accent)';
-              });
-            }
-          });
-        });
-      });
-    }
-
-    
-    
-    
-    // Contextual Floating WhatsApp Button
-    const fab = document.querySelector('.fab');
-    const defaultMsg = "Hello Asad Tech Concepts, I have an enquiry.";
-    
-    if (fab) {
-      const projectCards = document.querySelectorAll('#project-grid .card');
-      
-      if ('IntersectionObserver' in window && projectCards.length > 0) {
-        const fabObserver = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              // User is looking at a project card
-              const title = entry.target.querySelector('h3').innerText;
-              const msg = `Hello Asad Tech Concepts, I am interested in ${title}. Can we discuss this?`;
-              fab.href = `https://wa.me/2349063200718?text=${encodeURIComponent(msg)}`;
-            } else {
-              // Optional: If they scroll away, we could reset, but 
-              // leaving it until they hit another project is usually better UX.
-            }
-          });
-        }, { threshold: 0.5 }); // Trigger when card is 50% visible
-        
-        projectCards.forEach(card => fabObserver.observe(card));
-      }
-    }
-
-    
-    // Scroll Progress Bar Logic
-    window.addEventListener('scroll', () => {
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (scrollTop / scrollHeight) * 100;
-      document.getElementById('scroll-progress').style.width = scrolled + '%';
-    });
-
-    
-    // vCard Generator Logic
-    const saveContactBtn = document.getElementById('save-contact');
-    if (saveContactBtn) {
-      saveContactBtn.addEventListener('click', () => {
-        const vcard = `BEGIN:VCARD
+<button id="theme-toggle" class="menu-toggle" aria-label="Toggle theme" style="margin-right: 8px;">
+<svg id="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+</button>
+<button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+</button>
+</div>
+<div class="mobile-menu" id="mobile-menu">
+<a href="#work">Work</a>
+<a href="#services">Services</a>
+<a href="#process">Process</a>
+<a href="#about">About</a>
+<button class="btn btn-secondary update-btn" style="margin-top: 8px;">Update App</button>
+<a href="#contact" class="btn btn-primary" style="margin-top: 8px;">Start a project</a>
+</div>
+</header>
+<main id="main">
+<section class="hero container">
+<div class="status-badge"><div class="pulse-dot"></div> Available for Q4 Projects</div>
+<h1>Practical software for real businesses.</h1>
+<p class="lead">We build web apps, management tools, and marketplaces that solve operational bottlenecks and scale with your institution or enterprise.</p>
+<div class="hero-actions">
+<a href="https://wa.me/2349063200718?text=Hello%20Asad%20Tech%20Concepts%2C%20I%20would%20like%20to%20start%20a%20project." target="_blank" rel="noopener" class="btn btn-wa">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+Start a project
+</a>
+<button id="download-btn" class="btn btn-secondary">Download Profile</button>
+<button id="share-btn" class="btn btn-secondary">Share App</button>
+<a href="#work" class="btn btn-secondary">See our work</a>
+</div>
+<div class="trust-row">
+<span>Based in Yola, serving all Nigeria</span>
+<span>Fixed-cost quotes</span>
+<span>Weekly review builds</span>
+</div>
+</section>
+<div class="marquee-wrapper">
+<div class="marquee-content">
+<span>HTML & CSS</span><span>JavaScript</span><span>Python</span><span>Node.js</span><span>Supabase</span><span>React</span><span>Paystack API</span><span>Android & iOS</span>
+<span>HTML & CSS</span><span>JavaScript</span><span>Python</span><span>Node.js</span><span>Supabase</span><span>React</span><span>Paystack API</span><span>Android & iOS</span>
+</div>
+</div>
+<section id="work" class="reveal section container">
+<h2>Featured Work</h2>
+<p class="lead">Real tools built for real operations.</p>
+<div class="filter-container">
+<button class="filter-btn active" data-filter="all">All Work</button>
+<button class="filter-btn" data-filter="web">Web Apps</button>
+<button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+<button class="filter-btn" data-filter="pos">POS Systems</button>
+</div>
+<div class="grid-3" id="project-grid">
+<article class="card" data-category="ecommerce">
+<span class="badge prod">Production</span>
+<h3>PXDynasty</h3>
+<p><strong>Problem:</strong> Local vendors lacked a unified digital storefront. <br><br><strong>Built:</strong> A multi-vendor marketplace with product listings, cart handling, and delivery workflows.</p>
+<div class="stack-tags">
+<span>Vanilla JS</span>
+<span>Node.js</span>
+<span>Paystack</span>
+</div>
+<div class="card-mockup">
+<svg viewBox="0 0 300 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<rect width="300" height="200" fill="#0a1118"/>
+<rect x="20" y="20" width="260" height="160" rx="8" fill="#111a24" stroke="#1e293b"/>
+<rect x="20" y="20" width="260" height="30" rx="8" fill="#16222e"/>
+<circle cx="35" cy="35" r="4" fill="#ef4444"/>
+<circle cx="50" cy="35" r="4" fill="#f59e0b"/>
+<circle cx="65" cy="35" r="4" fill="#00e5a3"/>
+<rect x="35" y="65" width="40" height="10" rx="4" fill="#00e5a3"/>
+<rect x="35" y="85" width="100" height="6" rx="3" fill="#334155"/>
+<rect x="35" y="110" width="70" height="55" rx="6" fill="#16222e" stroke="#1e293b"/>
+<rect x="45" y="120" width="50" height="25" rx="4" fill="#1e293b"/>
+<rect x="45" y="150" width="30" height="6" rx="3" fill="#475569"/>
+<rect x="115" y="110" width="70" height="55" rx="6" fill="#16222e" stroke="#1e293b"/>
+<rect x="125" y="120" width="50" height="25" rx="4" fill="#1e293b"/>
+<rect x="125" y="150" width="30" height="6" rx="3" fill="#475569"/>
+</svg>
+</div>
+<a href="https://shehulhadi.github.io/pxdynasty/" target="_blank" rel="noopener" class="btn btn-secondary" style="margin-top: 16px; width: 100%; font-size: 0.875rem;">View Live Project &rarr;</a>
+</article>
+<article class="card" data-category="web">
+<span class="badge prod">Production</span>
+<h3>Matric</h3>
+<p><strong>Problem:</strong> University communications are scattered across informal channels with no verified identity. <br><br><strong>Built:</strong> A verified campus platform now serving MAU, SPY, and FCE in Yola, connecting students to their exact faculty, department, and course communities.</p>
+<div class="stack-tags">
+<span>React</span>
+<span>Firebase</span>
+</div>
+<div class="card-mockup">
+<svg viewBox="0 0 300 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<rect width="300" height="200" fill="#0a1118"/>
+<rect x="100" y="15" width="100" height="180" rx="16" fill="#111a24" stroke="#1e293b" stroke-width="2"/>
+<rect x="135" y="22" width="30" height="4" rx="2" fill="#334155"/>
+<rect x="110" y="45" width="80" height="20" rx="4" fill="#00e5a3"/>
+<rect x="115" y="52" width="40" height="6" rx="3" fill="#0a1118"/>
+<rect x="110" y="75" width="80" height="40" rx="6" fill="#16222e"/>
+<circle cx="125" cy="95" r="10" fill="#1e293b"/>
+<rect x="145" y="88" width="35" height="6" rx="3" fill="#475569"/>
+<rect x="145" y="100" width="25" height="6" rx="3" fill="#334155"/>
+<rect x="110" y="125" width="80" height="40" rx="6" fill="#16222e"/>
+<circle cx="125" cy="145" r="10" fill="#1e293b"/>
+<rect x="145" y="138" width="35" height="6" rx="3" fill="#475569"/>
+<rect x="145" y="150" width="25" height="6" rx="3" fill="#334155"/>
+</svg>
+</div>
+<a href="https://shehulhadi.github.io/matric" target="_blank" rel="noopener" class="btn btn-primary">View Live App &rarr;</a>
+</article>
+<article class="card" data-category="web">
+<span class="badge proto">Prototype</span>
+<h3>LegisCore</h3>
+<p><strong>Problem:</strong> Law firms struggle to track document versions and route administrative tasks. <br><br><strong>Built:</strong> A secure "Filing Room" document-management and workflow system for legal offices. <br><br><span style="color:var(--accent); font-weight:600;">Demo Login:</span><br>Email: test@legiscore.local<br>Pass: TestPass123!</p>
+<div class="stack-tags">
+<span>HTML/JS</span>
+<span>LocalStorage</span>
+</div>
+<div class="card-actions">
+<button class="btn btn-secondary view-screens-btn">📸 See Screenshots</button>
+<a href="https://shehulhadi.github.io/legiscore/" target="_blank" rel="noopener" class="btn btn-primary">View Live App &rarr;</a>
+</div>
+</article>
+<article class="card" data-category="pos">
+<span class="badge prod">Production</span>
+<h3>Asad POS</h3>
+<p><strong>Problem:</strong> Manual inventory tracking and sales recording for construction material. <br><br><strong>Built:</strong> A secure, PIN-protected point-of-sale and inventory manager for block production. <br><br><span style="color:var(--accent); font-weight:600;">Demo PIN: 1234</span></p>
+<div class="stack-tags">
+<span>Vanilla JS</span>
+<span>LocalStorage</span>
+</div>
+<div class="card-mockup">
+<svg viewBox="0 0 300 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<rect width="300" height="200" fill="#0a1118"/>
+<rect x="20" y="20" width="260" height="160" rx="8" fill="#111a24" stroke="#1e293b"/>
+<rect x="20" y="20" width="60" height="160" rx="8" fill="#16222e"/>
+<rect x="35" y="40" width="30" height="6" rx="3" fill="#00e5a3"/>
+<rect x="35" y="60" width="30" height="6" rx="3" fill="#475569"/>
+<rect x="35" y="80" width="30" height="6" rx="3" fill="#475569"/>
+<rect x="95" y="35" width="80" height="40" rx="4" fill="#16222e" stroke="#1e293b"/>
+<rect x="105" y="45" width="20" height="6" rx="3" fill="#334155"/>
+<rect x="105" y="60" width="40" height="8" rx="4" fill="#00e5a3"/>
+<rect x="185" y="35" width="80" height="40" rx="4" fill="#16222e" stroke="#1e293b"/>
+<rect x="195" y="45" width="20" height="6" rx="3" fill="#334155"/>
+<rect x="195" y="60" width="40" height="8" rx="4" fill="#00e5a3"/>
+<rect x="95" y="90" width="170" height="75" rx="4" fill="#16222e" stroke="#1e293b"/>
+<rect x="105" y="100" width="40" height="6" rx="3" fill="#475569"/>
+<rect x="165" y="100" width="40" height="6" rx="3" fill="#475569"/>
+<rect x="105" y="115" width="60" height="6" rx="3" fill="#334155"/>
+<rect x="165" y="115" width="30" height="6" rx="3" fill="#00e5a3"/>
+<rect x="105" y="130" width="50" height="6" rx="3" fill="#334155"/>
+<rect x="165" y="130" width="30" height="6" rx="3" fill="#00e5a3"/>
+</svg>
+</div>
+<a href="https://shehulhadi.github.io/asad-pos/index.html" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 16px; width: 100%; font-size: 0.875rem;">View Live App &rarr;</a>
+</article>
+</div>
+</section>
+<section id="services" class="reveal section container">
+<h2>Studio Capabilities</h2>
+<p class="lead">Full-stack engineering for complex operations.</p>
+<div class="services-grid">
+<div class="service-item">
+<div class="service-icon">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+</div>
+<h4>Web Applications</h4>
+<p class="service-meta"><strong>Solves:</strong> Manual spreadsheets</p>
+<p class="service-meta"><strong>Delivers:</strong> Custom internal tools</p>
+</div>
+<div class="service-item">
+<div class="service-icon">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+</div>
+<h4>Marketplaces</h4>
+<p class="service-meta"><strong>Solves:</strong> Scattered vendors</p>
+<p class="service-meta"><strong>Delivers:</strong> Unified storefronts</p>
+</div>
+<div class="service-item">
+<div class="service-icon">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+</div>
+<h4>Desktop Software</h4>
+<p class="service-meta"><strong>Solves:</strong> Offline data entry</p>
+<p class="service-meta"><strong>Delivers:</strong> Secure local apps</p>
+</div>
+<div class="service-item">
+<div class="service-icon">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+</div>
+<h4>Mobile Apps</h4>
+<p class="service-meta"><strong>Solves:</strong> On-the-go access</p>
+<p class="service-meta"><strong>Delivers:</strong> Android & iOS builds</p>
+</div>
+<div class="service-item">
+<div class="service-icon">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+</div>
+<h4>Cloud Systems</h4>
+<p class="service-meta"><strong>Solves:</strong> Server downtime</p>
+<p class="service-meta"><strong>Delivers:</strong> Scalable hosting</p>
+</div>
+<div class="service-item">
+<div class="service-icon">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+</div>
+<h4>API Integration</h4>
+<p class="service-meta"><strong>Solves:</strong> Disconnected tools</p>
+<p class="service-meta"><strong>Delivers:</strong> Automated workflows</p>
+</div>
+<div class="service-item">
+<div class="service-icon">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+</div>
+<h4>Security Audits</h4>
+<p class="service-meta"><strong>Solves:</strong> Vulnerability risks</p>
+<p class="service-meta"><strong>Delivers:</strong> Hardened codebases</p>
+</div>
+<div class="service-item">
+<div class="service-icon">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+</div>
+<h4>Maintenance</h4>
+<p class="service-meta"><strong>Solves:</strong> Breaking updates</p>
+<p class="service-meta"><strong>Delivers:</strong> Ongoing support</p>
+</div>
+</div>
+</section>
+<section id="process" class="reveal section container">
+<h2>How We Work</h2>
+<p class="lead">A transparent pipeline from first call to launch.</p>
+<div class="timeline">
+<div class="timeline-step">
+<h4>Discuss</h4>
+<p>We map your operational bottlenecks and define the project scope.</p>
+</div>
+<div class="timeline-step">
+<h4>Quote</h4>
+<p>You receive a fixed-cost estimate, timeline, and deliverable list.</p>
+</div>
+<div class="timeline-step">
+<h4>Build</h4>
+<p>Iterative development with weekly review builds and testing.</p>
+</div>
+<div class="timeline-step">
+<h4>Launch & Support</h4>
+<p>Deployment to production with ongoing maintenance retainer options.</p>
+</div>
+</div>
+</section>
+<section id="about" class="reveal section container">
+<h2>About the Studio</h2>
+<div class="about-wrap">
+<div class="founder-photo">MH</div>
+<div class="founder-info">
+<h3>Muhammad Hadi Usman</h3>
+<span class="location">Jimeta-Yola, Adamawa, Nigeria <br><span style="font-size:0.85rem; color:var(--accent);">Serving clients remotely across Abuja, Lagos, Kano, and all Nigerian states.</span></span>
+<blockquote>"We engineer software that prioritizes utility over vanity. Our focus is on building resilient, maintainable systems that solve specific, real-world problems."</blockquote>
+<p>With a background in fintech and local business operations, I build software that African businesses can actually rely on. From multi-vendor marketplace logistics to legal document routing, every line of code is written to solve a practical bottleneck.</p>
+</div>
+</div>
+</section>
+<section id="faq" class="section container reveal">
+<h2>Frequently Asked Questions</h2>
+<p class="lead">Clear answers before we even start.</p>
+<div class="faq-list">
+<details name="faq">
+<summary>How much does a custom web application cost?</summary>
+<p>Because every project is unique, we provide fixed-cost quotes after our initial discussion. Small business landing pages typically start around ₦150,000, while complex systems like multi-vendor marketplaces or custom POS software range between ₦500,000 and ₦2M+.</p>
+</details>
+<details name="faq">
+<summary>How long does it take to build a system?</summary>
+<p>A standard website takes 1-2 weeks. A complex web application or marketplace takes 4-8 weeks depending on the features. We provide a clear timeline in your quote and send you weekly review builds so you can see the progress.</p>
+</details>
+<details name="faq">
+<summary>Do you offer maintenance after launch?</summary>
+<p>Yes. We offer monthly maintenance retainers to handle server updates, bug fixes, and minor content changes. We ensure your software remains secure and online long after it is deployed.</p>
+</details>
+<details name="faq">
+<summary>Can you customize software you already built?</summary>
+<p>Absolutely. If you want to license the LegisCore engine for your law firm, or adapt the Asad POS for your retail store, we can customize the branding, workflows, and user roles to fit your specific business.</p>
+</details>
+<details name="faq">
+<summary>I don't live in Yola. Can we still work together?</summary>
+<p>Yes. While our studio is based in Jimeta-Yola, we work remotely with clients in Abuja, Lagos, Kano, and across Nigeria. All communication, reviews, and project handoffs are handled smoothly via WhatsApp and Email.</p>
+</details>
+</div>
+</section>
+<section id="estimator" class="section container reveal">
+<h2>Interactive Quote Estimator</h2>
+<p class="lead">Select your requirements to see a ballpark estimate.</p>
+<div class="estimator-card">
+<div class="est-group">
+<h4>1. What are you building?</h4>
+<div class="est-options">
+<label class="est-label"><input type="radio" name="projectType" value="Website" data-min="150000" data-max="300000" checked> Business Website</label>
+<label class="est-label"><input type="radio" name="projectType" value="E-commerce" data-min="400000" data-max="800000"> E-commerce / Marketplace</label>
+<label class="est-label"><input type="radio" name="projectType" value="Web App" data-min="600000" data-max="1500000"> Custom Web App / System</label>
+<label class="est-label"><input type="radio" name="projectType" value="POS" data-min="250000" data-max="500000"> POS / Inventory Software</label>
+</div>
+</div>
+<div class="est-group">
+<h4>2. Any add-ons?</h4>
+<div class="est-options">
+<label class="est-label"><input type="checkbox" name="addon" value="Payment Integration" data-min="50000" data-max="100000"> Payment Integration</label>
+<label class="est-label"><input type="checkbox" name="addon" value="Admin Dashboard" data-min="150000" data-max="300000"> Admin Dashboard</label>
+<label class="est-label"><input type="checkbox" name="addon" value="Mobile App Version" data-min="250000" data-max="600000"> Mobile App Version</label>
+<label class="est-label"><input type="checkbox" name="addon" value="Rush Delivery" data-min="100000" data-max="200000"> Rush Delivery</label>
+</div>
+</div>
+<div class="est-total-box">
+<div class="est-total-label">Estimated Range (NGN)</div>
+<div class="est-total-price" id="est-price">₦150,000 - ₦300,000</div>
+</div>
+<button id="est-submit" class="btn btn-wa" style="width: 100%; margin-top: 24px;">
+Send Estimate Request via WhatsApp
+</button>
+</div>
+</section>
+<section id="contact" class="reveal section container">
+<h2>Start a Project</h2>
+<p class="lead">Tell me what you're building. I reply within 24 hours.</p>
+<div class="contact-grid">
+<div data-fs-success style="display:none; color:var(--accent); padding:16px; background:rgba(0,229,163,0.1); border-radius:8px; margin-bottom:20px; font-weight:600;">✓ Message sent successfully! I will reply within 24 hours.</div>
+<form id="contact-form" action="https://formspree.io/f/xrpedgvz" method="POST">
+<div class="form-group">
+<label for="name">Your Name *</label>
+<input type="text" id="name" name="name" class="form-control" placeholder="e.g. John Doe" required data-fs-field>
+<div class="error-msg" data-fs-error="name" style="display:none;"></div>
+</div>
+<div class="form-group">
+<label for="details">Project Type & Budget *</label>
+<input type="text" id="details" name="details" class="form-control" placeholder="e.g. E-commerce store, ₦500k - ₦1M" required data-fs-field>
+<div class="error-msg" data-fs-error="details" style="display:none;"></div>
+</div>
+<div class="form-group">
+<label for="description">Project Description *</label>
+<textarea id="description" name="description" class="form-control" placeholder="Describe the problem you need solved..." required data-fs-field></textarea>
+<div class="error-msg" data-fs-error="description" style="display:none;"></div>
+</div>
+<div class="form-actions">
+<button type="submit" class="btn btn-primary" data-fs-submit-btn>Send via Email</button>
+<button type="button" id="send-wa" class="btn btn-wa">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+Send via WhatsApp
+</button>
+</div>
+</form>
+<div class="contact-info">
+<p>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+Jimeta-Yola, Adamawa, Nigeria <br><span style="font-size:0.85rem; color:var(--accent);">Serving clients remotely across Abuja, Lagos, Kano, and all Nigerian states.</span>
+</p>
+<p>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+<a href="mailto:shehulhadi00@gmail.com">shehulhadi00@gmail.com</a>
+</p>
+<p>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+<a href="https://wa.me/2349063200718" target="_blank" rel="noopener">+234 906 320 0718</a>
+</p>
+<button id="save-contact" class="btn btn-secondary" style="width: 100%; margin-top: 16px; font-size: 0.9rem;">📥 Save Contact to Phone</button>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container footer-content">
+<div class="copyright">
+&copy; <span id="year"></span> OProducts.
+</div>
+<div class="footer-links">
+<a href="#work">Work</a>
+<a href="#services">Services</a>
+<a href="#about">About</a>
+<a href="https://wa.me/2349063200718" target="_blank" rel="noopener">Contact</a>
+</div>
+</div>
+</footer>
+<a href="https://wa.me/2349063200718?text=Hello%20Asad%20Tech%20Concepts%2C%20I%20have%20an%20enquiry." target="_blank" rel="noopener" class="fab" aria-label="Chat on WhatsApp">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+<script>
+// Set Year
+document.getElementById('year').textContent = new Date().getFullYear();
+// Mobile Menu Toggle
+const menuToggle = document.getElementById('menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+menuToggle.addEventListener('click', () => {
+const isOpen = mobileMenu.classList.contains('active');
+if (isOpen) {
+mobileMenu.classList.remove('active');
+menuToggle.setAttribute('aria-expanded', 'false');
+} else {
+mobileMenu.classList.add('active');
+menuToggle.setAttribute('aria-expanded', 'true');
+}
+});
+// Close mobile menu on link click
+mobileMenu.querySelectorAll('a').forEach(link => {
+link.addEventListener('click', () => {
+mobileMenu.classList.remove('active');
+menuToggle.setAttribute('aria-expanded', 'false');
+});
+});
+// Download Modal Logic
+const downloadModal = document.getElementById('download-modal');
+const downloadBtn = document.getElementById('download-btn');
+const closeModalBtn = document.getElementById('close-modal');
+if (downloadBtn) {
+downloadBtn.addEventListener('click', () => downloadModal.showModal());
+}
+if (closeModalBtn) {
+closeModalBtn.addEventListener('click', () => downloadModal.close());
+}
+if (downloadModal) {
+downloadModal.addEventListener('click', (e) => {
+const rect = downloadModal.getBoundingClientRect();
+if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+downloadModal.close();
+}
+});
+}
+// Clear Cache / Update App Logic
+const updateBtns = document.querySelectorAll('.update-btn');
+updateBtns.forEach(btn => {
+btn.addEventListener('click', async () => {
+btn.textContent = 'Updating...';
+if ('serviceWorker' in navigator) {
+const regs = await navigator.serviceWorker.getRegistrations();
+for (let reg of regs) { await reg.unregister(); }
+}
+if ('caches' in window) {
+const keys = await caches.keys();
+for (let k of keys) { await caches.delete(k); }
+}
+window.location.reload(true);
+});
+});
+// Listen for new Service Worker updates
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register('sw.js').then(reg => {
+reg.addEventListener('updatefound', () => {
+const newWorker = reg.installing;
+newWorker.addEventListener('statechange', () => {
+if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+document.querySelectorAll('.update-btn').forEach(btn => {
+btn.textContent = 'Update Available!';
+btn.style.background = 'var(--accent)';
+btn.style.color = '#000';
+btn.style.borderColor = 'var(--accent)';
+});
+}
+});
+});
+});
+}
+// Contextual Floating WhatsApp Button
+const fab = document.querySelector('.fab');
+const defaultMsg = "Hello OProducts, I have an enquiry.";
+if (fab) {
+const projectCards = document.querySelectorAll('#project-grid .card');
+if ('IntersectionObserver' in window && projectCards.length > 0) {
+const fabObserver = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+// User is looking at a project card
+const title = entry.target.querySelector('h3').innerText;
+const msg = `Hello OProducts, I am interested in ${title}. Can we discuss this?`;
+fab.href = `https://wa.me/2349063200718?text=${encodeURIComponent(msg)}`;
+} else {
+// Optional: If they scroll away, we could reset, but
+// leaving it until they hit another project is usually better UX.
+}
+});
+}, { threshold: 0.5 }); // Trigger when card is 50% visible
+projectCards.forEach(card => fabObserver.observe(card));
+}
+}
+// Scroll Progress Bar Logic
+window.addEventListener('scroll', () => {
+const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+const scrolled = (scrollTop / scrollHeight) * 100;
+document.getElementById('scroll-progress').style.width = scrolled + '%';
+});
+// vCard Generator Logic
+const saveContactBtn = document.getElementById('save-contact');
+if (saveContactBtn) {
+saveContactBtn.addEventListener('click', () => {
+const vcard = `BEGIN:VCARD
 VERSION:3.0
 FN:Muhammad Hadi Usman
-ORG:Asad Tech Concepts
+ORG:OProducts
 TITLE:Software Studio
 TEL;TYPE=CELL,VOICE:+2349063200718
 EMAIL;TYPE=WORK,INTERNET:shehulhadi00@gmail.com
 URL:https://shehulhadi.github.io/about/
 ADR;TYPE=WORK:;;Jimeta-Yola;Adamawa;;;Nigeria
 END:VCARD`;
-
-        const blob = new Blob([vcard], { type: 'text/vcard' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        a.href = url;
-        a.download = 'Asad_Tech_Concepts.vcf';
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-        
-        // Visual feedback
-        const originalText = saveContactBtn.textContent;
-        saveContactBtn.textContent = '✓ Contact Saved!';
-        saveContactBtn.style.color = 'var(--accent)';
-        setTimeout(() => {
-          saveContactBtn.textContent = originalText;
-          saveContactBtn.style.color = '';
-        }, 3000);
-      });
-    }
-
-    // Theme Toggle Logic
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const currentTheme = localStorage.getItem('theme') || 'dark';
-    
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    
-    if (currentTheme === 'light') {
-      themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
-    }
-
-    themeToggle.addEventListener('click', () => {
-      const theme = document.documentElement.getAttribute('data-theme');
-      const newTheme = theme === 'dark' ? 'light' : 'dark';
-      
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      
-      if (newTheme === 'light') {
-        themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
-      } else {
-        themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
-      }
-    });
-
-    // Share API Logic
-    const shareBtn = document.getElementById('share-btn');
-    if (shareBtn) {
-      shareBtn.addEventListener('click', async () => {
-        const shareData = {
-          title: 'Asad Tech Concepts',
-          text: 'Practical software for real businesses. Check out Asad Tech Concepts!',
-          url: 'https://shehulhadi.github.io/about/'
-        };
-        try {
-          if (navigator.share) {
-            // Native mobile share sheet (WhatsApp, Twitter, etc.)
-            await navigator.share(shareData);
-          } else {
-            // Fallback for desktop browsers
-            await navigator.clipboard.writeText(shareData.url);
-            shareBtn.textContent = 'Link Copied!';
-            setTimeout(() => { shareBtn.textContent = 'Share App'; }, 2000);
-          }
-        } catch (err) {
-          console.log('Share failed or cancelled', err);
-        }
-      });
-    }
-
-    // PWA Install Logic
+const blob = new Blob([vcard], { type: 'text/vcard' });
+const url = window.URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.style.display = 'none';
+a.href = url;
+a.download = 'Asad_Tech_Concepts.vcf';
+document.body.appendChild(a);
+a.click();
+window.URL.revokeObjectURL(url);
+document.body.removeChild(a);
+// Visual feedback
+const originalText = saveContactBtn.textContent;
+saveContactBtn.textContent = '✓ Contact Saved!';
+saveContactBtn.style.color = 'var(--accent)';
+setTimeout(() => {
+saveContactBtn.textContent = originalText;
+saveContactBtn.style.color = '';
+}, 3000);
+});
+}
+// Theme Toggle Logic
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+const currentTheme = localStorage.getItem('theme') || 'dark';
+document.documentElement.setAttribute('data-theme', currentTheme);
+if (currentTheme === 'light') {
+themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+}
+themeToggle.addEventListener('click', () => {
+const theme = document.documentElement.getAttribute('data-theme');
+const newTheme = theme === 'dark' ? 'light' : 'dark';
+document.documentElement.setAttribute('data-theme', newTheme);
+localStorage.setItem('theme', newTheme);
+if (newTheme === 'light') {
+themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+} else {
+themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+}
+});
+// Share API Logic
+const shareBtn = document.getElementById('share-btn');
+if (shareBtn) {
+shareBtn.addEventListener('click', async () => {
+const shareData = {
+title: 'OProducts',
+text: 'Practical software for real businesses. Check out OProducts!',
+url: 'https://shehulhadi.github.io/about/'
+};
+try {
+if (navigator.share) {
+// Native mobile share sheet (WhatsApp, Twitter, etc.)
+await navigator.share(shareData);
+} else {
+// Fallback for desktop browsers
+await navigator.clipboard.writeText(shareData.url);
+shareBtn.textContent = 'Link Copied!';
+setTimeout(() => { shareBtn.textContent = 'Share App'; }, 2000);
+}
+} catch (err) {
+console.log('Share failed or cancelled', err);
+}
+});
+}
+// PWA Install Logic
 let deferredPrompt;
 const installBanner = document.getElementById('install-banner');
 const installBtn = document.getElementById('install-btn');
 const closeInstall = document.getElementById('close-install');
-
 window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  if (installBanner) installBanner.style.display = 'flex';
+e.preventDefault();
+deferredPrompt = e;
+if (installBanner) installBanner.style.display = 'flex';
 });
-
 if (installBtn) {
-  installBtn.addEventListener('click', async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        installBanner.style.display = 'none';
-      }
-      deferredPrompt = null;
-    }
-  });
+installBtn.addEventListener('click', async () => {
+if (deferredPrompt) {
+deferredPrompt.prompt();
+const { outcome } = await deferredPrompt.userChoice;
+if (outcome === 'accepted') {
+installBanner.style.display = 'none';
 }
-
+deferredPrompt = null;
+}
+});
+}
 if (closeInstall) {
-  closeInstall.addEventListener('click', () => {
-    installBanner.style.display = 'none';
-  });
+closeInstall.addEventListener('click', () => {
+installBanner.style.display = 'none';
+});
 }
-
 // Register Service Worker
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed', err));
+navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed', err));
 }
-
-    // Initialize Formspree (Handles Email submission, validation, and success message)
-    window.formspree = window.formspree || function () { (window.formspree.q = window.formspree.q || []).push(arguments); };
-    formspree('initForm', { formElement: '#contact-form', formId: 'xrpedgvz' });
-
-    // WhatsApp Button Logic (Custom)
-    const waBtn = document.getElementById('send-wa');
-    if (waBtn) {
-      waBtn.addEventListener('click', () => {
-        const name = document.getElementById('name');
-        const details = document.getElementById('details');
-        const desc = document.getElementById('description');
-        
-        if (!name.value.trim() || !details.value.trim() || !desc.value.trim()) {
-          alert('Please fill out all required fields before sending via WhatsApp.');
-          return;
-        }
-        
-        const text = `*New Project Enquiry*%0A%0A*Name:* ${encodeURIComponent(name.value.trim())}%0A*Details:* ${encodeURIComponent(details.value.trim())}%0A%0A*Description:*%0A${encodeURIComponent(desc.value.trim())}`;
-        window.open(`https://wa.me/2349063200718?text=${text}`, '_blank');
-      });
-    }
-  
-    
-    // Interactive Project Modal Logic
-    function openProjectModal(cardElement) {
-      const title = cardElement.querySelector('h3').innerText;
-      const desc = cardElement.querySelector('p').innerHTML;
-      const statusBadge = cardElement.querySelector('.badge').outerHTML;
-      const mockupSvg = cardElement.querySelector('.card-mockup svg').outerHTML;
-      const actionBtn = cardElement.querySelector('.card-actions a') ? cardElement.querySelector('.card-actions a').outerHTML : '';
-      
-      const modalContent = document.getElementById('modal-dynamic-content');
-      modalContent.innerHTML = `
-        ${statusBadge}
-        <h2 style="margin-top: 12px; margin-bottom: 16px; font-size: 2rem;">${title}</h2>
-        <div class="modal-mockup">${mockupSvg}</div>
-        <p style="color: var(--text-muted); margin-bottom: 24px; line-height: 1.6;">${desc}</p>
-        <div style="display: flex; gap: 16px;">${actionBtn}</div>
-      `;
-      
-      const dialog = document.getElementById('project-modal');
-      if (dialog.showModal) dialog.showModal(); else dialog.setAttribute('open', '');
-    }
-
-    // Attach click events to mockups
-    document.querySelectorAll('.view-screens-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        openProjectModal(btn.closest('.card'));
-      });
-    });
-
-    // Close modal logic
-    const closeBtn = document.getElementById('close-project-modal');
-    const projectDialog = document.getElementById('project-modal');
-    
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
-        if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribute('open');
-      });
-    }
-    if (projectDialog) {
-      projectDialog.addEventListener('click', (e) => {
-        const rect = projectDialog.getBoundingClientRect();
-        if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
-          if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribute('open');
-        }
-      });
-    }
-
-    
-    // Project Filter Logic
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('#project-grid .card');
-    
-    if (filterBtns.length > 0) {
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          filterBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          
-          const filter = btn.getAttribute('data-filter');
-          
-          projectCards.forEach(card => {
-            if (filter === 'all' || card.getAttribute('data-category') === filter) {
-              card.style.display = 'flex';
-              // Trigger re-animation
-              card.classList.remove('active');
-              setTimeout(() => card.classList.add('active'), 10);
-            } else {
-              card.style.display = 'none';
-            }
-          });
-        });
-      });
-    }
-
-    
-    // Quote Estimator Logic
-    const estForm = document.getElementById('estimator');
-    if (estForm) {
-      const priceEl = document.getElementById('est-price');
-      const submitBtn = document.getElementById('est-submit');
-      
-      function calculateEstimate() {
-        let minTotal = 0;
-        let maxTotal = 0;
-        
-        // Base project type
-        const selectedType = document.querySelector('input[name="projectType"]:checked');
-        if (selectedType) {
-          minTotal += parseInt(selectedType.getAttribute('data-min'));
-          maxTotal += parseInt(selectedType.getAttribute('data-max'));
-        }
-        
-        // Add-ons
-        document.querySelectorAll('input[name="addon"]:checked').forEach(addon => {
-          minTotal += parseInt(addon.getAttribute('data-min'));
-          maxTotal += parseInt(addon.getAttribute('data-max'));
-        });
-        
-        // Format to NGN
-        const formatter = new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 });
-        priceEl.textContent = `${formatter.format(minTotal)} - ${formatter.format(maxTotal)}`;
-      }
-
-      // Update on change
-      estForm.addEventListener('change', calculateEstimate);
-      calculateEstimate(); // Initial load
-
-      // Submit via WhatsApp
-      submitBtn.addEventListener('click', () => {
-        const selectedType = document.querySelector('input[name="projectType"]:checked').value;
-        let selectedAddons = [];
-        document.querySelectorAll('input[name="addon"]:checked').forEach(addon => {
-          selectedAddons.push(addon.value);
-        });
-        
-        const estimate = priceEl.textContent;
-        
-        let msg = `Hello Asad Tech Concepts,\n\nI used your website estimator and I'd like a formal quote.\n\n*Project:* ${selectedType}\n*Add-ons:* ${selectedAddons.length > 0 ? selectedAddons.join(', ') : 'None'}\n*Estimate:* ${estimate}\n\nPlease let me know the next steps.`;
-        
-        window.open(`https://wa.me/2349063200718?text=${encodeURIComponent(msg)}`, '_blank');
-      });
-    }
-
-    // Scroll Animations (Intersection Observer)
-    const reveals = document.querySelectorAll('.reveal');
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-      reveals.forEach(reveal => observer.observe(reveal));
-    } else {
-      // Fallback for older browsers
-      reveals.forEach(reveal => reveal.classList.add('active'));
-    }
-
-  </script>
-  <dialog id="download-modal">
-      <div class="modal-inner">
-        <button id="close-modal" class="modal-close" aria-label="Close">&times;</button>
-        <h3 style="margin-bottom: 8px;">Download Profile</h3>
-        <p style="color: var(--text-muted);">Get the complete PDF guide covering our services, past projects, and pricing.</p>
-        <div class="modal-actions">
-          <a href="profile.pdf" download class="btn btn-primary">Download PDF</a>
-          <a href="https://wa.me/2349063200718?text=Hello%2C%20please%20send%20me%20the%20Studio%20Profile." target="_blank" rel="noopener" class="btn btn-wa">Request on WhatsApp</a>
-        </div>
-      </div>
-    </dialog>
-
-<div id="install-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:var(--surface); border-top:1px solid var(--border); padding:16px; z-index:1000; align-items:center; justify-content:space-between; gap:16px;">
-  <div style="display:flex; align-items:center; gap:12px;">
-     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 2v13M5 9l7 7 7-7M4 22h16"/></svg>
-     <div>
-       <strong style="display:block; font-size:14px;">Install Asad Tech</strong>
-       <span style="font-size:12px; color:var(--text-muted);">Add to Home Screen</span>
-     </div>
-  </div>
-  <div>
-    <button id="install-btn" class="btn btn-primary" style="min-height:36px; padding:0 16px; font-size:14px;">Install</button>
-    <button id="close-install" style="background:none;border:none;color:var(--text-muted);font-size:24px;margin-left:8px;cursor:pointer;">&times;</button>
-  </div>
+// Initialize Formspree (Handles Email submission, validation, and success message)
+window.formspree = window.formspree || function () { (window.formspree.q = window.formspree.q || []).push(arguments); };
+formspree('initForm', { formElement: '#contact-form', formId: 'xrpedgvz' });
+// WhatsApp Button Logic (Custom)
+const waBtn = document.getElementById('send-wa');
+if (waBtn) {
+waBtn.addEventListener('click', () => {
+const name = document.getElementById('name');
+const details = document.getElementById('details');
+const desc = document.getElementById('description');
+if (!name.value.trim() || !details.value.trim() || !desc.value.trim()) {
+alert('Please fill out all required fields before sending via WhatsApp.');
+return;
+}
+const text = `*New Project Enquiry*%0A%0A*Name:* ${encodeURIComponent(name.value.trim())}%0A*Details:* ${encodeURIComponent(details.value.trim())}%0A%0A*Description:*%0A${encodeURIComponent(desc.value.trim())}`;
+window.open(`https://wa.me/2349063200718?text=${text}`, '_blank');
+});
+}
+// Interactive Project Modal Logic
+function openProjectModal(cardElement) {
+const title = cardElement.querySelector('h3').innerText;
+const desc = cardElement.querySelector('p').innerHTML;
+const statusBadge = cardElement.querySelector('.badge').outerHTML;
+const mockupSvg = cardElement.querySelector('.card-mockup svg').outerHTML;
+const actionBtn = cardElement.querySelector('.card-actions a') ? cardElement.querySelector('.card-actions a').outerHTML : '';
+const modalContent = document.getElementById('modal-dynamic-content');
+modalContent.innerHTML = `
+${statusBadge}
+<h2 style="margin-top: 12px; margin-bottom: 16px; font-size: 2rem;">${title}</h2>
+<div class="modal-mockup">${mockupSvg}</div>
+<p style="color: var(--text-muted); margin-bottom: 24px; line-height: 1.6;">${desc}</p>
+<div style="display: flex; gap: 16px;">${actionBtn}</div>
+`;
+const dialog = document.getElementById('project-modal');
+if (dialog.showModal) dialog.showModal(); else dialog.setAttribute('open', '');
+}
+// Attach click events to mockups
+document.querySelectorAll('.view-screens-btn').forEach(btn => {
+btn.addEventListener('click', () => {
+openProjectModal(btn.closest('.card'));
+});
+});
+// Close modal logic
+const closeBtn = document.getElementById('close-project-modal');
+const projectDialog = document.getElementById('project-modal');
+if (closeBtn) {
+closeBtn.addEventListener('click', () => {
+if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribute('open');
+});
+}
+if (projectDialog) {
+projectDialog.addEventListener('click', (e) => {
+const rect = projectDialog.getBoundingClientRect();
+if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribute('open');
+}
+});
+}
+// Project Filter Logic
+const filterBtns = document.querySelectorAll('.filter-btn');
+const projectCards = document.querySelectorAll('#project-grid .card');
+if (filterBtns.length > 0) {
+filterBtns.forEach(btn => {
+btn.addEventListener('click', () => {
+filterBtns.forEach(b => b.classList.remove('active'));
+btn.classList.add('active');
+const filter = btn.getAttribute('data-filter');
+projectCards.forEach(card => {
+if (filter === 'all' || card.getAttribute('data-category') === filter) {
+card.style.display = 'flex';
+// Trigger re-animation
+card.classList.remove('active');
+setTimeout(() => card.classList.add('active'), 10);
+} else {
+card.style.display = 'none';
+}
+});
+});
+});
+}
+// Quote Estimator Logic
+const estForm = document.getElementById('estimator');
+if (estForm) {
+const priceEl = document.getElementById('est-price');
+const submitBtn = document.getElementById('est-submit');
+function calculateEstimate() {
+let minTotal = 0;
+let maxTotal = 0;
+// Base project type
+const selectedType = document.querySelector('input[name="projectType"]:checked');
+if (selectedType) {
+minTotal += parseInt(selectedType.getAttribute('data-min'));
+maxTotal += parseInt(selectedType.getAttribute('data-max'));
+}
+// Add-ons
+document.querySelectorAll('input[name="addon"]:checked').forEach(addon => {
+minTotal += parseInt(addon.getAttribute('data-min'));
+maxTotal += parseInt(addon.getAttribute('data-max'));
+});
+// Format to NGN
+const formatter = new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 });
+priceEl.textContent = `${formatter.format(minTotal)} - ${formatter.format(maxTotal)}`;
+}
+// Update on change
+estForm.addEventListener('change', calculateEstimate);
+calculateEstimate(); // Initial load
+// Submit via WhatsApp
+submitBtn.addEventListener('click', () => {
+const selectedType = document.querySelector('input[name="projectType"]:checked').value;
+let selectedAddons = [];
+document.querySelectorAll('input[name="addon"]:checked').forEach(addon => {
+selectedAddons.push(addon.value);
+});
+const estimate = priceEl.textContent;
+let msg = `Hello OProducts,\n\nI used your website estimator and I'd like a formal quote.\n\n*Project:* ${selectedType}\n*Add-ons:* ${selectedAddons.length > 0 ? selectedAddons.join(', ') : 'None'}\n*Estimate:* ${estimate}\n\nPlease let me know the next steps.`;
+window.open(`https://wa.me/2349063200718?text=${encodeURIComponent(msg)}`, '_blank');
+});
+}
+// Scroll Animations (Intersection Observer)
+const reveals = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('active');
+observer.unobserve(entry.target);
+}
+});
+}, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+reveals.forEach(reveal => observer.observe(reveal));
+} else {
+// Fallback for older browsers
+reveals.forEach(reveal => reveal.classList.add('active'));
+}
+</script>
+<dialog id="download-modal">
+<div class="modal-inner">
+<button id="close-modal" class="modal-close" aria-label="Close">&times;</button>
+<h3 style="margin-bottom: 8px;">Download Profile</h3>
+<p style="color: var(--text-muted);">Get the complete PDF guide covering our services, past projects, and pricing.</p>
+<div class="modal-actions">
+<a href="profile.pdf" download class="btn btn-primary">Download PDF</a>
+<a href="https://wa.me/2349063200718?text=Hello%2C%20please%20send%20me%20the%20Studio%20Profile." target="_blank" rel="noopener" class="btn btn-wa">Request on WhatsApp</a>
 </div>
-
-  <dialog id="project-modal" class="project-modal">
-    <div class="modal-inner">
-      <button id="close-project-modal" class="modal-close" aria-label="Close">&times;</button>
-      <div id="modal-dynamic-content"></div>
-    </div>
-  </dialog>
+</div>
+</dialog>
+<div id="install-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:var(--surface); border-top:1px solid var(--border); padding:16px; z-index:1000; align-items:center; justify-content:space-between; gap:16px;">
+<div style="display:flex; align-items:center; gap:12px;">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 2v13M5 9l7 7 7-7M4 22h16"/></svg>
+<div>
+<strong style="display:block; font-size:14px;">Install OProducts</strong>
+<span style="font-size:12px; color:var(--text-muted);">Add to Home Screen</span>
+</div>
+</div>
+<div>
+<button id="install-btn" class="btn btn-primary" style="min-height:36px; padding:0 16px; font-size:14px;">Install</button>
+<button id="close-install" style="background:none;border:none;color:var(--text-muted);font-size:24px;margin-left:8px;cursor:pointer;">&times;</button>
+</div>
+</div>
+<dialog id="project-modal" class="project-modal">
+<div class="modal-inner">
+<button id="close-project-modal" class="modal-close" aria-label="Close">&times;</button>
+<div id="modal-dynamic-content"></div>
+</div>
+</dialog>
 </body>
 </html>

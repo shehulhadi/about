@@ -1,6 +1,6 @@
 {
-  "name": "Asad Tech Concepts",
-  "short_name": "AsadTech",
+  "name": "OProducts",
+  "short_name": "OProducts",
   "start_url": "/about/",
   "scope": "/about/",
   "display": "standalone",
