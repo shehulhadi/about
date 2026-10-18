@@ -390,7 +390,17 @@ transition: none !important;
 [data-theme="light"] header { background: rgba(248, 250, 252, 0.85); }
 /* === SCROLL PROGRESS BAR === */
 #scroll-progress { position: fixed; top: 0; left: 0; height: 4px; background: var(--accent); z-index: 9999; width: 0%; transition: width 0.1s ease-out; }
-</style>
+
+    /* === HORIZONTAL WIPE CARDS === */
+    .wipe-left { opacity: 0; transform: translateX(-40px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .wipe-right { opacity: 0; transform: translateX(40px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .wipe-left.active, .wipe-right.active { opacity: 1; transform: translateX(0); }
+    
+    @media (prefers-reduced-motion: reduce) {
+      .wipe-left, .wipe-right { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+
+  </style>
 <script type="application/ld+json">
 {
 "@context": "https://schema.org",
@@ -459,7 +469,29 @@ if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribu
 }
 });
 }
-// Project Filter Logic
+
+    // Horizontal Wipe Animation for Project Cards
+    const wipeCards = document.querySelectorAll('#project-grid .card');
+    wipeCards.forEach((card, index) => {
+        // Assign left/right based on index (even = left, odd = right)
+        card.classList.add(index % 2 === 0 ? 'wipe-left' : 'wipe-right');
+        
+        if ('IntersectionObserver' in window) {
+            const wipeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        wipeObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            wipeObserver.observe(card);
+        } else {
+            card.classList.add('active');
+        }
+    });
+
+    // Project Filter Logic
 const filterBtns = document.querySelectorAll('.filter-btn');
 const projectCards = document.querySelectorAll('#project-grid .card');
 if (filterBtns.length > 0) {
@@ -1208,7 +1240,29 @@ if (projectDialog.close) projectDialog.close(); else projectDialog.removeAttribu
 }
 });
 }
-// Project Filter Logic
+
+    // Horizontal Wipe Animation for Project Cards
+    const wipeCards = document.querySelectorAll('#project-grid .card');
+    wipeCards.forEach((card, index) => {
+        // Assign left/right based on index (even = left, odd = right)
+        card.classList.add(index % 2 === 0 ? 'wipe-left' : 'wipe-right');
+        
+        if ('IntersectionObserver' in window) {
+            const wipeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        wipeObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            wipeObserver.observe(card);
+        } else {
+            card.classList.add('active');
+        }
+    });
+
+    // Project Filter Logic
 const filterBtns = document.querySelectorAll('.filter-btn');
 const projectCards = document.querySelectorAll('#project-grid .card');
 if (filterBtns.length > 0) {
