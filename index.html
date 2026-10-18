@@ -423,6 +423,37 @@ transition: none !important;
       .split-word { opacity: 1 !important; transform: none !important; transition: none !important; }
     }
 
+  
+    /* === STRICT MOBILE-FIRST OVERRIDES === */
+    @media (max-width: 767px) {
+      /* 1. Tame the huge typography */
+      h1 { font-size: 2.2rem !important; line-height: 1.15 !important; }
+      h2 { font-size: 1.8rem !important; line-height: 1.2 !important; }
+      .lead { font-size: 1rem !important; }
+      
+      /* 2. Full-width buttons for easy thumb tapping */
+      .hero-actions { flex-direction: column !important; width: 100% !important; }
+      .hero-actions .btn, .hero-actions button { width: 100% !important; }
+      .wizard-nav { flex-direction: column !important; gap: 12px !important; }
+      .wizard-nav .btn, .wizard-nav button { width: 100% !important; }
+      .form-actions { flex-direction: column !important; }
+      .form-actions .btn, .form-actions button { width: 100% !important; }
+      .card-actions .btn { width: 100% !important; }
+      
+      /* 3. Prevent iOS auto-zoom on inputs */
+      input, textarea, select { font-size: 16px !important; }
+      
+      /* 4. Tighten layout spacing */
+      .hero { padding-top: 32px !important; padding-bottom: 32px !important; }
+      .card { padding: 20px !important; }
+      .estimator-card { padding: 20px !important; }
+      .est-options { grid-template-columns: 1fr !important; }
+      .contact-grid { gap: 32px !important; }
+      
+      /* 5. Ensure no horizontal scrolling */
+      body, html { overflow-x: hidden !important; }
+    }
+
   </style>
 <script type="application/ld+json">
 {
