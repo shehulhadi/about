@@ -563,6 +563,13 @@ transition: none !important;
     /* Hide scrollbars if we want it to feel more app-like */
     body { overflow-y: scroll; }
 
+  
+    /* === STRICT WIZARD FIX === */
+    .wizard-step { display: none !important; }
+    .wizard-step.active { display: block !important; animation: fadeIn 0.3s ease-in-out; }
+    .wizard-header { display: flex !important; justify-content: space-between !important; align-items: center !important; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
   </style>
 <script type="application/ld+json">
 {
@@ -812,7 +819,6 @@ Start a project
 <span>Fixed-cost quotes</span>
 <span>Weekly review builds</span>
 </div>
-</section>
 <div class="marquee-wrapper">
 <div class="marquee-content">
         <img src="https://cdn.simpleicons.org/html5/00e5a3" alt="HTML & CSS" class="tech-logo">
@@ -837,6 +843,8 @@ Start a project
         <img src="https://cdn.simpleicons.org/android/00e5a3" alt="Android & iOS" class="tech-logo">
 </div>
 </div>
+</section>
+
 <section id="work" class="reveal section container tab-section" class="tab-section">
 <h2>Featured Work</h2>
 <p class="lead">Real tools built for real operations.</p>
@@ -1547,10 +1555,15 @@ if ('serviceWorker' in navigator) {
 navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed', err));
 }
 
+    
+    // Robust Wizard Logic
     window.nextStep = function(step) {
       const currentStepDiv = document.querySelector('.wizard-step.active');
+      if (!currentStepDiv) return;
+      
       const inputs = currentStepDiv.querySelectorAll('input[required], textarea[required]');
       let isValid = true;
+      
       inputs.forEach(input => {
         if (!input.value.trim()) {
           input.style.borderColor = '#f87171';
@@ -1559,10 +1572,14 @@ navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registrat
           input.style.borderColor = '';
         }
       });
+      
       if (!isValid) return; 
+      
       document.querySelectorAll('.wizard-step').forEach(el => el.classList.remove('active'));
-      document.getElementById('step-' + step).classList.add('active');
+      const nextDiv = document.getElementById('step-' + step);
+      if (nextDiv) nextDiv.classList.add('active');
     };
+
 
     // Initialize Formspree (Handles Email submission, validation, and success message)
 window.formspree = window.formspree || function () { (window.formspree.q = window.formspree.q || []).push(arguments); };
