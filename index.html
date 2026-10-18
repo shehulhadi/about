@@ -379,6 +379,18 @@
       transition: none !important;
     }
 
+  
+    /* === CARD SCREENSHOT BUTTONS & HERO FIX === */
+    .card .card-mockup { display: none !important; } /* Hide visual in card */
+    .card-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+    .card-actions .btn { width: 100%; font-size: 0.875rem; }
+    
+    /* Force Hero buttons to stack on mobile */
+    @media (max-width: 599px) {
+      .hero-actions { flex-direction: column !important; width: 100%; }
+      .hero-actions .btn { width: 100%; }
+    }
+
   </style>
 
   <!-- SEO Schema Markup -->
@@ -418,7 +430,7 @@
       const desc = cardElement.querySelector('p').innerHTML;
       const statusBadge = cardElement.querySelector('.badge').outerHTML;
       const mockupSvg = cardElement.querySelector('.card-mockup svg').outerHTML;
-      const actionBtn = cardElement.querySelector('.btn').outerHTML;
+      const actionBtn = cardElement.querySelector('.card-actions a') ? cardElement.querySelector('.card-actions a').outerHTML : '';
       
       const modalContent = document.getElementById('modal-dynamic-content');
       modalContent.innerHTML = `
@@ -434,9 +446,9 @@
     }
 
     // Attach click events to mockups
-    document.querySelectorAll('.card-mockup').forEach(mockup => {
-      mockup.addEventListener('click', () => {
-        openProjectModal(mockup.closest('.card'));
+    document.querySelectorAll('.view-screens-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        openProjectModal(btn.closest('.card'));
       });
     });
 
@@ -1115,7 +1127,7 @@ if ('serviceWorker' in navigator) {
       const desc = cardElement.querySelector('p').innerHTML;
       const statusBadge = cardElement.querySelector('.badge').outerHTML;
       const mockupSvg = cardElement.querySelector('.card-mockup svg').outerHTML;
-      const actionBtn = cardElement.querySelector('.btn').outerHTML;
+      const actionBtn = cardElement.querySelector('.card-actions a') ? cardElement.querySelector('.card-actions a').outerHTML : '';
       
       const modalContent = document.getElementById('modal-dynamic-content');
       modalContent.innerHTML = `
@@ -1131,9 +1143,9 @@ if ('serviceWorker' in navigator) {
     }
 
     // Attach click events to mockups
-    document.querySelectorAll('.card-mockup').forEach(mockup => {
-      mockup.addEventListener('click', () => {
-        openProjectModal(mockup.closest('.card'));
+    document.querySelectorAll('.view-screens-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        openProjectModal(btn.closest('.card'));
       });
     });
 
