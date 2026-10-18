@@ -354,6 +354,31 @@
     .modal-mockup svg { width: 100%; height: 100%; object-fit: contain; }
     @media(max-width: 600px) { .modal-mockup { height: 200px; } }
 
+  
+    /* === MOBILE TAP FEEDBACK & HERO BUTTON LAYOUT === */
+    
+    /* Force Hero buttons to stack vertically on phones, row on desktop */
+    .hero-actions {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+    }
+    .hero-actions .btn { width: 100% !important; }
+    
+    @media (min-width: 600px) {
+      .hero-actions { flex-direction: row !important; }
+      .hero-actions .btn { width: auto !important; }
+    }
+
+    /* Physical press effect for mobile taps */
+    .btn:active, 
+    .fab:active, 
+    .card-mockup:active {
+      transform: scale(0.96) !important;
+      opacity: 0.8 !important;
+      transition: none !important;
+    }
+
   </style>
 
   <!-- SEO Schema Markup -->
