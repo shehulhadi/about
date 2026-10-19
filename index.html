@@ -177,6 +177,25 @@ footer{padding:36px 0 20px;border-top:1px solid var(--line);text-align:center;co
     .proj .row, .proj .mockup, .step::before { display: none !important; }
     .step { border-left: none !important; padding: 24px !important; }
 
+  
+    /* === FORM PROFESSIONAL OVERHAUL === */
+    
+    /* 1. Stop mobile auto-zoom by forcing 16px on inputs */
+    input, textarea, select { font-size: 16px !important; padding: 16px !important; border-radius: 10px !important; }
+    
+    /* 2. Clean up the labels */
+    #contact label { font-size: 12px !important; text-transform: uppercase; letter-spacing: 0.08em; color: var(--acc) !important; margin-bottom: 8px !important; font-weight: 700; }
+    
+    /* 3. Make the Contact Info box match the form card */
+    .info { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; justify-content: center; gap: 24px; height: 100%; }
+    
+    /* 4. Make the grid columns stretch to equal heights */
+    .contact { align-items: stretch !important; }
+    
+    /* 5. Add space at the bottom so the WhatsApp button doesn't cover the footer */
+    footer { padding-bottom: 100px !important; }
+    @media (min-width: 980px) { footer { padding-bottom: 40px !important; } }
+
   </style>
 
   <!-- Open Graph / Social Sharing -->
