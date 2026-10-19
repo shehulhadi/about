@@ -156,7 +156,28 @@ footer{padding:36px 0 20px;border-top:1px solid var(--line);text-align:center;co
   .bnav{display:none}body{padding-bottom:0}.wa{bottom:24px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
-</style>
+
+    /* === UNIFIED CARD DESIGN === */
+    .grid, .steps { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 32px; }
+    .card, .step {
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
+      padding: 24px; transition: .3s; display: flex; flex-direction: column; height: 100%;
+    }
+    .card:hover, .step:hover { transform: translateY(-4px); border-color: color-mix(in srgb,var(--acc) 50%,transparent); box-shadow: 0 12px 30px rgba(0,0,0,0.15); }
+    .card h3, .step h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; color: var(--tx); font-family: "Plus Jakarta Sans"; }
+    
+    .card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
+    .ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--glow); color: var(--acc); }
+    
+    /* The specific SOLVES/DELIVERS label style */
+    .meta-label { display: block; font-size: 10px; letter-spacing: 0.1em; font-weight: 700; text-transform: uppercase; color: var(--acc); margin-top: 12px; margin-bottom: 2px; }
+    .meta-text { font-size: 14px; color: var(--mut); line-height: 1.4; margin-bottom: 8px; }
+    
+    /* Hide old specific styles that conflict */
+    .proj .row, .proj .mockup, .step::before { display: none !important; }
+    .step { border-left: none !important; padding: 24px !important; }
+
+  </style>
 </head>
 <body>
 <div id="progress"></div>
@@ -244,52 +265,39 @@ footer{padding:36px 0 20px;border-top:1px solid var(--line);text-align:center;co
       <button class="chip" data-f="ecom">E-commerce</button>
       <button class="chip" data-f="pos">POS systems</button>
     </div>
+    
     <div class="grid g2" id="projects">
       <article class="card proj" data-c="ecom web">
-        <div class="mockup">
-          <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="200" fill="#0a1a15"/><rect x="20" y="20" width="260" height="160" rx="8" fill="#0d211b" stroke="#1e293b"/><rect x="20" y="20" width="260" height="30" rx="8" fill="#112a22"/><circle cx="35" cy="35" r="4" fill="#ef4444"/><circle cx="50" cy="35" r="4" fill="#f59e0b"/><circle cx="65" cy="35" r="4" fill="#10d98a"/><rect x="35" y="65" width="40" height="10" rx="4" fill="#10d98a"/><rect x="35" y="85" width="100" height="6" rx="3" fill="#334155"/><rect x="35" y="110" width="70" height="55" rx="6" fill="#112a22" stroke="#1e293b"/><rect x="45" y="120" width="50" height="25" rx="4" fill="#1e293b"/><rect x="115" y="110" width="70" height="55" rx="6" fill="#112a22" stroke="#1e293b"/><rect x="125" y="120" width="50" height="25" rx="4" fill="#1e293b"/></svg>
-        </div>
-        <span class="tag prod">PRODUCTION</span>
+        <div class="card-header"><div class="ic">🛒</div><span class="tag prod">PRODUCTION</span></div>
         <h3>PXDynasty</h3>
-        <div class="row"><b>Problem</b>Local vendors lacked a unified digital storefront.</div>
-        <div class="row"><b>Built</b>A multi-vendor marketplace with product listings, cart handling and delivery workflows.</div>
-        <div class="stack"><span>Vanilla JS</span><span>Node.js</span><span>Paystack</span></div>
-        <a class="btn pri" href="#" data-live="pxdynasty">View live project &rarr;</a>
+        <span class="meta-label">Problem</span><span class="meta-text">Local vendors lacked a unified digital storefront.</span>
+        <span class="meta-label">Built</span><span class="meta-text">A multi-vendor marketplace with product listings, cart handling and delivery workflows.</span>
+        <div class="stack" style="margin-top:auto; padding-top:16px;"><span>Vanilla JS</span><span>Node.js</span><span>Paystack</span></div>
+        <a class="btn pri" href="#" data-live="pxdynasty" style="margin-top: 16px; width: 100%;">View live project &rarr;</a>
       </article>
       <article class="card proj" data-c="web">
-        <div class="mockup">
-          <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="200" fill="#0a1a15"/><rect x="100" y="15" width="100" height="180" rx="16" fill="#0d211b" stroke="#1e293b" stroke-width="2"/><rect x="135" y="22" width="30" height="4" rx="2" fill="#334155"/><rect x="110" y="45" width="80" height="20" rx="4" fill="#10d98a"/><rect x="115" y="52" width="40" height="6" rx="3" fill="#06110e"/><rect x="110" y="75" width="80" height="40" rx="6" fill="#112a22"/><circle cx="125" cy="95" r="10" fill="#1e293b"/><rect x="145" y="88" width="35" height="6" rx="3" fill="#475569"/></svg>
-        </div>
-        <span class="tag prod">PRODUCTION</span>
+        <div class="card-header"><div class="ic">🎓</div><span class="tag prod">PRODUCTION</span></div>
         <h3>Matric</h3>
-        <div class="row"><b>Problem</b>University communications are scattered across informal channels.</div>
-        <div class="row"><b>Built</b>A verified campus platform serving MAU, SPY and FCE in Yola.</div>
-        <div class="stack"><span>React</span><span>Firebase</span></div>
-        <a class="btn pri" href="#" data-live="matric">View live app &rarr;</a>
+        <span class="meta-label">Problem</span><span class="meta-text">University communications are scattered across informal channels.</span>
+        <span class="meta-label">Built</span><span class="meta-text">A verified campus platform serving MAU, SPY and FCE in Yola.</span>
+        <div class="stack" style="margin-top:auto; padding-top:16px;"><span>React</span><span>Firebase</span></div>
+        <a class="btn pri" href="#" data-live="matric" style="margin-top: 16px; width: 100%;">View live app &rarr;</a>
       </article>
       <article class="card proj" data-c="web">
-        <div class="mockup">
-          <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="200" fill="#0a1a15"/><rect x="50" y="20" width="200" height="160" rx="6" fill="#0d211b" stroke="#1e293b"/><rect x="70" y="40" width="120" height="10" rx="4" fill="#10d98a"/><rect x="70" y="65" width="160" height="4" rx="2" fill="#334155"/><rect x="70" y="75" width="140" height="4" rx="2" fill="#334155"/><rect x="70" y="110" width="60" height="20" rx="4" fill="#112a22" stroke="#1e293b"/><rect x="90" y="116" width="20" height="8" rx="2" fill="#10d98a"/><path d="M 130 120 L 150 120" stroke="#334155" stroke-width="2"/><rect x="150" y="110" width="60" height="20" rx="4" fill="#112a22" stroke="#1e293b"/></svg>
-        </div>
-        <span class="tag proto">PROTOTYPE</span>
+        <div class="card-header"><div class="ic">⚖️</div><span class="tag proto">PROTOTYPE</span></div>
         <h3>LegisCore</h3>
-        <div class="row"><b>Problem</b>Law firms struggle to track document versions and route tasks.</div>
-        <div class="row"><b>Built</b>A secure "Filing Room" document-management and workflow system.</div>
-        <div class="demo">Demo &middot; <code>test@legiscore.local</code> / <code>TestPass123!</code></div>
-        <div class="stack"><span>HTML/JS</span><span>LocalStorage</span></div>
-        <a class="btn pri" href="#" data-live="legiscore">View live app &rarr;</a>
+        <span class="meta-label">Problem</span><span class="meta-text">Law firms struggle to track document versions and route tasks.</span>
+        <span class="meta-label">Built</span><span class="meta-text">A secure "Filing Room" document-management and workflow system.</span>
+        <div class="stack" style="margin-top:auto; padding-top:16px;"><span>HTML/JS</span><span>LocalStorage</span></div>
+        <a class="btn pri" href="#" data-live="legiscore" style="margin-top: 16px; width: 100%;">View live app &rarr;</a>
       </article>
       <article class="card proj" data-c="pos">
-        <div class="mockup">
-          <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="200" fill="#0a1a15"/><rect x="20" y="20" width="260" height="160" rx="8" fill="#0d211b" stroke="#1e293b"/><rect x="20" y="20" width="60" height="160" rx="8" fill="#112a22"/><rect x="35" y="40" width="30" height="6" rx="3" fill="#10d98a"/><rect x="95" y="35" width="80" height="40" rx="4" fill="#112a22" stroke="#1e293b"/><rect x="105" y="45" width="20" height="6" rx="3" fill="#334155"/><rect x="105" y="60" width="40" height="8" rx="4" fill="#10d98a"/><rect x="95" y="90" width="170" height="75" rx="4" fill="#112a22" stroke="#1e293b"/><rect x="105" y="100" width="40" height="6" rx="3" fill="#475569"/><rect x="165" y="100" width="40" height="6" rx="3" fill="#475569"/></svg>
-        </div>
-        <span class="tag prod">PRODUCTION</span>
+        <div class="card-header"><div class="ic">🏪</div><span class="tag prod">PRODUCTION</span></div>
         <h3>Asad POS</h3>
-        <div class="row"><b>Problem</b>Manual inventory tracking and sales recording.</div>
-        <div class="row"><b>Built</b>A secure, PIN-protected point-of-sale and inventory manager.</div>
-        <div class="demo">Demo PIN &middot; <code>1234</code></div>
-        <div class="stack"><span>Vanilla JS</span><span>LocalStorage</span></div>
-        <a class="btn pri" href="#" data-live="asadpos">View live app &rarr;</a>
+        <span class="meta-label">Problem</span><span class="meta-text">Manual inventory tracking and sales recording.</span>
+        <span class="meta-label">Built</span><span class="meta-text">A secure, PIN-protected point-of-sale and inventory manager.</span>
+        <div class="stack" style="margin-top:auto; padding-top:16px;"><span>Vanilla JS</span><span>LocalStorage</span></div>
+        <a class="btn pri" href="#" data-live="asadpos" style="margin-top: 16px; width: 100%;">View live app &rarr;</a>
       </article>
     </div>
   </div>
@@ -300,11 +308,12 @@ footer{padding:36px 0 20px;border-top:1px solid var(--line);text-align:center;co
   <div class="wrap">
     <span class="eyebrow">How we work</span>
     <h2 class="reveal">Clear scope. Visible progress. No surprises.</h2>
+    
     <div class="steps">
-      <div class="step reveal"><h3>Discover</h3><p>You describe the problem. I reply within 24 hours with questions and a direction.</p></div>
-      <div class="step reveal"><h3>Quote</h3><p>A fixed-cost quote with defined scope, so the price does not drift.</p></div>
-      <div class="step reveal"><h3>Build</h3><p>Weekly review builds you can open and test on your own phone.</p></div>
-      <div class="step reveal"><h3>Launch &amp; support</h3><p>Deployment, handover and ongoing maintenance as your needs grow.</p></div>
+      <div class="step"><div class="card-header"><div class="ic">01</div></div><h3>Discover</h3><span class="meta-text">You describe the problem. I reply within 24 hours with questions and a direction.</span></div>
+      <div class="step"><div class="card-header"><div class="ic">02</div></div><h3>Quote</h3><span class="meta-text">A fixed-cost quote with defined scope, so the price does not drift.</span></div>
+      <div class="step"><div class="card-header"><div class="ic">03</div></div><h3>Build</h3><span class="meta-text">Weekly review builds you can open and test on your own phone.</span></div>
+      <div class="step"><div class="card-header"><div class="ic">04</div></div><h3>Launch & Support</h3><span class="meta-text">Deployment, handover and ongoing maintenance as your needs grow.</span></div>
     </div>
   </div>
 </section>
@@ -378,7 +387,7 @@ var S = [
  ["Maintenance","Breaking updates","Ongoing support",P+'<circle cx="12" cy="12" r="3"/><path d="M19.400 15a1.700 1.700 0 00.3 1.800l.1.1a2 2 0 11-2.800 2.800l-.1-.1a1.700 1.700 0 00-1.800-.3 1.700 1.700 0 00-1 1.500V21a2 2 0 11-4 0v-.1a1.700 1.700 0 00-1-1.500 1.700 1.700 0 00-1.800.3l-.1.100a2 2 0 11-2.800-2.800l.1-.1a1.700 1.700 0 00.3-1.800 1.700 1.700 0 00-1.500-1H3a2 2 0 110-4h.1a1.700 1.700 0 001.500-1 1.700 1.700 0 00-.3-1.800l-.1-.1a2 2 0 112.800-2.800l.1.100a1.700 1.700 0 001.800.3h0a1.700 1.700 0 001-1.500V3a2 2 0 114 0v.1a1.700 1.700 0 001 1.500h0a1.700 1.700 0 001.800-.3l.1-.1a2 2 0 112.800 2.800l-.1.100a1.700 1.700 0 00-.3 1.800v0a1.700 1.700 0 001.500 1H21a2 2 0 110 4h-.1a1.700 1.700 0 00-1.500 1z"/></svg>']
 ];
 document.getElementById("svc").innerHTML = S.map(function(s,i){
-  return '<div class="card reveal"><span class="num">0'+(i+1)+'</span><div class="ic">'+s[3]+'</div><h3>'+s[0]+'</h3><p><b>Solves:</b> '+s[1]+'</p><p><b>Delivers:</b> '+s[2]+'</p></div>';
+  return '<div class="card reveal"><div class="card-header"><div class="ic">'+s[3]+'</div></div><h3>'+s[0]+'</h3><span class="meta-label">Solves</span><span class="meta-text">'+s[1]+'</span><span class="meta-label">Delivers</span><span class="meta-text">'+s[2]+'</span></div>';
 }).join("");
 
 /* live links */
